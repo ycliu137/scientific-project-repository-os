@@ -111,9 +111,20 @@ Humans: source README + `tex_docs/*.pdf`. Pipeline `docs/` is for agents.
 | `meeting_record/` | private; gitignored |
 | `tests/` | pytest; smoke scripts in `tests/smoke/` |
 | `env/` | one `create_*.sh` per runtime |
-| `tools/` | nav, project_api, bridge, lab, ref_catalog, check_project, packs |
+| `tools/` | nav, project_api, bridge, lab, ref_catalog, **slides**, check_project, packs |
 | `workspace/current/` | NEXT_ACTION pointer |
 | `backend_lab/` | Disposable probes (code in git for short repro; never imported elsewhere; `outputs/` ignored; promote to `tex_docs/`) |
+
+**Beamer slides** are an **external product** (no permanent `slides/` tree in the pipeline). Templates live under `tools/slides_templates/`; generate into a user `--out` directory:
+
+```bash
+python3 tools/slides.py templates
+python3 tools/slides.py init --out ~/Slides/MyTalk_YYYYMMDD --template clean_academic \
+  --title "…" --author "…"
+python3 tools/slides.py compile --dir ~/Slides/MyTalk_YYYYMMDD
+```
+
+See `skills/slides.md` (progress talks) and `skills/journal-club-slides.md` (paper decks).
 
 Instance-grown (create when needed): `objects/`, `pipelines/`, `experiments/`, `workspace/scratch/`, `backend_lab/<lab_id>/`.
 
