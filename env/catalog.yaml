@@ -1,0 +1,16 @@
+# Named environments in this repo. See skills/runtime-env.md.
+
+environments: []
+  # Copy env/_TEMPLATE.sh → env/create_<name>.sh for each machine class, then add a row.
+  # - name: laptop
+  #   script: env/create_laptop.sh
+  #   kind: micromamba          # micromamba | conda | venv
+  #   runtime_name: myproj-cpu
+  #   hosts: [laptop, ci]
+  #   notes: "CPU; default pytest env"
+  # - name: gpu
+  #   script: env/create_gpu.sh
+  #   kind: micromamba
+  #   runtime_name: myproj-cu128
+  #   hosts: [workstation]
+  #   notes: "CUDA; do not use on CI"

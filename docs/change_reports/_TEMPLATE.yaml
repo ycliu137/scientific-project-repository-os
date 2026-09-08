@@ -1,0 +1,19 @@
+# Change Report template — density over volume
+
+task_id: "theme-slug"
+timestamp: "YYYY-MM-DDTHH:MM:SSZ"
+repos_touched: []
+theme: "os"
+why: >
+  One paragraph: what was wrong and what we chose instead.
+artifacts:
+  - path: tools/example.py
+    note: "role of this artifact"
+risks:
+  - "Concrete risk"
+skills_followed: ["skills/change-report.md"]
+plan_ref: null
+summary: "One-line headline"
+new_knowledge: "What a future session must remember"
+supersedes: []
+integrity: "NOT_RUN"

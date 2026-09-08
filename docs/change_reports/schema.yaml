@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repo-os.local/schemas/change_report.json",
+  "title": "ChangeReport",
+  "type": "object",
+  "required": ["task_id", "timestamp", "repos_touched", "summary", "integrity"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "repos_touched": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "why": { "type": "string" },
+    "artifacts": { "type": "array" },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "skills_followed": { "type": "array", "items": { "type": "string" } },
+    "summary": { "type": "string" },
+    "new_knowledge": { "type": "string" },
+    "plan_ref": { "type": ["string", "null"] },
+    "integrity": { "type": "string", "enum": ["VALID", "VALID_WITH_WARN", "INVALID", "NOT_RUN"] }
+  }
+}

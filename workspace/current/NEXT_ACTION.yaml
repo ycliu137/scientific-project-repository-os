@@ -1,0 +1,31 @@
+# Live execution pointer (replace after instantiate)
+
+status: active
+updated_at: "2026-09-08T00:30:00Z"
+
+current_focus: |
+  Template v0.2.0 — four siblings. Instantiate with
+  apply_to_repo.py --layout siblings --parent <dir> --name <slug>
+  Default agent entry = *_pipeline.
+
+next_actions:
+  - id: NA_001
+    priority: 1
+    owner: human
+    summary: "apply --layout siblings; pip install -e the source repo from pipeline"
+    plan_ref: "docs/MASTER_PLAN.md"
+    done_when: "bridge.py status shows source+data; source pytest passes"
+
+do_not:
+  - Bulk-create objects to fill empty domains
+  - Pre-create objects/pipelines/workspace/scratch for cosmetics
+  - Walk the tree instead of nav.py
+  - Nest git repos inside the template as a parent mega-repo
+  - Import pipeline or data from the source package
+  - Commit meeting_record/* (except README)
+  - Put raw datasets in pipeline or source
+  - Copy src/objects into a paper sibling
+  - Recreate a root smoke/ folder (use tests/smoke/)
+
+operating_principle: []
+canon_sources: []

@@ -1,0 +1,31 @@
+task_id: "four-sibling-layout"
+timestamp: "2026-09-08T00:30:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  Research work is not one code repo plus a late paper. Split into a publicable
+  source package, a private pipeline (default agent entry), a data sibling, and
+  a late paper sibling. Pipeline imports source; meetings/TeX notes live on pipeline.
+artifacts:
+  - path: SKILL.md
+    note: H7 four siblings; import rules
+  - path: tools/apply_to_repo.py
+    note: --layout siblings
+  - path: tools/bridge.py
+    note: source|pipeline|data|paper cwd
+  - path: skills/meeting-record.md
+    note: YYYYMMDD_meeting + action_items
+  - path: skills/data-management.md
+    note: default datasets/ layout, agent may redesign
+risks:
+  - Source pack MAP/integrity is thinner; agents must not treat source as the object store
+  - Raw data gitignore may hide files from nav by design
+skills_followed:
+  - skills/change-report.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "v0.2.0 four-sibling scientific layout with pipeline as default entry"
+new_knowledge: "Open *_pipeline for almost all work; paper repo only when writing."
+supersedes:
+  - 2026-09-07_template_bootstrap.yaml
+integrity: "VALID"

@@ -1,0 +1,2 @@
+# Optional; tools fall back to a small YAML subset if missing.
+PyYAML>=6.0

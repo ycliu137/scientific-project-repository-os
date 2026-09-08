@@ -1,0 +1,30 @@
+task_id: "template-bootstrap"
+timestamp: "2026-09-07T23:10:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  First kernel drop: domain-free constitution, nav/index, project_api,
+  integrity with warn/error, scientific object pack, apply-to-repo,
+  and a paper sibling pack. No project science included.
+artifacts:
+  - path: SKILL.md
+    note: L1 constitution
+  - path: tools/apply_to_repo.py
+    note: instantiate / overlay / paper pack
+  - path: tools/nav.py
+    note: indexed resolve
+  - path: integrity/check_project.py
+    note: done-gate
+  - path: packs/paper/SKILL.md
+    note: writing-entry overlay
+risks:
+  - Overlay on a large existing tree will WARN on unindexed files until nav rebuild and legacy_roots are set
+  - parent_path uses os.yaml project.slug; renaming slug without reindex breaks H5
+skills_followed:
+  - skills/change-report.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "Bootstrap Scientific Project Repository OS v0.1.0"
+new_knowledge: "Template repo is the kernel; instances copy it; paper pack is apply --pack paper."
+supersedes: []
+integrity: "VALID"

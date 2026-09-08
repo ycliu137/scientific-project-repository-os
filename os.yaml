@@ -1,0 +1,56 @@
+# Scientific Project Repository OS — instance config (single source of identity).
+
+os:
+  name: scientific-project-repository-os
+  version: "0.3.2"
+  pack: pipeline      # source | pipeline | data | paper
+  strictness: warn    # warn | error
+
+project:
+  name: scientific-project-repository-os
+  slug: scientific-project-repository-os
+  kind: template      # template | instance
+
+# Four sibling roles. Parent directory is NOT a git repo.
+# Default working entry = pipeline. Paper is late. Source is the publicable package.
+siblings:
+  source:
+    enabled: false
+    path: null
+    env: SOURCE_REPO_ROOT
+  pipeline:
+    enabled: false
+    path: null
+    env: PIPELINE_REPO_ROOT
+  data:
+    enabled: false
+    path: null
+    env: DATA_REPO_ROOT
+  paper:
+    enabled: false
+    path: null
+    env: PAPER_REPO_ROOT
+
+# Roots to index when present. Instance-grown dirs (objects, pipelines, …) appear after first use.
+include_roots:
+  - skills
+  - docs
+  - tex_docs
+  - tools
+  - workspace
+  - index
+  - tests
+  - env
+  - objects
+  - pipelines
+  - experiments
+
+legacy_roots: []
+
+# Interpreter for pytest / smoke (instance fills env_name). Never use a stray ~/.local pytest.
+runtime:
+  env_kind: system          # micromamba | conda | venv | system
+  env_name: null            # e.g. project env — set on real instances
+  python: python3
+  pytest_module: true       # always `python -m pytest`
+  env_dir: env              # create_*.sh live here (skills/runtime-env.md)

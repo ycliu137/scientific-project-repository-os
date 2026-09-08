@@ -1,0 +1,34 @@
+task_id: "lean-template-layout"
+timestamp: "2026-09-08T04:00:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  The bare template still looked like an opened project: root smoke/,
+  pre-created workspace/scratch/, and MAP domain tables listing every
+  scientific folder as scaffold. Collapse smoke under tests/, create
+  scratch on demand, and rewrite MAP as a contract table with census
+  only in inventory.
+artifacts:
+  - path: tests/smoke/README.md
+    note: smoke lives under tests/; root smoke/ removed
+  - path: MAP.md
+    note: kernel + grown-by-instance contracts; no scaffold status rows
+  - path: tools/check_project.py
+    note: rejects MAP empty-domain scaffold tables; census pointer required
+  - path: os.yaml
+    note: version 0.3.1; include_roots without top-level smoke
+  - path: .gitignore
+    note: ignore whole workspace/scratch/ (no .gitkeep)
+risks:
+  - Instances that still have root smoke/ need a one-time move to tests/smoke/
+  - Overlay upgrades must rewrite MAP and os.yaml include_roots
+skills_followed:
+  - skills/change-report.md
+  - skills/code-change.md
+  - skills/maintenance.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "Lean template: tests/smoke/, no scratch precreate, MAP as contracts"
+new_knowledge: "MAP is contracts not census status; smoke under tests/smoke/; mkdir scratch when needed."
+supersedes: []
+integrity: "VALID"

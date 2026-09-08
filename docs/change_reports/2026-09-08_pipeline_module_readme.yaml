@@ -1,0 +1,28 @@
+task_id: "pipeline-module-readme"
+timestamp: "2026-09-08T00:50:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  Pipeline work splits into many task modules. Without a per-module README,
+  I/O and upstream/parallel edges live only in the author's head. Require
+  Purpose / Inputs / Outputs / Relations / How to run, plus a catalog graph.
+artifacts:
+  - path: skills/pipeline-modules.md
+    note: procedure
+  - path: pipelines/_TEMPLATE/README.md
+    note: copy when adding a module
+  - path: pipelines/README.md
+    note: catalog + graph
+  - path: integrity/check_project.py
+    note: missing README is ERROR; missing headings / catalog row is WARN
+risks:
+  - _TEMPLATE is skipped as a module so an empty pipeline stays VALID
+skills_followed:
+  - skills/change-report.md
+  - skills/pipeline-modules.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "Require a structured README on every pipeline module"
+new_knowledge: "context --task pipeline; copy pipelines/_TEMPLATE."
+supersedes: []
+integrity: "VALID"

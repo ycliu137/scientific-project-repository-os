@@ -1,0 +1,34 @@
+# Hierarchical navigation tree (logical kernel)
+
+root: scientific-project-repository-os
+children:
+  - name: SKILL.md
+    kind: control
+  - name: MAP.md
+    kind: control
+  - name: COLD_START.md
+    kind: control
+  - name: AGENTS.md
+    kind: control
+  - name: os.yaml
+    kind: control
+  - name: skills
+    kind: control
+  - name: docs
+    kind: meta
+  - name: tex_docs
+    kind: meta
+  - name: tools
+    kind: ops
+  - name: index
+    kind: cognitive
+  - name: workspace
+    kind: ops
+  - name: tests
+    kind: ops
+  - name: env
+    kind: ops
+siblings:
+  - source
+  - data
+  - paper

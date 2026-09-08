@@ -1,0 +1,30 @@
+task_id: "code-change-done-gate"
+timestamp: "2026-09-08T01:00:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  Lift instance-specific test/env/path rules (named conda env, Snakemake stages)
+  into a domain-free done-gate: project interpreter, pytest+smoke until green,
+  scoped diffs, and artefact/log full paths that encode every run parameter.
+artifacts:
+  - path: skills/code-change.md
+    note: three engineering rules
+  - path: os.yaml
+    note: runtime.env_kind / env_name / python -m pytest
+  - path: smoke/README.md
+    note: smoke folder convention
+  - path: pipelines/_shared/README.md
+    note: shared path builders
+  - path: pipelines/_TEMPLATE/README.md
+    note: Path contract heading
+risks:
+  - Template runtime.env_name is null; instances must set it or agents may use system python
+skills_followed:
+  - skills/change-report.md
+  - skills/code-change.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "General code-change done-gate: tests, scope, path contract"
+new_knowledge: "H16; always python -m pytest in os.yaml runtime; logs mirror artefact paths."
+supersedes: []
+integrity: "VALID"

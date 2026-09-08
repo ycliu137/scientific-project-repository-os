@@ -1,0 +1,23 @@
+task_id: "h3-type-skills-path"
+timestamp: "2026-09-08T04:30:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  H3 and Bootstrap still pointed agents at objects/*/SKILL.md after type
+  skills moved to skills/objects/*.md so the objects/ tree can stay absent
+  until first create.
+artifacts:
+  - path: SKILL.md
+    note: H3 + Bootstrap step 6 → skills/objects/<type>.md
+  - path: docs/OBJECT_SCHEMA.md
+    note: status row points at skills/objects/
+risks:
+  - Overlay instances that still keep objects/*/SKILL.md should delete those and use skills/objects/
+skills_followed:
+  - skills/change-report.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "Fix H3: type skills live under skills/objects/"
+new_knowledge: "Type skills = skills/objects/*.md; objects/ holds YAML only."
+supersedes: []
+integrity: "VALID"

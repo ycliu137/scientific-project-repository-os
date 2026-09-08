@@ -1,0 +1,35 @@
+task_id: "runtime-env-one-script"
+timestamp: "2026-09-08T02:00:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  Instances need a committed, one-shot way to recreate Python/conda runtimes
+  on different machines instead of chat-log pip lines. env/ holds one
+  create_<name>.sh per named environment; catalog.yaml maps scripts to hosts;
+  source env/ is the publicable default and pipeline may add extra stacks.
+  os.yaml runtime still names which env pytest uses.
+artifacts:
+  - path: env/_TEMPLATE.sh
+    note: copy to create_<name>.sh (venv | conda | micromamba)
+  - path: env/catalog.yaml
+    note: empty list on template; instances add one row per script
+  - path: skills/runtime-env.md
+    note: L3 procedure; context --task env
+  - path: os.yaml
+    note: version 0.2.3; include_roots env; runtime.env_dir
+  - path: integrity/check_project.py
+    note: WARN if create_*.sh missing from catalog
+risks:
+  - Template catalog is empty by design; instances must copy _TEMPLATE.sh and set runtime.env_name
+  - Pipeline extra scripts must not be the only copy if the public package needs to reproduce
+skills_followed:
+  - skills/consult-plan.md
+  - skills/change-report.md
+  - skills/runtime-env.md
+  - skills/code-change.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "env/: one create_*.sh per runtime, many machines"
+new_knowledge: "H17; source env/ publishes; pipeline may add extra create_*.sh; never ad-hoc ~/.local."
+supersedes: []
+integrity: "VALID"

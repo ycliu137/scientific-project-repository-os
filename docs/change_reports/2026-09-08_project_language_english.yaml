@@ -1,0 +1,33 @@
+task_id: "project-language-english"
+timestamp: "2026-09-08T03:00:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os"
+why: >
+  Instances mix Chinese into skills, objects, and code, which breaks a
+  publishable English source package and makes the OS unreadable to
+  non-Chinese collaborators. Default language is English. The only
+  Chinese exception is meeting records: durable notes in tex_docs/
+  (compiled PDF) and private transcripts in meeting_record/. Facts
+  promoted into objects or NEXT_ACTION.yaml stay English.
+artifacts:
+  - path: skills/language.md
+    note: allow-list and promote-to-English rule
+  - path: SKILL.md
+    note: H18
+  - path: integrity/check_project.py
+    note: WARN on CJK outside tex_docs/ and meeting_record/
+  - path: tools/compile_tex_docs.py
+    note: latexmk -xelatex when the .tex contains CJK
+risks:
+  - Overlay on an existing Chinese-heavy tree will VALID_WITH_WARN until those files are translated
+  - Quoted original titles in source objects may still WARN; keep English title plus one original-script field
+skills_followed:
+  - skills/consult-plan.md
+  - skills/change-report.md
+  - skills/language.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "H18: English project language; Chinese only for meeting records"
+new_knowledge: "H18; Chinese meeting notes in tex_docs/; raw transcripts in meeting_record/; promote in English."
+supersedes: []
+integrity: "VALID"

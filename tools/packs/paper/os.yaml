@@ -1,0 +1,43 @@
+# Paper-pack instance config (overwritten by apply --pack paper)
+
+os:
+  name: scientific-project-repository-os
+  version: "0.2.0"
+  pack: paper
+  strictness: warn
+
+project:
+  name: paper
+  slug: paper
+  kind: instance
+
+siblings:
+  source:
+    enabled: true
+    path: ../source
+    env: SOURCE_REPO_ROOT
+  pipeline:
+    enabled: true
+    path: ../pipeline
+    env: PIPELINE_REPO_ROOT
+  data:
+    enabled: true
+    path: ../data
+    env: DATA_REPO_ROOT
+  paper:
+    enabled: false
+    path: null
+    env: PAPER_REPO_ROOT
+
+include_roots:
+  - skills
+  - protocol
+  - docs
+  - tools
+  - integrity
+  - workspace
+  - index
+  - tex
+  - packs
+
+legacy_roots: []
