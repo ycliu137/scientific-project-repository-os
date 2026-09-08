@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Reach sibling repos (source / pipeline / data / paper). No fifth control API.
+"""Reach sibling repos (source / pipeline / data / ref / paper). No extra control API.
 
 Examples:
   python3 tools/bridge.py status
   python3 tools/bridge.py resolve source skill
   python3 tools/bridge.py run source -- pytest -q
   python3 tools/bridge.py run data -- python preprocess/example.py
+  python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py list
 """
 
 from __future__ import annotations
@@ -45,6 +46,7 @@ def _pick(name: str | None) -> tuple[str, Path] | tuple[None, None]:
         "paper": "pipeline",
         "data": "source",
         "source": "pipeline",
+        "ref": "pipeline",
     }.get(pack, "source")
     return label, p
 
@@ -82,7 +84,7 @@ def cmd_resolve(args: argparse.Namespace) -> int:
     if repo is None and parts and parts[0] in SIBLING_ORDER:
         repo = parts.pop(0)
     if not parts:
-        print("usage: bridge.py resolve [source|pipeline|data|paper] <query>", file=sys.stderr)
+        print("usage: bridge.py resolve [source|pipeline|data|ref|paper] <query>", file=sys.stderr)
         return 2
     query = parts[0]
     name, sib = _pick(repo)

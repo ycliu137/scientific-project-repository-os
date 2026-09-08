@@ -101,12 +101,13 @@ def strictness(root: Path) -> str:
     return str((load_os(root).get("os") or {}).get("strictness") or "warn")
 
 
-SIBLING_ORDER = ("source", "pipeline", "data", "paper")
+SIBLING_ORDER = ("source", "pipeline", "data", "ref", "paper")
 
 _DEFAULT_ENV = {
     "source": "SOURCE_REPO_ROOT",
     "pipeline": "PIPELINE_REPO_ROOT",
     "data": "DATA_REPO_ROOT",
+    "ref": "REF_REPO_ROOT",
     "paper": "PAPER_REPO_ROOT",
 }
 
@@ -115,6 +116,7 @@ _DEFAULT_SIBLING_FOR_PACK = {
     "paper": "pipeline",
     "data": "source",
     "source": "pipeline",
+    "ref": "pipeline",
 }
 
 

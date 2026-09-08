@@ -4,19 +4,20 @@
 > Identity of **this clone** is `os.yaml` → `project.name`. This file has **no** domain science.
 
 **OS:** Scientific Project Repository OS (`os.yaml` → `os.version`)  
-**Pack:** `os.yaml` → `os.pack` (`source` | `pipeline` | `data` | `paper`)  
+**Pack:** `os.yaml` → `os.pack` (`source` | `pipeline` | `data` | `ref` | `paper`)  
 **On-demand:** `python3 tools/project_api.py context --task <intent>` then read **only** listed skills.
 
 ---
 
 ## Identity
 
-You are operating a **repository OS** for a scientific project split into **at most four sibling git repos**. The parent folder is only a local grouping directory — not a fifth repo, not a control plane.
+You are operating a **repository OS** for a scientific project split into **sibling git repos** (source, pipeline, data, ref, paper). The parent folder is only a local grouping directory — not an orchestration mega-repo.
 
 ```
 Skill governs. Index navigates. Retrieval focuses.
 Source is the publicable package. Pipeline runs and thinks.
-Data holds raw + processed corpora. Paper narrates late.
+Data holds raw + processed corpora. Ref holds literature PDFs.
+Paper narrates late.
 Hypothesis proposes. Experiment measures. Result records. Claim stays unproven until linked.
 ```
 
@@ -25,17 +26,19 @@ Hypothesis proposes. Experiment measures. Result records. Claim stays unproven u
 | `pipeline` | Runs, objects, AI docs, TeX notes, meetings | private | **Yes — most work** |
 | `source` | Installable package + tests + human README | public at paper time | No — edit/test from pipeline |
 | `data` | Raw/processed datasets + preprocess | private | No — operate from pipeline |
+| `ref` | Reference PDFs + metadata + BibTeX | private | No — ingest from pipeline; cite from paper |
 | `paper` | Manuscript / figures | as needed | **Only when writing the paper** |
 
-**Working entry:** open the **pipeline** repo for almost everything (design, implement source, test, run, fetch/arrange data, TeX method notes, meetings). **After a paper sibling exists**, write the article **from the paper repo**; read/run source, pipeline, and data through `tools/bridge.py`. Do not copy trees across repos.
+**Working entry:** open the **pipeline** repo for almost everything (design, implement source, test, run, fetch/arrange data, ingest reference papers, TeX method notes, meetings). **After a paper sibling exists**, write the article **from the paper repo**; read/run source, pipeline, data, and ref through `tools/bridge.py`. Do not copy trees across repos.
 
 **Import rules**
 
 - Pipeline **may and should** `import` the source package (`pip install -e` the source sibling).
-- Source **must not** import pipeline or data (keep the package independently runnable and publishable).
+- Source **must not** import pipeline, data, or ref (keep the package independently runnable and publishable).
 - Data preprocess **may** import source for schemas; **must not** import pipeline.
-- Paper **must not** import any sibling as a control package; run tests via the bridge.
-- Do not invent a fifth orchestration repo.
+- Ref is a literature corpus (like data): study/ingest from pipeline; export BibTeX for paper. Do not import pipeline.
+- Paper **must not** import any sibling as a control package; run tests via the bridge; cite via ref `bib/`.
+- Do not invent an extra orchestration / control-plane repo beyond these sibling roles.
 
 ---
 
@@ -49,7 +52,7 @@ Before any meaningful read/write:
 4. Compact state: `python3 tools/plan_pointer.py`
 5. Task subgraph: `python3 tools/project_api.py context --task <intent>`
 6. Read **only** listed L2/L3 skills (plus `skills/objects/<type>.md` if writing that type)
-7. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; new host / missing env → `skills/runtime-env.md`
+7. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; new host / missing env → `skills/runtime-env.md`
 8. Act → index → dense Change Report → `tools/check_project.py` → **VALID** (or WARN-only if `os.strictness: warn`)
 
 Pipeline: `SKILL → MAP → INDEX → compact state → context → listed skills → REASON → UPDATE`
@@ -76,7 +79,7 @@ Full drill: `COLD_START.md`.
 4. **H4** Updates are writes through the index (`project_api` or equivalent), not stray files under `objects/`.
 5. **H5** Every object `parent_path` starts with `project.slug` from `os.yaml`.
 6. **H6** No blind edits; Bootstrap first.
-7. **H7** At most four sibling repos. Operate source and data **from pipeline** (paper from the paper repo). No fifth control layer.
+7. **H7** Sibling roles are source / pipeline / data / ref / paper. Operate source, data, and ref **from pipeline** (paper from the paper repo for writing). No extra orchestration mega-repo.
 8. Hypothesis ≠ experiment ≠ result ≠ claim. A claim is not a result.
 9. Preserve negative evidence and failures. Do not delete failing experiments to tidy the tree.
 10. Do not bulk-create objects to make empty domains look balanced. Empty scaffold is honest.

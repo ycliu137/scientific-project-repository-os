@@ -4,6 +4,8 @@
 Examples:
   python3 tools/apply_to_repo.py --layout siblings --parent ~/Proj/foo --name foo
   python3 tools/apply_to_repo.py --target /existing --name foo --pack pipeline --overlay
+  python3 tools/apply_to_repo.py --target ../foo_ref --name foo_ref --pack ref \
+      --sibling-pipeline ../foo_pipeline --sibling-source ../foo --sibling-data ../foo_data
   python3 tools/apply_to_repo.py --target ../foo_paper --name foo_paper --pack paper \\
       --sibling-pipeline ../foo_pipeline --sibling-source ../foo --sibling-data ../foo_data
   python3 tools/apply_to_repo.py --target . --upgrade
@@ -17,7 +19,7 @@ import sys
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.3.2"
+OS_VERSION = "0.4.0"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -43,6 +45,7 @@ KERNEL_FILES = [
     "skills/code-change.md",
     "skills/runtime-env.md",
     "skills/language.md",
+    "skills/reference-papers.md",
     "tools/os_config.py",
     "tools/nav.py",
     "tools/build_nav_index.py",
@@ -53,6 +56,7 @@ KERNEL_FILES = [
     "tools/apply_to_repo.py",
     "tools/compile_tex_docs.py",
     "tools/check_project.py",
+    "tools/ref_catalog.py",
     "docs/change_reports/schema.yaml",
     "docs/OBJECT_SCHEMA.md",
     "docs/change_reports/_TEMPLATE.yaml",
@@ -93,6 +97,12 @@ PIPELINE_EXTRA = [
     "tools/packs/data/SKILL.md",
     "tools/packs/data/MAP.md",
     "tools/packs/data/AGENTS.md",
+    "tools/packs/ref/SKILL.md",
+    "tools/packs/ref/MAP.md",
+    "tools/packs/ref/AGENTS.md",
+    "tools/packs/ref/papers/_TEMPLATE/meta.yaml",
+    "tools/packs/ref/papers/_TEMPLATE/notes.md",
+    "tools/packs/ref/pdfs/README.md",
 ]
 
 PACK_OVERLAY = {
@@ -110,6 +120,11 @@ PACK_OVERLAY = {
         ("tools/packs/data/SKILL.md", "SKILL.md"),
         ("tools/packs/data/MAP.md", "MAP.md"),
         ("tools/packs/data/AGENTS.md", "AGENTS.md"),
+    ],
+    "ref": [
+        ("tools/packs/ref/SKILL.md", "SKILL.md"),
+        ("tools/packs/ref/MAP.md", "MAP.md"),
+        ("tools/packs/ref/AGENTS.md", "AGENTS.md"),
     ],
 }
 
@@ -143,6 +158,11 @@ INCLUDE = {
   - workspace
   - index
   - tex""",
+    "ref": """  - skills
+  - tools
+  - papers
+  - bib
+  - docs""",
 }
 
 
@@ -166,6 +186,7 @@ def _write_os_yaml(
             "source": "SOURCE_REPO_ROOT",
             "pipeline": "PIPELINE_REPO_ROOT",
             "data": "DATA_REPO_ROOT",
+            "ref": "REF_REPO_ROOT",
             "paper": "PAPER_REPO_ROOT",
         }[role]
         return (
@@ -192,6 +213,7 @@ siblings:
 {block("source")}
 {block("pipeline")}
 {block("data")}
+{block("ref")}
 {block("paper")}
 
 include_roots:
@@ -216,6 +238,12 @@ def _gitignore_for(pack: str) -> str:
         extra = "\nmeeting_record/*\n!meeting_record/README.md\ntex_docs/**/*.aux\ntex_docs/**/*.log\ntex_docs/**/*.out\ntex_docs/**/*.fls\ntex_docs/**/*.fdb_latexmk\ntex_docs/**/*.synctex.gz\n"
     if pack == "data":
         extra += "\ndatasets/**/raw/**\n*.h5\n*.hdf5\n*.parquet\n*.bam\n*.fastq.gz\n"
+    if pack == "ref":
+        extra += (
+            "\n# Reference PDFs — local only (do not commit; use title-slug names)\n"
+            "pdfs/*.pdf\n"
+            "!pdfs/README.md\n"
+        )
     return base + extra
 
 
@@ -294,6 +322,49 @@ integrated: []
     ) if not (target / "preprocess" / "README.md").exists() else None
 
 
+def _write_ref_layout(target: Path) -> None:
+    papers = target / "papers" / "_TEMPLATE"
+    papers.mkdir(parents=True, exist_ok=True)
+    pdfs = target / "pdfs"
+    pdfs.mkdir(parents=True, exist_ok=True)
+    (target / "bib").mkdir(parents=True, exist_ok=True)
+    src_pack = SOURCE / "tools" / "packs" / "ref"
+    for name in ("meta.yaml", "notes.md"):
+        s = src_pack / "papers" / "_TEMPLATE" / name
+        d = papers / name
+        if s.is_file() and not d.exists():
+            d.write_text(s.read_text(encoding="utf-8"), encoding="utf-8")
+    pdf_readme_src = src_pack / "pdfs" / "README.md"
+    pdf_readme = pdfs / "README.md"
+    if pdf_readme_src.is_file():
+        pdf_readme.write_text(pdf_readme_src.read_text(encoding="utf-8"), encoding="utf-8")
+    elif not pdf_readme.exists():
+        pdf_readme.write_text(
+            "# PDFs (local only)\n\nStore `pdfs/<Title_Slug>.pdf` here. Gitignored.\n",
+            encoding="utf-8",
+        )
+    catalog = target / "catalog.yaml"
+    if not catalog.exists():
+        catalog.write_text(
+            """# Reference paper index (see skills/reference-papers.md)
+papers: []
+""",
+            encoding="utf-8",
+        )
+    bib = target / "bib" / "references.bib"
+    if not bib.exists():
+        bib.write_text("% Export with: python3 tools/ref_catalog.py export-bib\n", encoding="utf-8")
+    readme = target / "papers" / "README.md"
+    if not readme.exists():
+        readme.write_text(
+            "# Papers\n\n"
+            "One folder per article title slug (`meta.yaml` + optional `notes.md`).\n"
+            "PDFs live in `../pdfs/<Title_Slug>.pdf` (gitignored). See `skills/reference-papers.md`.\n",
+            encoding="utf-8",
+        )
+
+
+
 def apply(
     target: Path,
     *,
@@ -369,6 +440,8 @@ def apply(
         _write_source_package(target, name)
     if pack == "data":
         _write_data_layout(target)
+    if pack == "ref":
+        _write_ref_layout(target)
 
     os_path = target / "os.yaml"
     if preexisting["os.yaml"] and not upgrade:
@@ -400,6 +473,14 @@ def apply(
             body = f"# {name} (data)\n\nPrivate data sibling. Operate from the pipeline repo via `tools/bridge.py`.\n"
         elif pack == "paper":
             body = f"# {name} (paper)\n\nWriting entry. Agents start at `SKILL.md`.\n"
+        elif pack == "ref":
+            body = (
+                f"# {name} (ref)\n\n"
+                "Reference literature sibling. Ingest from the **pipeline** repo; "
+                "cite from the **paper** repo via `bib/references.bib`. "
+                "Metadata in `papers/<Title_Slug>/`; PDFs in `pdfs/<Title_Slug>.pdf` "
+                "(title-slug names; PDFs gitignored).\n"
+            )
         else:
             body = f"# {name} (pipeline)\n\nDefault agent entry. Agents start at `SKILL.md`.\n"
         readme.write_text(body, encoding="utf-8")
@@ -416,10 +497,36 @@ def apply_siblings(parent: Path, name: str, strictness: str) -> int:
     src = parent / name
     pipe = parent / f"{name}_pipeline"
     data = parent / f"{name}_data"
+    ref = parent / f"{name}_ref"
     rel = {
-        "from_source": {"source": None, "pipeline": f"../{name}_pipeline", "data": f"../{name}_data", "paper": None},
-        "from_pipeline": {"source": f"../{name}", "pipeline": None, "data": f"../{name}_data", "paper": None},
-        "from_data": {"source": f"../{name}", "pipeline": f"../{name}_pipeline", "data": None, "paper": None},
+        "from_source": {
+            "source": None,
+            "pipeline": f"../{name}_pipeline",
+            "data": f"../{name}_data",
+            "ref": f"../{name}_ref",
+            "paper": None,
+        },
+        "from_pipeline": {
+            "source": f"../{name}",
+            "pipeline": None,
+            "data": f"../{name}_data",
+            "ref": f"../{name}_ref",
+            "paper": None,
+        },
+        "from_data": {
+            "source": f"../{name}",
+            "pipeline": f"../{name}_pipeline",
+            "data": None,
+            "ref": f"../{name}_ref",
+            "paper": None,
+        },
+        "from_ref": {
+            "source": f"../{name}",
+            "pipeline": f"../{name}_pipeline",
+            "data": f"../{name}_data",
+            "ref": None,
+            "paper": None,
+        },
     }
     rc = apply(src, name=name, pack="source", overlay=False, upgrade=False, strictness=strictness, siblings=rel["from_source"], thin=True)
     if rc:
@@ -428,10 +535,14 @@ def apply_siblings(parent: Path, name: str, strictness: str) -> int:
     if rc:
         return rc
     rc = apply(data, name=f"{name}_data", pack="data", overlay=False, upgrade=False, strictness=strictness, siblings=rel["from_data"], thin=True)
+    if rc:
+        return rc
+    rc = apply(ref, name=f"{name}_ref", pack="ref", overlay=False, upgrade=False, strictness=strictness, siblings=rel["from_ref"], thin=True)
     print(f"LAYOUT\tparent={parent}")
     print(f"  source    {src}  (publicable package)")
     print(f"  pipeline  {pipe}  ★ default agent entry")
     print(f"  data      {data}")
+    print(f"  ref       {ref}  (reference literature)")
     print(f"NEXT\tcd {pipe} && pip install -e {src} && python3 tools/nav.py rebuild")
     return 0
 
@@ -442,7 +553,7 @@ def main() -> int:
     ap.add_argument("--parent", default=None, help="Grouping folder for --layout siblings (not a git repo)")
     ap.add_argument("--target", default=None, help="Destination repo root (single-pack apply)")
     ap.add_argument("--name", default=None, help="project slug")
-    ap.add_argument("--pack", choices=["source", "pipeline", "data", "paper", "code"], default="pipeline")
+    ap.add_argument("--pack", choices=["source", "pipeline", "data", "ref", "paper", "code"], default="pipeline")
     ap.add_argument("--overlay", action="store_true")
     ap.add_argument("--upgrade", action="store_true")
     ap.add_argument("--strictness", choices=["warn", "error"], default="warn")
@@ -451,6 +562,7 @@ def main() -> int:
     ap.add_argument("--sibling-pipeline", default=None)
     ap.add_argument("--sibling-data", default=None)
     ap.add_argument("--sibling-paper", default=None)
+    ap.add_argument("--sibling-ref", default=None)
     ap.add_argument("--thin", action="store_true")
     args = ap.parse_args()
 
@@ -470,6 +582,7 @@ def main() -> int:
         "source": args.sibling_source,
         "pipeline": args.sibling_pipeline,
         "data": args.sibling_data,
+        "ref": args.sibling_ref,
         "paper": args.sibling_paper,
     }
     if args.sibling:

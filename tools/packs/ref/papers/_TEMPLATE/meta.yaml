@@ -1,0 +1,25 @@
+# Reference paper metadata template
+# Copy papers/_TEMPLATE/ → papers/<Title_Slug>/ then edit.
+
+id: REF_000000
+title: ""
+title_slug: ""          # must match papers/<Title_Slug>/ AND pdfs/<Title_Slug>.pdf
+authors: []
+venue: ""               # journal / conference / bioRxiv / arXiv
+published_at: "YYYY"    # YYYY | YYYY-MM | YYYY-MM-DD
+kind: algorithm         # experiment | algorithm | analysis | review | theory | other
+research_directions: []
+problem: >
+  What scientific or technical problem does this paper address?
+methods: []
+contribution: >
+  Why this paper matters for *this* project (1 short paragraph).
+appendix_merged: true   # main + appendix merged into the single PDF
+doi: null
+url: null
+pdf_path: pdfs/<Title_Slug>.pdf   # unified store; file is gitignored
+cite_key: ""            # BibTeX key for the paper sibling
+tags: []
+pipeline_sources: []    # optional S_* ids in the pipeline repo
+added_at: "YYYY-MM-DD"
+notes: null             # or keep longer notes in notes.md

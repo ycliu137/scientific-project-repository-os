@@ -2,7 +2,7 @@
 
 Template operating system you instantiate into **sibling git repos** so AI agents can reach, read, and govern a scientific project (constitution, indexed navigation, integrity). The kernel carries **no** project-specific science.
 
-**GitHub description:** Template OS for scientific git repos (SKILL, index, integrity). Four siblings: publicable source package, private pipeline (default agent entry), data, and a late paper repo.
+**GitHub description:** Template OS for scientific git repos (SKILL, index, integrity). Siblings: publicable source, private pipeline (default agent entry), data, reference literature, and a late paper repo.
 
 Short name: `repo-os`.
 
@@ -10,13 +10,14 @@ Short name: `repo-os`.
 
 ---
 
-## Four siblings (parent folder is not a git repo)
+## Sibling roles (parent folder is not a git repo)
 
 ```
 ~/Proj/my_topic/                 # local grouping only
   my_topic/                      # SOURCE — installable package (public at paper time)
   my_topic_pipeline/             # PIPELINE — default AI entry (private)
   my_topic_data/                 # DATA — corpora + preprocess (private)
+  my_topic_ref/                  # REF — reference PDFs + metadata (private)
   my_topic_paper/                # PAPER — late, writing entry
 ```
 
@@ -25,13 +26,16 @@ Short name: `repo-os`.
 | source | Package code, tests, human README | yes, later | only for package-only tasks |
 | pipeline | Runs, objects, `docs/` (AI), `tex_docs/` (human+AI), meetings | no | **yes, almost always** |
 | data | `datasets/`, `integrated/`, preprocess | no | via pipeline bridge |
+| ref | `papers/<Title_Slug>/`, `catalog.yaml`, `bib/` | no | ingest via pipeline; cite via paper |
 | paper | Manuscript | as needed | **yes, when writing the paper** |
 
-Pipeline **imports** the source package. Source stays independently runnable and must not import pipeline or data.
+Pipeline **imports** the source package. Source stays independently runnable and must not import pipeline, data, or ref.
+
+**Ref rules:** folder name = article title slug; one merged `paper.pdf` (main + appendix); metadata in `meta.yaml`; study from pipeline; cite from paper (`skills/reference-papers.md`).
 
 ---
 
-## New project (three repos at once)
+## New project (source + pipeline + data + ref)
 
 ```bash
 python3 tools/apply_to_repo.py --layout siblings \
@@ -44,7 +48,7 @@ python3 tools/bridge.py status
 # from pipeline: pip install -e ../my_topic
 ```
 
-Then implement the package in `../my_topic`, runs in `pipelines/` + `experiments/`, datasets in `../my_topic_data`.
+Then implement the package in `../my_topic`, runs in `pipelines/` + `experiments/`, datasets in `../my_topic_data`, literature in `../my_topic_ref`.
 
 ---
 
@@ -52,6 +56,20 @@ Then implement the package in `../my_topic`, runs in `pipelines/` + `experiments
 
 ```bash
 python3 tools/apply_to_repo.py --target /path/to/existing --name foo --pack pipeline --overlay
+```
+
+---
+
+## Ref sibling (literature)
+
+```bash
+python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
+  --target ./my_topic_ref \
+  --name my_topic_ref \
+  --pack ref \
+  --sibling-pipeline ../my_topic_pipeline \
+  --sibling-source ../my_topic \
+  --sibling-data ../my_topic_data
 ```
 
 ---
@@ -67,10 +85,11 @@ python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
   --pack paper \
   --sibling-pipeline ../my_topic_pipeline \
   --sibling-source ../my_topic \
-  --sibling-data ../my_topic_data
+  --sibling-data ../my_topic_data \
+  --sibling-ref ../my_topic_ref
 ```
 
-Open **the paper repo** to write. Read/test via `python3 tools/bridge.py status`.
+Open **the paper repo** to write. Read/test via `python3 tools/bridge.py status`. Export cites: `python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py export-bib`.
 
 ---
 
@@ -92,7 +111,7 @@ Humans: source README + `tex_docs/*.pdf`. Pipeline `docs/` is for agents.
 | `meeting_record/` | private; gitignored |
 | `tests/` | pytest; smoke scripts in `tests/smoke/` |
 | `env/` | one `create_*.sh` per runtime |
-| `tools/` | nav, project_api, bridge, check_project, packs |
+| `tools/` | nav, project_api, bridge, ref_catalog, check_project, packs |
 | `workspace/current/` | NEXT_ACTION pointer |
 
 Instance-grown (create when needed): `objects/`, `pipelines/`, `experiments/`, `workspace/scratch/`.

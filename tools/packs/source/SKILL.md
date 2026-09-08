@@ -3,7 +3,7 @@
 > Thin constitution. **Default agent entry is the pipeline sibling.**
 
 **Pack:** source  
-**Siblings:** `os.yaml` → `siblings.pipeline` / `siblings.data`
+**Siblings:** `os.yaml` → `siblings.pipeline` / `siblings.data` / `siblings.ref`
 
 You are the **installable package** that will be published with the paper. Keep tests passing here without pipeline or data.
 

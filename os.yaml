@@ -2,8 +2,8 @@
 
 os:
   name: scientific-project-repository-os
-  version: "0.3.2"
-  pack: pipeline      # source | pipeline | data | paper
+  version: "0.4.0"
+  pack: pipeline      # source | pipeline | data | ref | paper
   strictness: warn    # warn | error
 
 project:
@@ -11,8 +11,9 @@ project:
   slug: scientific-project-repository-os
   kind: template      # template | instance
 
-# Four sibling roles. Parent directory is NOT a git repo.
+# Sibling roles. Parent directory is NOT a git repo.
 # Default working entry = pipeline. Paper is late. Source is the publicable package.
+# Ref holds reference PDFs (study from pipeline; cite from paper).
 siblings:
   source:
     enabled: false
@@ -26,6 +27,10 @@ siblings:
     enabled: false
     path: null
     env: DATA_REPO_ROOT
+  ref:
+    enabled: false
+    path: null
+    env: REF_REPO_ROOT
   paper:
     enabled: false
     path: null

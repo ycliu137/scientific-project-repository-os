@@ -8,8 +8,8 @@
 4. Find files via `nav.py` / `project_api` / `bridge.py` — do not walk the tree; **do not pre-read all `skills/`**.
 5. Learning / objects / evolution: `consult-plan` when `context` lists it.
 6. L3 **only if** `context` listed them.
-7. Siblings: `os.yaml` → `siblings` + `tools/bridge.py`. Parent folder is not a git repo. No fifth control layer.
-8. **Default entry is the pipeline repo.** Implement/test/run the source package from pipeline (`pip install -e` source). Source must stay independently runnable. Pipeline **may** import source. Source **must not** import pipeline or data.
+7. Siblings: `os.yaml` → `siblings` + `tools/bridge.py`. Parent folder is not a git repo. No extra orchestration mega-repo (roles: source / pipeline / data / ref / paper).
+8. **Default entry is the pipeline repo.** Implement/test/run the source package from pipeline (`pip install -e` source). Ingest literature into the **ref** sibling from pipeline. Source must stay independently runnable. Pipeline **may** import source. Source **must not** import pipeline, data, or ref.
 9. Prefer `tools/project_api.py` for objects (pipeline repo).
 10. After adds: `python3 tools/nav.py rebuild`.
 11. Done = index + dense Change Report + `tools/check_project.py` + **`skills/code-change.md`** when code/pipelines changed (pytest + `tests/smoke/` green in `runtime` env; path contract).
@@ -23,10 +23,11 @@
 
 - Editing `objects/**` without `project_api` (or equivalent index registration)
 - Claiming done without a Change Report (or with an empty file-list shell)
-- Copying source/data/objects into a paper repo
+- Copying source/data/objects/ref PDFs wholesale into a paper repo
 - Putting pipeline glue, meetings, or raw data into the source package
 - Nesting project git repos inside this OS template as a parent mega-repo
-- Importing pipeline or data from the source package
+- Importing pipeline, data, or ref from the source package
+- Dumping reference PDFs without `meta.yaml` / catalog entries (`skills/reference-papers.md`)
 - Adding a pipeline module directory without a structured README
 - Declaring a code/pipeline task done with failing tests or artefact paths that omit run parameters
 - Creating runtimes only from chat-log pip lines instead of `env/create_*.sh`

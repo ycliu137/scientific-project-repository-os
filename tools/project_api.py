@@ -66,11 +66,11 @@ TASK_SKILLS: dict[str, list[str]] = {
     "learning": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/language.md"],
     "experiment": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md"],
     "pipeline": ["skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md", "skills/change-report.md"],
-    "literature": ["skills/consult-plan.md", "skills/adding-knowledge.md"],
+    "literature": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/reference-papers.md", "skills/pipeline-entry.md"],
     "data": ["skills/consult-plan.md", "skills/data-management.md"],
     "meeting": ["skills/meeting-record.md", "skills/language.md", "skills/tex-docs.md", "skills/consult-plan.md"],
     "tex": ["skills/tex-docs.md", "skills/language.md", "skills/change-report.md"],
-    "write": ["skills/consult-plan.md", "skills/paper-entry.md", "skills/language.md", "skills/change-report.md"],
+    "write": ["skills/consult-plan.md", "skills/paper-entry.md", "skills/reference-papers.md", "skills/language.md", "skills/change-report.md"],
     "evolution": ["skills/consult-plan.md", "skills/evolution.md", "skills/language.md"],
     "retrieval": ["skills/retrieval.md"],
 }

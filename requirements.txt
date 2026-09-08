@@ -1,2 +1,5 @@
 # Optional; tools fall back to a small YAML subset if missing.
 PyYAML>=6.0
+# Optional, for tools/ref_catalog.py merge-pdf:
+# pypdf>=4.0
+

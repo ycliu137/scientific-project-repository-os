@@ -3,7 +3,7 @@
 > Navigation + contracts only. **Census authority** is `index/domain_inventory.generated.yaml`  
 > (`python3 tools/project_api.py inventory`). Do not list empty domain “scaffold/live” status here.
 
-This clone’s pack is `os.yaml` → `os.pack`. Source / data / paper are sibling repos (`os.yaml` → `siblings`), not children of this tree.
+This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are sibling repos (`os.yaml` → `siblings`), not children of this tree.
 
 ## How to enter
 
@@ -13,7 +13,7 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / paper are siblin
 4. `python3 tools/project_api.py context --task <intent>` — read **only** listed skills
 5. Index: `tools/nav.py` / `project_api`. Siblings: `python3 tools/bridge.py status`
 
-**Default working repo = pipeline.** Open source/data only when the package or corpus itself is the task.
+**Default working repo = pipeline.** Open source/data/ref only when the package, corpus, or literature library itself is the task.
 
 ## Kernel (ships with the template)
 
@@ -51,22 +51,24 @@ Do **not** pre-create these in the template. First write creates the path.
 
 Object census (counts / which domains exist): **inventory only** — never hand-maintain status rows in this file.
 
-## Four siblings
+## Sibling roles
 
 | Role | Typical dirname | Authority |
 |------|-----------------|-----------|
 | source | `{name}/` | Publicable package |
 | pipeline | `{name}_pipeline/` | Objects, runs, AI docs, TeX notes (this pack) |
 | data | `{name}_data/` | Raw + processed datasets |
+| ref | `{name}_ref/` | Reference PDFs + metadata + BibTeX |
 | paper | `{name}_paper/` | Manuscript (late) |
 
-Parent grouping folder is **not** a git repo.
+Parent grouping folder is **not** a git repo. Ref is a literature corpus (ingest from pipeline; cite from paper) — not an orchestration layer.
 
 ## Authoritative vs temporary
 
 - **Authoritative objects:** pipeline `objects/` with integrity VALID
 - **Authoritative package:** source repo (installable, tested)
 - **Authoritative data:** data repo layout (adapt per project)
+- **Authoritative literature:** ref repo (`catalog.yaml` + `papers/<Title_Slug>/`)
 - **Temporary:** `workspace/scratch/` (create on demand)
 - **Private:** `meeting_record/` (not git)
 - **Legacy:** `os.yaml` → `legacy_roots`
