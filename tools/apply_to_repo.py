@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.4.0"
+OS_VERSION = "0.5.0"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -46,6 +46,7 @@ KERNEL_FILES = [
     "skills/runtime-env.md",
     "skills/language.md",
     "skills/reference-papers.md",
+    "skills/backend-lab.md",
     "tools/os_config.py",
     "tools/nav.py",
     "tools/build_nav_index.py",
@@ -57,6 +58,7 @@ KERNEL_FILES = [
     "tools/compile_tex_docs.py",
     "tools/check_project.py",
     "tools/ref_catalog.py",
+    "tools/lab.py",
     "docs/change_reports/schema.yaml",
     "docs/OBJECT_SCHEMA.md",
     "docs/change_reports/_TEMPLATE.yaml",
@@ -103,6 +105,11 @@ PIPELINE_EXTRA = [
     "tools/packs/ref/papers/_TEMPLATE/meta.yaml",
     "tools/packs/ref/papers/_TEMPLATE/notes.md",
     "tools/packs/ref/pdfs/README.md",
+    "backend_lab/README.md",
+    "backend_lab/_TEMPLATE/LAB.yaml",
+    "backend_lab/_TEMPLATE/run.py",
+    "backend_lab/_TEMPLATE/notes.md",
+    "docs/design/BACKEND_LAB.md",
 ]
 
 PACK_OVERLAY = {
@@ -235,7 +242,24 @@ def _gitignore_for(pack: str) -> str:
     base = (SOURCE / ".gitignore").read_text(encoding="utf-8") if (SOURCE / ".gitignore").is_file() else ""
     extra = ""
     if pack == "pipeline":
-        extra = "\nmeeting_record/*\n!meeting_record/README.md\ntex_docs/**/*.aux\ntex_docs/**/*.log\ntex_docs/**/*.out\ntex_docs/**/*.fls\ntex_docs/**/*.fdb_latexmk\ntex_docs/**/*.synctex.gz\n"
+        extra = (
+            "\nmeeting_record/*\n!meeting_record/README.md\n"
+            "tex_docs/**/*.aux\ntex_docs/**/*.log\ntex_docs/**/*.out\n"
+            "tex_docs/**/*.fls\ntex_docs/**/*.fdb_latexmk\ntex_docs/**/*.synctex.gz\n"
+            "# Backend lab: keep code/docs; ignore run outputs only\n"
+            "backend_lab/**/outputs/\n"
+            "backend_lab/**/output/\n"
+            "backend_lab/**/*.npy\n"
+            "backend_lab/**/*.npz\n"
+            "backend_lab/**/*.h5\n"
+            "backend_lab/**/*.pkl\n"
+            "backend_lab/**/*.pickle\n"
+            "backend_lab/**/*.pt\n"
+            "backend_lab/**/*.pth\n"
+            "backend_lab/**/*.ckpt\n"
+            "backend_lab/**/*.log\n"
+            "backend_lab/**/__pycache__/\n"
+        )
     if pack == "data":
         extra += "\ndatasets/**/raw/**\n*.h5\n*.hdf5\n*.parquet\n*.bam\n*.fastq.gz\n"
     if pack == "ref":

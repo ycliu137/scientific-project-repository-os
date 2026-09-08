@@ -8,6 +8,7 @@ Use when `os.pack` is `pipeline`, which is the **default agent entry**.
 - Fetch, register, and preprocess **data** (`skills/data-management.md`).
 - Ingest and study **reference papers** in the ref sibling (`skills/reference-papers.md`).
 - Objects, experiments, `docs/`, `tex_docs/`, meetings.
+- **Disposable probes** in `backend_lab/` (`skills/backend-lab.md`) — short-term repro only; **never import** lab code from elsewhere; promote process/params/important results to `tex_docs/` (not lab `notes.md`).
 - Smoke tests in this repo’s `tests/` plus source tests in the source cwd.
 - **Pipeline modules:** one directory per task under `pipelines/<module>/` with a README (`skills/pipeline-modules.md`).
 
@@ -17,7 +18,10 @@ Use when `os.pack` is `pipeline`, which is the **default agent entry**.
 - Add `pipelines/<module>/` without `README.md` (Purpose / Inputs / Outputs / Relations / How to run).
 - Put raw datasets in this repo.
 - Dump reference PDFs into this repo (they belong in `*_ref`).
-- Commit `meeting_record/*` (except README).
+- Commit `meeting_record/*` (except README) or `backend_lab/**/outputs/`.
+- `import` anything under `backend_lab/` from pipelines, source, tests, or experiments.
+- Treat lab `notes.md` / `outputs/` as the durable project record.
+- Promote throwaway lab scripts into `pipelines/` without a rewrite.
 - Import pipeline from the source package.
 
 ## Source test loop
@@ -31,4 +35,5 @@ python -m pytest tests/ -q
 python -m pytest tests/test_smoke.py -q
 python3 tools/bridge.py run source -- python -m pytest -q
 python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py list
+python3 tools/lab.py list
 ```

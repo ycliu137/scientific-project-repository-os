@@ -1,0 +1,22 @@
+# Lab reproducibility card (edit after copy)
+id: LAB_ID
+created_at: "YYYY-MM-DDTHH:MM:SSZ"
+status: active   # active | done | promoted | discarded
+purpose: >
+  What question does this short-lived lab answer?
+params:
+  seed: 0
+  # add every run-identifying parameter
+commands:
+  - python run.py
+cwd: lab         # lab = this folder; pipeline = repo root
+runtime:
+  env_name: null
+  python: python3
+inputs: []
+outputs_dir: outputs/   # gitignored — do not commit artefacts
+repro_notes: >
+  How to reproduce on this machine. Note any non-committed data paths.
+promote_to: null
+linked_objects: []
+results_summary: null   # fill before promote

@@ -52,7 +52,7 @@ Before any meaningful read/write:
 4. Compact state: `python3 tools/plan_pointer.py`
 5. Task subgraph: `python3 tools/project_api.py context --task <intent>`
 6. Read **only** listed L2/L3 skills (plus `skills/objects/<type>.md` if writing that type)
-7. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; new host / missing env → `skills/runtime-env.md`
+7. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; ephemeral probes → `skills/backend-lab.md`; new host / missing env → `skills/runtime-env.md`
 8. Act → index → dense Change Report → `tools/check_project.py` → **VALID** (or WARN-only if `os.strictness: warn`)
 
 Pipeline: `SKILL → MAP → INDEX → compact state → context → listed skills → REASON → UPDATE`
@@ -91,6 +91,7 @@ Full drill: `COLD_START.md`.
 16. **Code-change done-gate** (`skills/code-change.md`): pytest + `tests/smoke/` green in `os.yaml` → `runtime` interpreter; minimal diffs; artefact and log **full paths** encode every run-identifying parameter.
 17. **One script per environment** (`skills/runtime-env.md`): `env/create_<name>.sh` builds that runtime in one shot. Multiple scripts are expected (laptop, GPU, HPC, CI). Register them in `env/catalog.yaml`. Source `env/` is the publicable default; pipeline may add extra stacks.
 18. **Project language is English** (`skills/language.md`). Skills, objects, code, comments, `docs/`, Change Reports, pipelines, env, and the paper manuscript are English. Chinese is allowed only for **meeting records**: durable notes in `tex_docs/`, private transcripts in `meeting_record/`. Promotions into objects or `NEXT_ACTION.yaml` are English.
+19. **Backend labs are disposable** (`skills/backend-lab.md`): never import `backend_lab/` from pipelines, source, or tests; commit lab code only for short-term repro; put important results in `tex_docs/` (not lab notes); wiping a lab after promotion must not break the project.
 
 ---
 
@@ -106,6 +107,7 @@ Always-on L2: `consult-plan`, `retrieval`, `adding-knowledge`, `change-report`, 
 | New hypothesis / experiment | `experiment` |
 | New / change pipeline module | `pipeline` |
 | Literature / sources | `literature` |
+| Ephemeral backend lab | `lab` |
 | Data find / download / preprocess | `data` |
 | Meeting record ingested | `meeting` |
 | TeX method note | `tex` |

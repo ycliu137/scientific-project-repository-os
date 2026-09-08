@@ -111,10 +111,11 @@ Humans: source README + `tex_docs/*.pdf`. Pipeline `docs/` is for agents.
 | `meeting_record/` | private; gitignored |
 | `tests/` | pytest; smoke scripts in `tests/smoke/` |
 | `env/` | one `create_*.sh` per runtime |
-| `tools/` | nav, project_api, bridge, ref_catalog, check_project, packs |
+| `tools/` | nav, project_api, bridge, lab, ref_catalog, check_project, packs |
 | `workspace/current/` | NEXT_ACTION pointer |
+| `backend_lab/` | Disposable probes (code in git for short repro; never imported elsewhere; `outputs/` ignored; promote to `tex_docs/`) |
 
-Instance-grown (create when needed): `objects/`, `pipelines/`, `experiments/`, `workspace/scratch/`.
+Instance-grown (create when needed): `objects/`, `pipelines/`, `experiments/`, `workspace/scratch/`, `backend_lab/<lab_id>/`.
 
 Upgrade kernel:
 

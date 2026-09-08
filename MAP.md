@@ -24,7 +24,7 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are 
 | Procedures | `skills/` | L2 always; L3 via `context` |
 | Object type skills | `skills/objects/*.md` | Read when writing that type |
 | Object schema | `docs/OBJECT_SCHEMA.md` | Field contract |
-| Tools | `tools/` | `nav`, `project_api`, `bridge`, `check_project`, `apply_to_repo` |
+| Tools | `tools/` | `nav`, `project_api`, `bridge`, `lab`, `ref_catalog`, `check_project`, `apply_to_repo` |
 | Pack overlays | `tools/packs/` | Applied into sibling roots — not a fifth repo |
 | Integrity | `tools/check_project.py` | Done-gate |
 | Index (committed) | `index/tree.yaml` | Logical tree seed |
@@ -47,6 +47,7 @@ Do **not** pre-create these in the template. First write creates the path.
 | First pipeline module | `pipelines/<module>/` | README required (`skills/pipeline-modules.md`) |
 | Shared path helpers | `pipelines/_shared/` | Path contract builders |
 | Run artefacts | `experiments/` | Not Evidence until linked from a result |
+| Backend labs | `backend_lab/<lab_id>/` | Disposable sandbox; code in git, `outputs/` ignored; **no external imports**; promote to `tex_docs/` |
 | Scratch drafts | `workspace/scratch/` | `mkdir` when needed; not indexed; gitignored |
 
 Object census (counts / which domains exist): **inventory only** — never hand-maintain status rows in this file.
@@ -69,7 +70,9 @@ Parent grouping folder is **not** a git repo. Ref is a literature corpus (ingest
 - **Authoritative package:** source repo (installable, tested)
 - **Authoritative data:** data repo layout (adapt per project)
 - **Authoritative literature:** ref repo (`catalog.yaml` + `papers/<Title_Slug>/`)
-- **Temporary:** `workspace/scratch/` (create on demand)
+- **Disposable sandboxes:** `backend_lab/` (may delete anytime after TeX promotion; never imported by maintained code) and `workspace/scratch/`
+- **Temporary outputs:** `backend_lab/**/outputs/`
+
 - **Private:** `meeting_record/` (not git)
 - **Legacy:** `os.yaml` → `legacy_roots`
 

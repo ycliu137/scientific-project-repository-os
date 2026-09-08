@@ -45,6 +45,7 @@ python3 tools/bridge.py status
 | Live next actions | `python3 tools/nav.py resolve next_action` |
 | Task subgraph | `python3 tools/project_api.py context --task experiment` |
 | Literature catalog | `python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py list` |
+| Backend lab | `python3 tools/lab.py list` / `init` / `promote` |
 | Domain census | `python3 tools/project_api.py inventory` |
 
 **Do not** walk `objects/`, source `src/`, or data `datasets/` randomly.

@@ -67,6 +67,7 @@ TASK_SKILLS: dict[str, list[str]] = {
     "experiment": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md"],
     "pipeline": ["skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md", "skills/change-report.md"],
     "literature": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/reference-papers.md", "skills/pipeline-entry.md"],
+    "lab": ["skills/backend-lab.md", "skills/tex-docs.md", "skills/code-change.md", "skills/pipeline-entry.md"],
     "data": ["skills/consult-plan.md", "skills/data-management.md"],
     "meeting": ["skills/meeting-record.md", "skills/language.md", "skills/tex-docs.md", "skills/consult-plan.md"],
     "tex": ["skills/tex-docs.md", "skills/language.md", "skills/change-report.md"],

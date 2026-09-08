@@ -28,3 +28,17 @@ tex_docs/**/*.out
 tex_docs/**/*.fls
 tex_docs/**/*.fdb_latexmk
 tex_docs/**/*.synctex.gz
+
+# Backend lab: keep code/docs; ignore run outputs only
+backend_lab/**/outputs/
+backend_lab/**/output/
+backend_lab/**/*.npy
+backend_lab/**/*.npz
+backend_lab/**/*.h5
+backend_lab/**/*.pkl
+backend_lab/**/*.pickle
+backend_lab/**/*.pt
+backend_lab/**/*.pth
+backend_lab/**/*.ckpt
+backend_lab/**/*.log
+backend_lab/**/__pycache__/
