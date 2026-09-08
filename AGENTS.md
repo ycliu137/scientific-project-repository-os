@@ -9,7 +9,7 @@
 5. Learning / objects / evolution: `consult-plan` when `context` lists it.
 6. L3 **only if** `context` listed them.
 7. Siblings: `os.yaml` → `siblings` + `tools/bridge.py`. Parent folder is not a git repo. No extra orchestration mega-repo (roles: source / pipeline / data / ref / paper).
-8. **Default entry is the pipeline repo.** Implement/test/run the source package from pipeline (`pip install -e` source). Ingest literature into the **ref** sibling from pipeline. Use `backend_lab/` for **disposable** probes (never import lab code from pipelines/source/tests; promote findings to `tex_docs/`). Source must stay independently runnable. Pipeline **may** import source. Source **must not** import pipeline, data, or ref.
+8. **Default entry is the pipeline repo.** Implement/test/run the source package from pipeline (`pip install -e` source). Ingest literature into the **ref** sibling from pipeline. Use `backend_lab/` for **disposable** probes (never import lab code from pipelines/source/tests; promote findings to `tex_docs/`). Generate Beamer talks into an **external** `--out` dir (`skills/slides.md`) — no permanent `slides/` tree in the pipeline. Source must stay independently runnable. Pipeline **may** import source. Source **must not** import pipeline, data, or ref.
 9. Prefer `tools/project_api.py` for objects (pipeline repo).
 10. After adds: `python3 tools/nav.py rebuild`.
 11. Done = index + dense Change Report + `tools/check_project.py` + **`skills/code-change.md`** when code/pipelines changed (pytest + `tests/smoke/` green in `runtime` env; path contract).

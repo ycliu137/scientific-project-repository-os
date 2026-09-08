@@ -1,0 +1,33 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=cpPrimary,
+  urlcolor=cpSecondary,
+  citecolor=cpAccent
+}
+
+\graphicspath{{figures/}}
+
+\usepackage{./theme/beamerthemeCleanAcademic}
+
+\title[SLIDES_SHORT_TITLE]{SLIDES_FULL_TITLE}
+\subtitle{SLIDES_SUBTITLE}
+\author{SLIDES_AUTHOR}
+\institute{SLIDES_INSTITUTE}
+\date{SLIDES_DATE}
+
+\begin{document}
+
+\input{content/00_frontmatter.tex}
+\input{content/01_content.tex}
+\input{content/06_closing.tex}
+
+\end{document}

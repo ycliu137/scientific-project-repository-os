@@ -2,7 +2,7 @@
 
 os:
   name: scientific-project-repository-os
-  version: "0.5.0"
+  version: "0.6.0"
   pack: pipeline      # source | pipeline | data | ref | paper
   strictness: warn    # warn | error
 

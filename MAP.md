@@ -48,6 +48,7 @@ Do **not** pre-create these in the template. First write creates the path.
 | Shared path helpers | `pipelines/_shared/` | Path contract builders |
 | Run artefacts | `experiments/` | Not Evidence until linked from a result |
 | Backend labs | `backend_lab/<lab_id>/` | Disposable sandbox; code in git, `outputs/` ignored; **no external imports**; promote to `tex_docs/` |
+| Beamer slides | external `--out` dir | Templates + CLI in pipeline; **no** permanent `slides/` tree (`skills/slides.md`) |
 | Scratch drafts | `workspace/scratch/` | `mkdir` when needed; not indexed; gitignored |
 
 Object census (counts / which domains exist): **inventory only** — never hand-maintain status rows in this file.

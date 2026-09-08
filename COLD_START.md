@@ -46,6 +46,7 @@ python3 tools/bridge.py status
 | Task subgraph | `python3 tools/project_api.py context --task experiment` |
 | Literature catalog | `python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py list` |
 | Backend lab | `python3 tools/lab.py list` / `init` / `promote` |
+| Beamer slides | `python3 tools/slides.py templates` / `init --out …` / `compile` |
 | Domain census | `python3 tools/project_api.py inventory` |
 
 **Do not** walk `objects/`, source `src/`, or data `datasets/` randomly.

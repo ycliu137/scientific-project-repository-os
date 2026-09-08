@@ -2,4 +2,8 @@
 PyYAML>=6.0
 # Optional, for tools/ref_catalog.py merge-pdf:
 # pypdf>=4.0
+# Optional, for tools/slides.py snapshot / qa --border:
+# pymupdf>=1.24
+# pillow>=10.0
+# numpy>=1.26
 

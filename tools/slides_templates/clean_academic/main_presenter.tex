@@ -1,0 +1,46 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
+\usepackage{pgfpages}
+
+% Dual-screen presenter view: slides left, notes right
+\setbeameroption{show notes on second screen=right}
+\setbeamerfont{note page}{size=\scriptsize}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=cpPrimary,
+  urlcolor=cpSecondary,
+  citecolor=cpAccent
+}
+
+\graphicspath{{figures/}}
+
+\usepackage{./theme/beamerthemeCleanAcademic}
+
+\title[SLIDES_SHORT_TITLE]{SLIDES_FULL_TITLE}
+\subtitle{SLIDES_SUBTITLE}
+\author{SLIDES_AUTHOR}
+\institute{SLIDES_INSTITUTE}
+\date{SLIDES_DATE}
+
+\begin{document}
+
+\input{content/00_frontmatter.tex}
+\input{content/01_background.tex}
+\input{content/02_progress.tex}
+\input{content/03_results.tex}
+\input{content/04_outlook.tex}
+\input{content/06_closing.tex}
+
+\end{document}

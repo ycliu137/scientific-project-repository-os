@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.5.0"
+OS_VERSION = "0.6.0"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -47,6 +47,8 @@ KERNEL_FILES = [
     "skills/language.md",
     "skills/reference-papers.md",
     "skills/backend-lab.md",
+    "skills/slides.md",
+    "skills/journal-club-slides.md",
     "tools/os_config.py",
     "tools/nav.py",
     "tools/build_nav_index.py",
@@ -59,6 +61,7 @@ KERNEL_FILES = [
     "tools/check_project.py",
     "tools/ref_catalog.py",
     "tools/lab.py",
+    "tools/slides.py",
     "docs/change_reports/schema.yaml",
     "docs/OBJECT_SCHEMA.md",
     "docs/change_reports/_TEMPLATE.yaml",
@@ -110,7 +113,19 @@ PIPELINE_EXTRA = [
     "backend_lab/_TEMPLATE/run.py",
     "backend_lab/_TEMPLATE/notes.md",
     "docs/design/BACKEND_LAB.md",
+    "docs/design/SLIDES.md",
 ]
+
+# Directory trees copied wholesale for pipeline packs (not listed file-by-file).
+PIPELINE_TREES = [
+    "tools/slides_templates",
+]
+
+# Instance-owned stubs: ship on first instantiate, never clobber on --upgrade.
+KEEP_ON_UPGRADE = {
+    "docs/MASTER_PLAN.md",
+    "workspace/current/NEXT_ACTION.yaml",
+}
 
 PACK_OVERLAY = {
     "paper": [
@@ -427,7 +442,7 @@ def apply(
             print(f"MISSING_IN_TEMPLATE\t{rel}", file=sys.stderr)
             continue
         dest = target / rel
-        if dest.exists() and not upgrade:
+        if dest.exists() and (not upgrade or rel in KEEP_ON_UPGRADE):
             print(f"keep\t{rel}")
             skipped += 1
             continue
@@ -437,6 +452,23 @@ def apply(
             dest.chmod(dest.stat().st_mode | 0o111)
         print(f"copy\t{rel}")
         copied += 1
+
+    if pack == "pipeline" and not thin:
+        for rel in PIPELINE_TREES:
+            src = SOURCE / rel
+            if not src.is_dir():
+                print(f"MISSING_IN_TEMPLATE\t{rel}/", file=sys.stderr)
+                continue
+            dest = target / rel
+            if dest.exists() and not upgrade:
+                print(f"keep\t{rel}/")
+                skipped += 1
+                continue
+            if dest.exists():
+                shutil.rmtree(dest)
+            shutil.copytree(src, dest)
+            print(f"copytree\t{rel}/")
+            copied += 1
 
     for src_rel, dest_rel in PACK_OVERLAY.get(pack, []):
         src = SOURCE / src_rel
@@ -470,6 +502,34 @@ def apply(
     os_path = target / "os.yaml"
     if preexisting["os.yaml"] and not upgrade:
         print("keep\tos.yaml")
+    elif preexisting["os.yaml"] and upgrade:
+        # Preserve siblings / runtime; only bump OS version metadata.
+        try:
+            import yaml  # local optional
+        except ImportError:
+            yaml = None
+        if yaml is None:
+            print("WARN\toverwrite os.yaml (PyYAML missing; cannot merge)", file=sys.stderr)
+            _write_os_yaml(
+                os_path,
+                name=name,
+                pack=pack,
+                strictness=strictness,
+                siblings=siblings,
+            )
+            print("write\tos.yaml")
+        else:
+            data = yaml.safe_load(os_path.read_text(encoding="utf-8")) or {}
+            data.setdefault("os", {})
+            data["os"]["version"] = OS_VERSION
+            data["os"]["name"] = data["os"].get("name") or "scientific-project-repository-os"
+            if "pack" not in data["os"]:
+                data["os"]["pack"] = pack
+            os_path.write_text(
+                yaml.safe_dump(data, sort_keys=False, allow_unicode=True),
+                encoding="utf-8",
+            )
+            print("merge\tos.yaml\tversion=" + OS_VERSION)
     else:
         _write_os_yaml(
             os_path,
@@ -481,9 +541,27 @@ def apply(
         print("write\tos.yaml")
 
     gi = target / ".gitignore"
-    if upgrade or not gi.exists():
+    if not gi.exists():
         gi.write_text(_gitignore_for(pack), encoding="utf-8")
         print("write\t.gitignore")
+    elif upgrade:
+        # Append missing ignore rules without duplicating the whole file.
+        desired = _gitignore_for(pack)
+        cur = gi.read_text(encoding="utf-8")
+        added = 0
+        for line in desired.splitlines():
+            if line.strip() and line not in cur:
+                if not cur.endswith("\n"):
+                    cur += "\n"
+                cur += line + "\n"
+                added += 1
+        if added:
+            gi.write_text(cur, encoding="utf-8")
+            print(f"merge\t.gitignore\t+{added} lines")
+        else:
+            print("keep\t.gitignore")
+    else:
+        print("keep\t.gitignore")
 
     readme = target / "README.md"
     if not readme.exists():

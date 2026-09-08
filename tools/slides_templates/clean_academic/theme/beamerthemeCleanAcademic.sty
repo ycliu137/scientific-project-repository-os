@@ -1,0 +1,120 @@
+% beamerthemeCleanAcademic.sty
+% Generalized from RegVelo / CellProphet journal-club Beamer theme.
+\ProvidesPackage{beamerthemeCleanAcademic}[2026/09/08 Clean academic Beamer theme]
+
+\mode<presentation>
+
+\usefonttheme{professionalfonts}
+\useinnertheme{rounded}
+\useoutertheme{default}
+
+\setbeamertemplate{headline}{}
+
+% Colors
+\definecolor{cpPrimary}{HTML}{1B4965}
+\definecolor{cpSecondary}{HTML}{5FA8D3}
+\definecolor{cpAccent}{HTML}{CA6702}
+\definecolor{cpLight}{HTML}{F0F4F8}
+\definecolor{cpDark}{HTML}{0D1B2A}
+\definecolor{cpMuted}{HTML}{6C757D}
+% On-slide short citations (distinct from body text)
+\definecolor{cpCite}{HTML}{8B1E3F}
+
+\setbeamercolor{structure}{fg=cpPrimary}
+\setbeamercolor{frametitle}{bg=cpPrimary, fg=white}
+\setbeamercolor{title}{fg=cpPrimary}
+\setbeamercolor{subtitle}{fg=cpMuted}
+\setbeamercolor{author}{fg=cpDark}
+\setbeamercolor{institute}{fg=cpMuted}
+\setbeamercolor{date}{fg=cpMuted}
+\setbeamercolor{section in toc}{fg=cpPrimary}
+\setbeamercolor{subsection in toc}{fg=cpDark}
+\setbeamercolor{block title}{bg=cpPrimary, fg=white}
+\setbeamercolor{block body}{bg=cpLight, fg=cpDark}
+\setbeamercolor{block title alerted}{bg=cpAccent, fg=white}
+\setbeamercolor{block body alerted}{bg=cpLight, fg=cpDark}
+\setbeamercolor{footline}{fg=cpMuted}
+
+\setbeamerfont{title}{series=\bfseries,size=\Large}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\small}
+\setbeamerfont{citation}{size=\scriptsize}
+
+\RequirePackage{tikz}
+
+\setbeamertemplate{navigation symbols}{}
+% Page numbers at bottom-right; leave left (and mid) free for \slidecite*
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,rightskip=.35cm]{footline}%
+      \hfill\usebeamerfont{footline}\insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\setbeamertemplate{section page}{
+  \begin{center}
+    \vfill
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\insertsectionnumber.\ \insertsectionhead\par}
+    \vfill
+  \end{center}
+}
+
+\newcommand{\sectionslide}[1]{%
+  \section{#1}%
+  \begin{frame}[plain,noframenumbering]
+    \sectionpage
+  \end{frame}
+}
+
+% Placeholder when a figure is not ready yet
+\newcommand{\placeholderfig}[2][0.55]{%
+  \begin{center}
+    \fbox{\parbox[c][#1\textheight][c]{0.92\linewidth}{\centering\small\textit{#2}\\[0.4em]\footnotesize (Insert figure)}}
+  \end{center}
+}
+
+% Safe include: always constrain width and height
+\newcommand{\slidefig}[2][0.68]{%
+  \begin{center}
+    \includegraphics[width=\linewidth,height=#1\textheight,keepaspectratio]{#2}%
+  \end{center}
+}
+
+% ---------------------------------------------------------------------------
+% Short on-slide citations (sparse: only when a claim needs a source)
+% Format: Lastname et al., J Abbrev YYYY   (1--2 authors; no title; no DOI)
+% Placement: bottom corner, clear of the page-number footline.
+%   \slidecite{...}       → bottom-left (default; safest vs page #)
+%   \slideciteleft{...}   → same
+%   \slideciteright{...}  → bottom-right, inset so it does not cover page #
+% Multiple on one frame: prefer one line with ``; '' between entries.
+% ---------------------------------------------------------------------------
+\newcommand{\slideciteleft}[1]{%
+  \tikz[remember picture,overlay]\node[
+    anchor=south west,
+    xshift=0.45cm,
+    yshift=0.38cm,
+    font=\usebeamerfont{citation},
+    text=cpCite,
+    inner sep=0pt,
+    align=left,
+    text width=0.70\paperwidth
+  ] at (current page.south west) {#1};%
+}
+\newcommand{\slideciteright}[1]{%
+  \tikz[remember picture,overlay]\node[
+    anchor=south east,
+    xshift=-1.55cm,
+    yshift=0.38cm,
+    font=\usebeamerfont{citation},
+    text=cpCite,
+    inner sep=0pt,
+    align=right,
+    text width=0.52\paperwidth
+  ] at (current page.south east) {#1};%
+}
+\newcommand{\slidecite}[1]{\slideciteleft{#1}}
+
+\endinput
