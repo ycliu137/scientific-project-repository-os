@@ -46,7 +46,7 @@ Do **not** pre-create these in the template. First write creates the path.
 | First object of a type | `objects/<domain>/` | Via `project_api create`; skills in `skills/objects/` |
 | First pipeline module | `pipelines/<module>/` | README required (`skills/pipeline-modules.md`) |
 | Shared path helpers | `pipelines/_shared/` | Path contract builders |
-| Run artefacts | `experiments/` | Not Evidence until linked from a result |
+| Run artefacts | **instance-defined** | Template does **not** ship a default tree. Prefer a clear name such as `outputs/` or `dat/output_*/` if you need one; create on first write; not Evidence until linked from a result |
 | Backend labs | `backend_lab/<lab_id>/` | Disposable sandbox; code in git, `outputs/` ignored; **no external imports**; promote to `tex_docs/` |
 | Beamer slides | external `--out` dir | Templates + CLI in pipeline; **no** permanent `slides/` tree (`skills/slides.md`) |
 | Scratch drafts | `workspace/scratch/` | `mkdir` when needed; not indexed; gitignored |
@@ -72,8 +72,7 @@ Parent grouping folder is **not** a git repo. Ref is a literature corpus (ingest
 - **Authoritative data:** data repo layout (adapt per project)
 - **Authoritative literature:** ref repo (`catalog.yaml` + `papers/<Title_Slug>/`)
 - **Disposable sandboxes:** `backend_lab/` (may delete anytime after TeX promotion; never imported by maintained code) and `workspace/scratch/`
-- **Temporary outputs:** `backend_lab/**/outputs/`
-
+- **Temporary / bulk artefacts:** `backend_lab/**/outputs/` and any instance-chosen run tree (e.g. `outputs/`, `dat/output_*/`) — not Evidence until linked from a result object
 - **Private:** `meeting_record/` (not git)
 - **Legacy:** `os.yaml` → `legacy_roots`
 

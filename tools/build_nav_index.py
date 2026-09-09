@@ -117,7 +117,9 @@ def _tier_for(rel: str) -> str:
         return "run"
     if rel.startswith("tex_docs/"):
         return "doc"
-    if rel.startswith("experiments/"):
+    if rel.startswith("outputs/") or rel.startswith("dat/"):
+        return "run"
+    if rel.startswith("experiments/"):  # legacy instance path; not shipped by template
         return "run"
     if rel.startswith("env/"):
         return "ops"
@@ -141,7 +143,6 @@ def iter_files() -> list[Path]:
         "env",
         "objects",
         "pipelines",
-        "experiments",
     ]
     for root_name in roots:
         base = ROOT / root_name

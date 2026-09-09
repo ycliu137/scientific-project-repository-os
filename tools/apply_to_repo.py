@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.6.0"
+OS_VERSION = "0.6.1"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -160,8 +160,7 @@ INCLUDE = {
   - tests
   - env
   - objects
-  - pipelines
-  - experiments""",
+  - pipelines""",
     "source": """  - skills
   - tools
   - src

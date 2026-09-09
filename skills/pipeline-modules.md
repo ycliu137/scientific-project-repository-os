@@ -21,7 +21,7 @@ Never add a module directory without `README.md` in the same session. Copy `_TEM
 |---------|---------|
 | Purpose | What this module does (one short paragraph) |
 | Inputs | Paths, sibling (`data` / `source` / other modules), formats, required columns/files |
-| Outputs | Paths under `experiments/` or data `processed/`, formats, what downstream consumes |
+| Outputs | Instance-defined artefact paths (e.g. `outputs/`, `dat/output_*/`, or data `processed/`), formats, what downstream consumes |
 | Relations | **Upstream** (must run before) / **Downstream** (consumes this) / **Parallel** (same stage, no order) |
 | How to run | Exact command from the pipeline repo root |
 | Path contract | How output **and log** full paths encode every run-identifying parameter (`skills/code-change.md`) |

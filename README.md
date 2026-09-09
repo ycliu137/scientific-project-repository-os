@@ -48,7 +48,7 @@ python3 tools/bridge.py status
 # from pipeline: pip install -e ../my_topic
 ```
 
-Then implement the package in `../my_topic`, runs in `pipelines/` + `experiments/`, datasets in `../my_topic_data`, literature in `../my_topic_ref`.
+Then implement the package in `../my_topic`, runs in `pipelines/` (artefacts under an instance-chosen dir such as `outputs/` or `dat/output_*/`), datasets in `../my_topic_data`, literature in `../my_topic_ref`.
 
 ---
 
@@ -126,7 +126,7 @@ python3 tools/slides.py compile --dir ~/Slides/MyTalk_YYYYMMDD
 
 See `skills/slides.md` (progress talks) and `skills/journal-club-slides.md` (paper decks).
 
-Instance-grown (create when needed): `objects/`, `pipelines/`, `experiments/`, `workspace/scratch/`, `backend_lab/<lab_id>/`.
+Instance-grown (create when needed): `objects/`, `pipelines/`, `workspace/scratch/`, `backend_lab/<lab_id>/`. Run artefacts are **not** pre-named by the template — pick something obvious (e.g. `outputs/`, `dat/output_*/`) when you need them.
 
 Upgrade kernel:
 

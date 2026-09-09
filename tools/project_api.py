@@ -307,7 +307,7 @@ def base_object(
         "body": body,
     }
     if type_name == "experiment":
-        obj["run_dir"] = f"experiments/{oid}"
+        obj["run_dir"] = f"outputs/{oid}"
     return obj
 
 

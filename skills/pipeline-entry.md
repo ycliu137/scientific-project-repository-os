@@ -20,7 +20,7 @@ Use when `os.pack` is `pipeline`, which is the **default agent entry**.
 - Put raw datasets in this repo.
 - Dump reference PDFs into this repo (they belong in `*_ref`).
 - Commit `meeting_record/*` (except README) or `backend_lab/**/outputs/`.
-- `import` anything under `backend_lab/` from pipelines, source, tests, or experiments.
+- `import` anything under `backend_lab/` from pipelines, source, tests, or run-artefact trees.
 - Treat lab `notes.md` / `outputs/` as the durable project record.
 - Create a permanent tracked `slides/` package for cosmetics (use external `--out`).
 - Promote throwaway lab scripts into `pipelines/` without a rewrite.

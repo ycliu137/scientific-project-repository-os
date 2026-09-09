@@ -164,6 +164,6 @@ Never point Beamer at an absolute path inside a giant experiment tree for the fi
 ## Anti-patterns
 
 - Creating `spfid_pipeline/slides/` as a permanent project tree
-- `\includegraphics{../../experiments/.../huge.pdf}` in the deck
+- `\includegraphics{../../outputs/.../huge.pdf}` (or other bulky artefact trees) in the deck
 - Importing `backend_lab` code into slides generation
 - Treating the deck as the scientific source of truth

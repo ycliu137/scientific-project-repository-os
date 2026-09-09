@@ -23,7 +23,7 @@ Copy `datasets/_TEMPLATE/` to `datasets/<id>/` when adding a corpus.
 1. Search/download only what the task needs; write `meta.yaml` **before** treating files as usable.
 2. Keep **raw** immutable; write derived files under `processed/` or `integrated/`.
 3. Register the id in `catalog.yaml`.
-4. Point pipeline experiments at **processed** paths, not ad-hoc home folders.
+4. Point pipeline runs at **processed** paths, not ad-hoc home folders.
 5. Large binaries: gitignore or Git LFS; never commit secrets in URLs with tokens.
 
 ## Integrity of provenance

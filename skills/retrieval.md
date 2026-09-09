@@ -21,7 +21,7 @@ Cold-start: `COLD_START.md`. Learning: `skills/consult-plan.md` (not the whole m
 
 | Layer | Question | Prefer |
 |-------|----------|--------|
-| Episodic | What did we run? | `objects/experiments/`, `objects/results/`, `experiments/` |
+| Episodic | What did we run? | `objects/experiments/`, `objects/results/`, instance artefact dirs (e.g. `outputs/`, `dat/output_*/`) |
 | Semantic | What do we claim to know? | `objects/claims/` (unproven until linked), hypotheses |
 | Procedural | How do we act? | `skills/`, root `SKILL.md` |
 | Failure | What went wrong? | `objects/failures/`, `do_not` in NEXT_ACTION |

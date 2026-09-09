@@ -13,7 +13,7 @@ Use when the agent (or human) needs **background / exploratory runs** in the **p
 
 Hard rules:
 
-1. **No inbound deps:** `pipelines/`, source package, `tests/`, `experiments/`, preprocess, and other labs must **not** `import` or call `backend_lab/` code.
+1. **No inbound deps:** `pipelines/`, source package, `tests/`, run-artefact trees, preprocess, and other labs must **not** `import` or call `backend_lab/` code.
 2. **No outbound authority:** Lab code may `import` the **source** package and read data via normal paths; it must not become an API others depend on.
 3. **No durable truth inside the lab:** Do not park important results in `backend_lab/*/notes.md` or `outputs/` as the project record. Promote to `tex_docs/` (or a Change Report / object) first.
 4. **Git ≠ permanent:** Committing lab scripts only helps short-term repro / audit; the tree may still be wiped after promotion.
@@ -24,7 +24,7 @@ Contrast:
 |------|------|
 | `backend_lab/` | Disposable sandboxes |
 | `pipelines/` | Maintained runners (README required) |
-| `experiments/` | Durable run artefacts for registered `EXP_*` |
+| Instance artefact root (e.g. `outputs/`, `dat/output_*/`) | Durable run artefacts for registered `EXP_*` — template does not pre-create one |
 | `tests/` / `tests/smoke/` | Regression / done-gate |
 | `workspace/scratch/` | Even lighter drafts |
 | `tex_docs/` | Durable method / result notes |

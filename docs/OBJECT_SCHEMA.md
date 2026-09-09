@@ -20,7 +20,7 @@ Objects are YAML files with `---` front matter + body. Create via `tools/project
 Hypothesis ≠ experiment ≠ result ≠ claim.
 
 - A **claim** may cite sources; it is not a **result**.
-- A **result** must name an experiment (and usually a `run_dir` under `experiments/`).
+- A **result** must name an experiment (and usually a `run_dir` under the instance’s artefact convention, e.g. `outputs/` or `dat/output_*/`).
 - Promoting a claim to “accepted” without `links.results` or `links.experiments` is a completeness issue.
 - Failures are kept. Do not delete them to tidy the map.
 
