@@ -51,6 +51,18 @@ def test_language_skill_and_h18():
     assert "meeting_record/" in lang
 
 
+def test_notation_skill_and_h21():
+    assert (ROOT / "skills" / "notation.md").is_file()
+    assert (ROOT / "docs" / "NOTATION.md").is_file()
+    skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+    assert "Unified notation" in skill
+    notation = (ROOT / "skills" / "notation.md").read_text(encoding="utf-8")
+    assert "docs/NOTATION.md" in notation
+    registry = (ROOT / "docs" / "NOTATION.md").read_text(encoding="utf-8")
+    assert "Math" in registry
+    assert "Code" in registry
+
+
 def test_module_template_path_contract_when_present():
     """pipelines/ is instance-grown; only assert if the template folder exists."""
     path = ROOT / "pipelines" / "_TEMPLATE" / "README.md"

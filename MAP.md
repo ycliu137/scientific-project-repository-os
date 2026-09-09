@@ -30,8 +30,8 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are 
 | Index (committed) | `index/tree.yaml` | Logical tree seed |
 | Index (generated) | `index/nav_*.json`, `objects.db`, … | Regenerable |
 | Next action | `workspace/current/NEXT_ACTION.yaml` | Live pointer |
-| AI design docs | `docs/` | Agents; Change Reports under `docs/change_reports/` |
-| TeX notes | `tex_docs/` | Dual-use; Chinese meeting notes OK (`skills/language.md`) |
+| AI design docs | `docs/` | Agents; Change Reports under `docs/change_reports/`; notation map `docs/NOTATION.md` |
+| TeX notes | `tex_docs/` | Dual-use; Chinese meeting notes OK (`skills/language.md`); symbols via `skills/notation.md` |
 | Meetings | `meeting_record/` | Private; gitignored |
 | Tests | `tests/` | pytest |
 | Smoke scripts | `tests/smoke/` | Fast checks (`skills/code-change.md`) |

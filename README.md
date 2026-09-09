@@ -8,6 +8,8 @@ Short name: `repo-os`.
 
 **Language:** English everywhere, except Chinese meeting records in pipeline `tex_docs/` and private `meeting_record/` (`skills/language.md`).
 
+**Notation:** one math symbol per quantity in docs, one identifier per quantity in code; mapping in pipeline `docs/NOTATION.md` (`skills/notation.md`). Docs and code may use different spellings for the same quantity.
+
 ---
 
 ## Sibling roles (parent folder is not a git repo)

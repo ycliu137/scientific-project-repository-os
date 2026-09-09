@@ -1,0 +1,46 @@
+task_id: "unified-notation-convention"
+timestamp: "2026-09-09T18:35:00Z"
+repos_touched:
+  - scientific-project-repository-os
+  - sclatcov_pipeline
+  - sclatcov
+  - sclatcov_data
+  - sclatcov_ref
+theme: "os"
+why: >
+  Scientific quantities were free to be renamed across docs and code, which
+  breaks human reading and agent consistency. Add H21: one math symbol per
+  quantity in documents, one identifier per quantity in code; docs and code
+  may differ from each other; the mapping lives in pipeline docs/NOTATION.md.
+  Ship the skill in the OS template (0.6.2) and seed sclatcov's registry.
+artifacts:
+  - path: skills/notation.md
+    note: discipline (two namespaces + registry rule)
+  - path: docs/NOTATION.md
+    note: template stub; instance-filled on sclatcov_pipeline
+  - path: SKILL.md
+    note: H21 + always-on notation + lifecycle router entry
+  - path: AGENTS.md
+    note: mandatory item + violation
+  - path: tools/project_api.py
+    note: context --task notation and related tasks
+  - path: tools/check_project.py
+    note: CORE skill + WARN if pipeline missing docs/NOTATION.md
+  - path: tools/apply_to_repo.py
+    note: ship skill/stub; KEEP_ON_UPGRADE; upgrade reads pack from os.yaml
+  - path: sclatcov_pipeline/docs/NOTATION.md
+    note: seeded FMI/BSP/generative/feature symbol map
+risks:
+  - Existing docs may still use ad-hoc letters until gradually aligned to the registry
+  - apply_to_repo --upgrade without --pack used to default to pipeline; now reads os.yaml
+skills_followed:
+  - skills/consult-plan.md
+  - skills/change-report.md
+  - skills/evolution.md
+  - skills/notation.md
+  - skills/language.md
+plan_ref: docs/MASTER_PLAN.md
+summary: "H21 unified notation; docs↔code map in docs/NOTATION.md; OS 0.6.2"
+new_knowledge: "H21; skills/notation.md; pipeline docs/NOTATION.md is authority; code and math may differ; upgrade --pack defaults from os.yaml."
+supersedes: []
+integrity: "VALID"

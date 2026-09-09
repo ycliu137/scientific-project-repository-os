@@ -45,6 +45,7 @@ CORE_FILES = [
     ROOT / "skills" / "code-change.md",
     ROOT / "skills" / "runtime-env.md",
     ROOT / "skills" / "language.md",
+    ROOT / "skills" / "notation.md",
     ROOT / "tools" / "nav.py",
     ROOT / "tools" / "project_api.py",
     ROOT / "workspace" / "current" / "NEXT_ACTION.yaml",
@@ -200,6 +201,19 @@ def _change_report_density() -> list[str]:
     return warns
 
 
+def _check_notation_registry() -> list[str]:
+    """Pipeline packs should keep docs/NOTATION.md (H21). Missing is WARN."""
+    warnings: list[str] = []
+    if os_pack(ROOT) != "pipeline":
+        return warnings
+    path = ROOT / "docs" / "NOTATION.md"
+    if not path.is_file():
+        warnings.append(
+            "docs/NOTATION.md missing — docs↔code symbol map (skills/notation.md)"
+        )
+    return warnings
+
+
 CJK_RE = re.compile(r"[\u3400-\u9fff\uf900-\ufaff]")
 CJK_ALLOW_PREFIXES = ("tex_docs/", "meeting_record/")
 CJK_SUFFIXES = {".md", ".py", ".yaml", ".yml", ".json", ".sh", ".txt", ".toml", ".tex", ".rst", ".cfg"}
@@ -322,6 +336,7 @@ def main() -> int:
     warnings.extend(_check_env_folder())
     warnings.extend(_change_report_density())
     warnings.extend(_check_project_english())
+    warnings.extend(_check_notation_registry())
 
     if indexed_paths:
         missing = _unindexed_files(indexed_paths)

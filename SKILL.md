@@ -93,12 +93,13 @@ Full drill: `COLD_START.md`.
 18. **Project language is English** (`skills/language.md`). Skills, objects, code, comments, `docs/`, Change Reports, pipelines, env, and the paper manuscript are English. Chinese is allowed only for **meeting records**: durable notes in `tex_docs/`, private transcripts in `meeting_record/`. Promotions into objects or `NEXT_ACTION.yaml` are English.
 19. **Backend labs are disposable** (`skills/backend-lab.md`): never import `backend_lab/` from pipelines, source, or tests; commit lab code only for short-term repro; put important results in `tex_docs/` (not lab notes); wiping a lab after promotion must not break the project.
 20. **Slides are external products** (`skills/slides.md`): generate Beamer decks into a user `--out` directory; do not create a permanent `slides/` tree in the pipeline.
+21. **Unified notation** (`skills/notation.md`): one math symbol per quantity across all documents; one code identifier per quantity across the sibling set. Docs and code **may** use different spellings for the same quantity, but both sides stay internally consistent. Record the mapping in pipeline `docs/NOTATION.md` whenever a quantity is introduced or renamed.
 
 ---
 
 ## Lifecycle router
 
-Always-on L2: `consult-plan`, `retrieval`, `adding-knowledge`, `change-report`, `reindex`, `maintenance`, `code-change`, `language`.
+Always-on L2: `consult-plan`, `retrieval`, `adding-knowledge`, `change-report`, `reindex`, `maintenance`, `code-change`, `language`, `notation`.
 
 | Intent | `--task` |
 |--------|----------|
@@ -114,6 +115,7 @@ Always-on L2: `consult-plan`, `retrieval`, `adding-knowledge`, `change-report`, 
 | Meeting record ingested | `meeting` |
 | TeX method note | `tex` |
 | Write manuscript | `write` |
+| Notation / symbol map | `notation` |
 | Protocol / OS change | `evolution` |
 | Navigate only | `retrieval` |
 
@@ -127,7 +129,7 @@ L3 skills exist **on demand**. Completeness is `context` missing-what.
 
 **Code/pipeline edits:** follow `skills/code-change.md` (project interpreter, tests+smoke green, scoped diffs, path contract).
 
-**Forbidden as done:** drop YAML under `objects/` without index; skip Change Report; copy source/data into paper; commit `meeting_record/` contents; leave pytest/smoke red; omit run parameters from output/log paths; skip `env/create_*.sh` on a new host when `runtime.env_name` is set; write Chinese outside `tex_docs/` / `meeting_record/`.
+**Forbidden as done:** drop YAML under `objects/` without index; skip Change Report; copy source/data into paper; commit `meeting_record/` contents; leave pytest/smoke red; omit run parameters from output/log paths; skip `env/create_*.sh` on a new host when `runtime.env_name` is set; write Chinese outside `tex_docs/` / `meeting_record/`; introduce a scientific quantity without updating `docs/NOTATION.md` (`skills/notation.md`).
 
 ---
 

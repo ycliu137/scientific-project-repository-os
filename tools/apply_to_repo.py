@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.6.1"
+OS_VERSION = "0.6.2"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -45,6 +45,7 @@ KERNEL_FILES = [
     "skills/code-change.md",
     "skills/runtime-env.md",
     "skills/language.md",
+    "skills/notation.md",
     "skills/reference-papers.md",
     "skills/backend-lab.md",
     "skills/slides.md",
@@ -84,6 +85,7 @@ PIPELINE_EXTRA = [
     "skills/objects/results.md",
     "skills/objects/failures.md",
     "docs/MASTER_PLAN.md",
+    "docs/NOTATION.md",
     "tests/test_smoke.py",
     "tests/smoke/README.md",
     "env/README.md",
@@ -124,6 +126,7 @@ PIPELINE_TREES = [
 # Instance-owned stubs: ship on first instantiate, never clobber on --upgrade.
 KEEP_ON_UPGRADE = {
     "docs/MASTER_PLAN.md",
+    "docs/NOTATION.md",
     "workspace/current/NEXT_ACTION.yaml",
 }
 
@@ -679,6 +682,19 @@ def main() -> int:
     target = Path(args.target)
     name = args.name or target.name
     pack = "pipeline" if args.pack == "code" else args.pack
+    # On upgrade, prefer the instance's recorded pack unless the user overrode --pack.
+    if args.upgrade and "--pack" not in sys.argv:
+        os_path = target.expanduser().resolve() / "os.yaml"
+        if os_path.is_file():
+            try:
+                import yaml
+            except ImportError:
+                yaml = None
+            if yaml is not None:
+                data = yaml.safe_load(os_path.read_text(encoding="utf-8")) or {}
+                recorded = ((data.get("os") or {}).get("pack") or "").strip()
+                if recorded in ("source", "pipeline", "data", "ref", "paper"):
+                    pack = recorded
     siblings = {
         "source": args.sibling_source,
         "pipeline": args.sibling_pipeline,

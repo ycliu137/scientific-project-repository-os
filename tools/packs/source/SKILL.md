@@ -16,6 +16,8 @@ pytest -q
 
 Pipeline may `import` this package. This repo **must not** import pipeline or data.
 
+Scientific symbols: reuse the pipeline registry `docs/NOTATION.md` (`skills/notation.md`); do not invent a second math letter or code name for the same quantity.
+
 If you landed here by mistake for design/runs/meetings: `cd` to the pipeline sibling (`skills/pipeline-entry.md` there).
 
 Bootstrap: this file → `MAP.md` → `python3 tools/nav.py rebuild` if tools exist. Prefer opening **pipeline** for real work.

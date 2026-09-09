@@ -9,6 +9,7 @@ Chinese is allowed **here** for meeting notes (`skills/language.md`). The rest o
 - One topic per folder or file: `tex_docs/<topic>/<topic>.tex`
 - State the `H_*` / `EXP_*` you are explaining when they exist
 - Prefer compileable standalone articles (article class is enough)
+- Use symbols from pipeline `docs/NOTATION.md` (`skills/notation.md`); register new quantities there before inventing TeX macros
 - Lab promotions: `python3 tools/lab.py promote <lab_id> --tex tex_docs/labs/<topic>` then edit Results/Conclusion (`skills/backend-lab.md`)
 
 ## Compile
@@ -25,3 +26,4 @@ Requires `latexmk` + a TeX engine. Aux files are gitignored; **commit `.tex` and
 - Put the journal manuscript here once a paper sibling exists (`skills/paper-entry.md`)
 - Write the rest of the project in Chinese because a meeting note is Chinese
 - Leave important lab findings only inside `backend_lab/` (`notes.md` or `outputs/`) without a TeX / docs promotion
+- Introduce ad-hoc math letters that contradict `docs/NOTATION.md`

@@ -34,6 +34,7 @@ Change only what the task requires. Comments, identifiers, and log/artefact **pa
 - Do not alter behavior, APIs, or control flow in **unrelated** modules.
 - Do not “while we’re here” rewrite other pipelines.
 - Shared helpers (`pipelines/_shared/`) may change only when the task needs a shared contract.
+- New or renamed **scientific quantities** keep one code name; update pipeline `docs/NOTATION.md` in the same change (`skills/notation.md`).
 
 ---
 
@@ -65,3 +66,4 @@ Document the path pattern in the module README heading **Path contract**.
 - Skipping `env/create_*.sh` and hand-assembling pip on a new machine
 - Seeds/models only in the job name on an HPC scheduler, not in the file path
 - Copy-pasting path strings in every rule instead of a shared builder
+- Introducing a second identifier for a quantity already named in `docs/NOTATION.md`

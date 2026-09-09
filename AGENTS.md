@@ -18,6 +18,7 @@
 14. New `pipelines/<module>/` must include `README.md` (Purpose / Inputs / Outputs / Relations / How to run / Path contract) and a row in `pipelines/README.md` (`skills/pipeline-modules.md`).
 15. New host: run the matching `env/create_*.sh` from `env/catalog.yaml` (`skills/runtime-env.md`) before pytest. Do not invent ad-hoc `~/.local` envs.
 16. Write **English** everywhere except Chinese meeting records in `tex_docs/` and private `meeting_record/` (`skills/language.md`).
+17. Keep **one math symbol per quantity** in docs and **one code name per quantity** in code; record docs↔code mapping in `docs/NOTATION.md` (`skills/notation.md`).
 
 ## Violations
 
@@ -33,3 +34,4 @@
 - Declaring a code/pipeline task done with failing tests or artefact paths that omit run parameters
 - Creating runtimes only from chat-log pip lines instead of `env/create_*.sh`
 - Writing Chinese in skills, objects, code, or `docs/` (Chinese meeting notes belong in `tex_docs/` / `meeting_record/`)
+- Using two doc symbols or two code names for the same scientific quantity, or skipping `docs/NOTATION.md` when introducing/renaming one

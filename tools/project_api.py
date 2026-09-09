@@ -61,19 +61,20 @@ EMPTY_LINKS = {
 }
 
 TASK_SKILLS: dict[str, list[str]] = {
-    "bootstrap": ["skills/bootstrap.md", "skills/runtime-env.md", "skills/language.md"],
+    "bootstrap": ["skills/bootstrap.md", "skills/runtime-env.md", "skills/language.md", "skills/notation.md"],
     "env": ["skills/runtime-env.md", "skills/code-change.md", "skills/bootstrap.md"],
-    "learning": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/language.md"],
-    "experiment": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md"],
-    "pipeline": ["skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md", "skills/change-report.md"],
+    "learning": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/language.md", "skills/notation.md"],
+    "experiment": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md", "skills/notation.md"],
+    "pipeline": ["skills/pipeline-entry.md", "skills/pipeline-modules.md", "skills/code-change.md", "skills/change-report.md", "skills/notation.md"],
     "literature": ["skills/consult-plan.md", "skills/adding-knowledge.md", "skills/reference-papers.md", "skills/pipeline-entry.md"],
-    "lab": ["skills/backend-lab.md", "skills/tex-docs.md", "skills/code-change.md", "skills/pipeline-entry.md"],
-    "slides": ["skills/slides.md", "skills/journal-club-slides.md", "skills/language.md", "skills/pipeline-entry.md"],
+    "lab": ["skills/backend-lab.md", "skills/tex-docs.md", "skills/code-change.md", "skills/pipeline-entry.md", "skills/notation.md"],
+    "slides": ["skills/slides.md", "skills/journal-club-slides.md", "skills/language.md", "skills/notation.md", "skills/pipeline-entry.md"],
     "data": ["skills/consult-plan.md", "skills/data-management.md"],
     "meeting": ["skills/meeting-record.md", "skills/language.md", "skills/tex-docs.md", "skills/consult-plan.md"],
-    "tex": ["skills/tex-docs.md", "skills/language.md", "skills/change-report.md"],
-    "write": ["skills/consult-plan.md", "skills/paper-entry.md", "skills/reference-papers.md", "skills/language.md", "skills/change-report.md"],
-    "evolution": ["skills/consult-plan.md", "skills/evolution.md", "skills/language.md"],
+    "tex": ["skills/tex-docs.md", "skills/language.md", "skills/notation.md", "skills/change-report.md"],
+    "write": ["skills/consult-plan.md", "skills/paper-entry.md", "skills/reference-papers.md", "skills/language.md", "skills/notation.md", "skills/change-report.md"],
+    "notation": ["skills/notation.md", "docs/NOTATION.md", "skills/tex-docs.md", "skills/code-change.md"],
+    "evolution": ["skills/consult-plan.md", "skills/evolution.md", "skills/language.md", "skills/notation.md"],
     "retrieval": ["skills/retrieval.md"],
 }
 

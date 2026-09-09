@@ -26,7 +26,7 @@ python3 tools/nav.py anywhere <query>
 | `\cite{…}` / bibliography inputs | Ref sibling `bib/` + `papers/*/meta.yaml` |
 | Change Reports about the manuscript | Method/run reports in pipeline |
 
-Mine `../<name>_pipeline/tex_docs/` as material; do not treat those notes as the submission. Manuscript prose is **English** even if some pipeline TeX notes are Chinese meeting records (`skills/language.md`).
+Mine `../<name>_pipeline/tex_docs/` as material; do not treat those notes as the submission. Manuscript prose is **English** even if some pipeline TeX notes are Chinese meeting records (`skills/language.md`). Manuscript math follows pipeline `docs/NOTATION.md` (`skills/notation.md`).
 
 ## Forbidden
 

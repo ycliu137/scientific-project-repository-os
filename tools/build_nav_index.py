@@ -65,6 +65,7 @@ SEED_ALIASES: dict[str, list[str]] = {
     "code_change": ["skills/code-change.md"],
     "runtime_env": ["skills/runtime-env.md", "env/README.md", "env/catalog.yaml"],
     "language": ["skills/language.md"],
+    "notation": ["skills/notation.md", "docs/NOTATION.md"],
     "env_catalog": ["env/catalog.yaml"],
     "source_package": ["skills/source-package.md"],
     "data_management": ["skills/data-management.md"],
