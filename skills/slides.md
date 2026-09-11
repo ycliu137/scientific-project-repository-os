@@ -114,6 +114,67 @@ Never size wide figures with **only** `height=` — they overflow horizontally.
 8. **Do not paste raw notebook dumps.** Promote from `tex_docs/` / objects.
 9. **English by default** (`skills/language.md`). Chinese: `language: zh` → XeLaTeX.
 
+## Narrative craft (lab / progress talks)
+
+Hard-won habits. Apply **before** filling frames with theory or pipeline dumps.
+
+### Before writing
+
+1. **Causal chain first, materials second.** Pick one spine the audience can repeat
+   (e.g.\ depth → quantity quality → downstream score). Everything else is support
+   or deferred. Month-long theory/method inventories are not a talk.
+2. **Per-frame question.** Before drafting a page, write ≤5 lines: *what one
+   question does this slide answer?* If two questions, split or cut.
+3. **Continue the last talk; prefer delete over add.** Keep the bridge
+   (model / workflow / one result page). Drop re-derivations, parallel strategy
+   menus, and multi-page diagnostics the group already heard. Audience memory of
+   *where we stopped* beats another equation pass.
+
+### Figures
+
+4. **Figures serve the spine — do not paste pipeline plots by default.** Full
+   evaluation bars with every method (and every variant) pull the room off-plot.
+   Default: redraw from CSV with **only the 2–3 series the story needs**
+   (often focal method ± one baseline). Omit constant/trivial series (e.g.\ Truth
+   stuck at 1). Ask: *can this be 2–3 curves that make the causal claim obvious?*
+5. **Park extras on problem / outlook.** Alternate schemes, multi-type variants,
+   full method families → one problem slide or outlook, not the results arc.
+
+### Language and layout
+
+6. **Audience-resolvable terms; consistent across pages.** Prefer plain labels
+   over overloaded symbols (`|A|`, ambiguous “Pearson r vs latent”) that collide
+   with later baselines. Nail operational definitions at first use
+   (e.g.\ shallow = \(1\times\), deep = \(10^{4}\times\)) and reuse them.
+7. **No duplicate text on the same frame.** If \(C,G,N_c\) (or any definition)
+   already live in a table row / caption, do not reprint them in the header.
+   Test: *if I delete this sentence, does the slide still parse?*
+
+### Results rhetoric
+
+8. **Explain non-monotonic / negative results in a bullet up front.**
+   (Example pattern: pairwise regression AUPR rises then falls because it eats
+   indirect correlation — not a plotting bug.) Better than improvising when asked.
+9. **Split “looks good” into structure vs scale.** High agreement with latent
+   structure can coexist with systematic scaling error. Say both; that contrast
+   motivates *why recovery is still needed* after deep sequencing.
+
+### Engineering the deck repo
+
+10. **Sparse checkout + version every pass.** Pull only the talk tree + theme;
+    after each meaningful edit: compile → commit → push so the podium PDF is not
+    a stale local cache.
+
+### Anti-patterns (narrative)
+
+- Dumping the month’s theory/methods because they exist in `tex_docs/`
+- Re-teaching last meeting’s formulas instead of bridging forward
+- Dropping a full multi-method pipeline figure into results “to be complete”
+- Symbol soup the in-group still argues about
+- Header + caption + bullets all restating the same definition
+- Surprising the room with a U-shaped curve and no pre-written cause
+- Equating “deep / clean / high \(r\)” with “already equal to latent”
+
 ### On-slide citations (少而精)
 
 Use only when a claim or figure needs a source — **not every frame**, and usually **≤1–2 short cites** per frame.
@@ -157,9 +218,10 @@ Never point Beamer at an absolute path inside a giant experiment tree for the fi
 
 1. Confirm `--out` (external path) before generating.
 2. Pull narrative from `docs/MASTER_PLAN.md`, `tex_docs/`, `NEXT_ACTION.yaml`, objects — not invented results.
-3. Snapshot heavy PDFs; keep the talk folder self-contained.
-4. Compile and fix TeX errors in the **output** directory; run `slides.py qa` when layout changed.
-5. Do not add a tracked `slides/` package inside the pipeline for cosmetics.
+3. **Lock the causal spine and per-frame questions** (Narrative craft) before drafting content; prefer cut over add when continuing a prior talk.
+4. Snapshot heavy PDFs; keep the talk folder self-contained. For result plots: default to redrawing a narrative-minimal figure, not pasting the full pipeline panel.
+5. Compile and fix TeX errors in the **output** directory; run `slides.py qa` when layout changed. After each pass worth keeping: commit + push the external talk repo.
+6. Do not add a tracked `slides/` package inside the pipeline for cosmetics.
 
 ## Anti-patterns
 
@@ -167,3 +229,6 @@ Never point Beamer at an absolute path inside a giant experiment tree for the fi
 - `\includegraphics{../../outputs/.../huge.pdf}` (or other bulky artefact trees) in the deck
 - Importing `backend_lab` code into slides generation
 - Treating the deck as the scientific source of truth
+- Pasting a full multi-method evaluation figure when 2–3 series would carry the claim
+- Re-deriving last talk’s formulas instead of bridging from where the audience stopped
+- Leaving a non-monotonic result unexplained on-slide

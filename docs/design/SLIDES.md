@@ -1,6 +1,6 @@
 # Design note — External Beamer slides
 
-Status: OS v0.6.0
+Status: OS v0.6.2 (+ narrative craft)
 
 ## Problem
 
@@ -29,6 +29,13 @@ authority and tempts huge PDF includes.
 - **Deck structure rules:** required Outline/TOC page; Summary \& outlook
   share one frame by default; Thank you sits at the bottom of that frame
   unless layout forces a separate page.
+- **Narrative craft** (progress / lab talks): causal spine before materials;
+  continue prior talk by deleting more than adding; redraw pipeline plots to
+  the 2–3 series the story needs; audience-resolvable consistent terms; no
+  duplicate definitions on one frame; pre-explain non-monotonic results;
+  split “looks good” into structure vs scale; sparse-checkout talk repo and
+  compile → commit → push each pass. Full checklist: `skills/slides.md`
+  § Narrative craft.
 
 ## Non-goals
 

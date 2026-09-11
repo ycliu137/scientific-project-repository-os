@@ -12,7 +12,9 @@ description: >-
 # Journal Club Slides from a Paper
 
 Produce a ~1-hour Beamer deck in an **external** talk directory (see
-`skills/slides.md`: no permanent `slides/` tree in the pipeline).
+`skills/slides.md`: no permanent `slides/` tree in the pipeline). For
+progress / lab-meeting decks, also follow `skills/slides.md` § Narrative craft
+(causal spine, delete-over-add continuation, narrative-minimal figures).
 
 Scaffold:
 
