@@ -1,0 +1,30 @@
+# Change Report — Upgrade never clobbers instance-modified kernel (absorb)
+
+task_id: "os-upgrade-absorb-not-clobber"
+timestamp: "2026-09-13T18:30:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os-evolution"
+why: >
+  Overwriting modified kernel files and asking humans to merge from backups was
+  wrong. Instance edits must be kept; template improvements are absorbed into
+  the instance under agent guidance.
+artifacts:
+  - path: tools/apply_to_repo.py
+    note: "OS_APPLIED hashes; refresh vs absorb; --record-hashes; OS_ABSORB.md"
+  - path: docs/design/APPLY_AND_UPGRADE.md
+    note: "hash decision table + absorb agent checklist"
+  - path: tools/check_project.py
+    note: "WARN when absorb_needed pending"
+  - path: os.yaml
+    note: "0.7.2"
+plan_ref: docs/design/APPLY_AND_UPGRADE.md
+skills_followed:
+  - skills/evolution.md
+  - skills/change-report.md
+summary: >
+  Upgrade never overwrites instance-modified kernel files; records them in
+  OS_ABSORB.md for coherent template→instance merges.
+risks:
+  - "First upgrade without OS_APPLIED marks all divergences as absorb (expected once)."
+integrity: "VALID_WITH_WARN"

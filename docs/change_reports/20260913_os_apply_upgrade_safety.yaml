@@ -1,0 +1,32 @@
+# Change Report — Safe repeatable apply/upgrade (v0.7.1)
+
+task_id: "os-apply-upgrade-safety"
+timestamp: "2026-09-13T18:00:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os-evolution"
+why: >
+  First apply must not destroy instance files; template and instances both
+  evolve, so upgrades must be repeatable with clear collision rules, dry-run,
+  and backups for overwritten kernel files.
+artifacts:
+  - path: tools/apply_to_repo.py
+    note: "modes documented; --dry-run; backup on overwrite; KEEP_ON_UPGRADE"
+  - path: docs/design/APPLY_AND_UPGRADE.md
+    note: "collision policy + both-sides-improved workflow"
+  - path: README.md
+    note: "overlay vs upgrade sections"
+  - path: skills/evolution.md
+    note: "upgrade procedure with dry-run"
+  - path: os.yaml
+    note: "version 0.7.1"
+plan_ref: docs/design/APPLY_AND_UPGRADE.md
+skills_followed:
+  - skills/evolution.md
+  - skills/change-report.md
+summary: >
+  Codified instantiate / first-overlay / upgrade semantics: never overwrite on
+  first apply; on upgrade keep instance state, backup then refresh kernel.
+risks:
+  - "Instance forks of generic SKILL.md/skills still need manual merge from scratch backup after upgrade."
+integrity: "VALID_WITH_WARN"

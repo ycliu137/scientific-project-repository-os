@@ -14,11 +14,19 @@ When changing Protocol / root SKILL / invariants / `os.yaml` pack semantics:
    `docs/design/AUTORESEARCH.md` before merging. Newer agents must stay first-class.
 6. If the change is a **scientific method** (not the OS): record it as hypothesis/experiment/result, not only as a code comment.
 
-Upgrade an instance from a clean template checkout:
+Upgrade an instance from a clean template checkout (see
+`docs/design/APPLY_AND_UPGRADE.md`):
 
 ```bash
 python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
-  --target . --upgrade --name <keep-existing-slug>
+  --target . --upgrade --dry-run
+python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
+  --target . --upgrade
 ```
 
-`--upgrade` overwrites kernel files. It should not clobber `src/`, `objects/`, or (unless you pass flags) `os.yaml` identity — check the script before running on a dirty tree.
+`--upgrade` refreshes shipped kernel files **only when the instance did not
+modify them** (tracked in `OS_APPLIED.yaml`). Modified files are listed in
+`OS_ABSORB.md` for the agent to merge template improvements into the instance
+copy. KEEP_ON_UPGRADE (ledger/comprehension/plans) is never overwritten.
+`os.yaml` / `.gitignore` are merged. Do not run on a dirty tree without
+`--dry-run` first. After absorb merges: `--record-hashes`.

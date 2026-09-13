@@ -54,11 +54,30 @@ Then implement the package in `../my_topic`, runs in `pipelines/` (artefacts und
 
 ---
 
-## Single-repo overlay (existing tree)
+## Single-repo overlay (existing tree — first apply, safe)
+
+Never overwrites existing files; only adds missing kernel files:
 
 ```bash
 python3 tools/apply_to_repo.py --target /path/to/existing --name foo --pack pipeline --overlay
 ```
+
+## Upgrade an instance after the template improves (repeatable)
+
+```bash
+python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
+  --target . --upgrade --dry-run
+python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
+  --target . --upgrade
+# If OS_ABSORB.md has absorb_needed: merge template→instance, then:
+python3 /path/to/scientific-project-repository-os/tools/apply_to_repo.py \
+  --target . --record-hashes
+python3 tools/nav.py rebuild
+python3 tools/check_project.py
+```
+
+Instance-modified kernel files are **never** overwritten; see
+`docs/design/APPLY_AND_UPGRADE.md`.
 
 ---
 

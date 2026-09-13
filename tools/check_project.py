@@ -333,6 +333,25 @@ def _check_comprehension() -> list[str]:
     ]
 
 
+def _check_os_absorb() -> list[str]:
+    """Warn when a prior upgrade left absorb_needed entries."""
+    path = ROOT / "workspace" / "current" / "OS_ABSORB.md"
+    if not path.is_file():
+        return []
+    text = path.read_text(encoding="utf-8")
+    if "absorb_needed (0)" in text or "_None — instance kernel" in text:
+        return []
+    if "## absorb_needed" not in text:
+        return []
+    after = text.split("## absorb_needed", 1)[1].split("## ", 1)[0]
+    if "`" in after and "_None" not in after:
+        return [
+            "OS_ABSORB.md has absorb_needed entries — merge template improvements "
+            "into those instance files (docs/design/APPLY_AND_UPGRADE.md)"
+        ]
+    return []
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument(
@@ -408,6 +427,7 @@ def main() -> int:
     errors.extend(ledger_err)
     warnings.extend(ledger_warn)
     warnings.extend(_check_comprehension())
+    warnings.extend(_check_os_absorb())
 
     if indexed_paths:
         missing = _unindexed_files(indexed_paths)
