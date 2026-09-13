@@ -113,10 +113,15 @@ Humans: source README + `tex_docs/*.pdf`. Pipeline `docs/` is for agents.
 | `meeting_record/` | private; gitignored |
 | `tests/` | pytest; smoke scripts in `tests/smoke/` |
 | `env/` | one `create_*.sh` per runtime |
-| `tools/` | nav, project_api, bridge, lab, ref_catalog, **slides**, check_project, packs |
-| `workspace/current/` | NEXT_ACTION pointer |
+| `tools/` | nav, project_api, bridge, lab, ref_catalog, slides, check_project, **experiment** (`.auto/` micro-loop), packs |
+| `workspace/current/` | `TASK_LEDGER` (authority) + `COMPREHENSION` (audit) + `NEXT_ACTION` (pointer) |
 | `backend_lab/` | Disposable probes (code in git for short repro; never imported elsewhere; `outputs/` ignored; promote to `tex_docs/`) |
 
+**Campaign / autoresearch governance** (generic): `skills/task-ledger.md`,
+`skills/project-comprehension.md`, `skills/autoresearch.md`,
+`skills/experiment-loop.md`, `docs/design/AUTORESEARCH.md`. Host **floor**
+(truth + re-entry) only — no vendor agent required; `.auto/` / `experiment.py`
+are optional; future stronger agents must not be blocked by stale harness rules.
 **Beamer slides** are an **external product** (no permanent `slides/` tree in the pipeline). Templates live under `tools/slides_templates/`; generate into a user `--out` directory:
 
 ```bash

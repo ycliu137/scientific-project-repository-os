@@ -42,3 +42,9 @@ backend_lab/**/*.pth
 backend_lab/**/*.ckpt
 backend_lab/**/*.log
 backend_lab/**/__pycache__/
+
+# Autoresearch micro-loop: keep session config/prompt; ignore run dumps
+.auto/runs/
+.auto/last_run.json
+**/.auto/runs/
+**/.auto/last_run.json

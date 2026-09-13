@@ -51,11 +51,12 @@ Before any meaningful read/write:
 3. Index: `python3 tools/nav.py` / `python3 tools/project_api.py` — **do not** walk the tree or pre-read all `skills/`
 4. Compact state: `python3 tools/plan_pointer.py`
 5. Task subgraph: `python3 tools/project_api.py context --task <intent>`
-6. Read **only** listed L2/L3 skills (plus `skills/objects/<type>.md` if writing that type)
-7. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; ephemeral probes → `skills/backend-lab.md`; Beamer talks → `skills/slides.md` (journal club → `skills/journal-club-slides.md`); new host / missing env → `skills/runtime-env.md`
-8. Act → index → dense Change Report → `tools/check_project.py` → **VALID** (or WARN-only if `os.strictness: warn`)
+6. Task ledger + comprehension: read `workspace/current/TASK_LEDGER.yaml` then `workspace/current/COMPREHENSION.md`; run a fresh pass if starting work (`skills/project-comprehension.md`)
+7. Read **only** listed L2/L3 skills (plus `skills/objects/<type>.md` if writing that type)
+8. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; ephemeral probes → `skills/backend-lab.md`; Beamer talks → `skills/slides.md` (journal club → `skills/journal-club-slides.md`); new host / missing env → `skills/runtime-env.md`; autoresearch → `skills/autoresearch.md` when looping
+9. Act → index → dense Change Report → `tools/check_project.py` → **VALID** (or WARN-only if `os.strictness: warn`)
 
-Pipeline: `SKILL → MAP → INDEX → compact state → context → listed skills → REASON → UPDATE`
+Pipeline: `SKILL → MAP → INDEX → compact state (ledger+comprehension) → context → listed skills → REASON → UPDATE`
 
 ### Find anything
 
@@ -94,12 +95,15 @@ Full drill: `COLD_START.md`.
 19. **Backend labs are disposable** (`skills/backend-lab.md`): never import `backend_lab/` from pipelines, source, or tests; commit lab code only for short-term repro; put important results in `tex_docs/` (not lab notes); wiping a lab after promotion must not break the project.
 20. **Slides are external products** (`skills/slides.md`): generate Beamer decks into a user `--out` directory; do not create a permanent `slides/` tree in the pipeline.
 21. **Unified notation** (`skills/notation.md`): one math symbol per quantity across all documents; one code identifier per quantity across the sibling set. Docs and code **may** use different spellings for the same quantity, but both sides stay internally consistent. Record the mapping in pipeline `docs/NOTATION.md` whenever a quantity is introduced or renamed.
+22. **Task ledger is authoritative** (`skills/task-ledger.md`): campaigns keep `workspace/current/TASK_LEDGER.yaml` as the single source of task truth (with the instance plan). A task is `done` only with acceptance + evidence; toy/smoke/prototype runs are `validation_of`, never `done`. `NEXT_ACTION.yaml` is a focus pointer — ledger wins on conflict.
+23. **Comprehension before execution** (`skills/project-comprehension.md`): before experiment/pipeline/evolution/data campaign work, run the four-part pass (authority / inventory / plan-vs-code / scope) into `workspace/current/COMPREHENSION.md`. Audit is read-only; audit→execution switch is **automatic** — continue into the next unfinished ledger task without pausing when unblocked.
+24. **Autoresearch host, not a capability ceiling** (`skills/autoresearch.md`): the OS standardizes truth layers and re-entry so agents stay aligned; it does **not** require a particular autoresearch agent, nor freeze today's harness (`.auto/`, `tools/experiment.py`) as the only legal path. Future, stronger agents must remain first-class — optional convenience tools must never block them. Agents must not mark campaign tasks `done` from toy micro-runs.
 
 ---
 
 ## Lifecycle router
 
-Always-on L2: `consult-plan`, `retrieval`, `adding-knowledge`, `change-report`, `reindex`, `maintenance`, `code-change`, `language`, `notation`.
+Always-on L2: `consult-plan`, `task-ledger`, `project-comprehension`, `retrieval`, `adding-knowledge`, `change-report`, `reindex`, `maintenance`, `code-change`, `language`, `notation`.
 
 | Intent | `--task` |
 |--------|----------|
@@ -107,6 +111,7 @@ Always-on L2: `consult-plan`, `retrieval`, `adding-knowledge`, `change-report`, 
 | New machine / create env | `env` |
 | What next / learning | `learning` |
 | New hypothesis / experiment | `experiment` |
+| Autoresearch micro-loop | `experiment` (also read `autoresearch`, `experiment-loop`) |
 | New / change pipeline module | `pipeline` |
 | Literature / sources | `literature` |
 | Ephemeral backend lab | `lab` |

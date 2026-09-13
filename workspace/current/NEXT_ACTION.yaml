@@ -1,12 +1,16 @@
 # Live execution pointer (replace after instantiate)
+# AUTHORITATIVE task state is workspace/current/TASK_LEDGER.yaml
+# (skills/task-ledger.md). If this file disagrees with the ledger, the ledger wins.
+# Pre-execution audit: workspace/current/COMPREHENSION.md
 
 status: active
-updated_at: "2026-09-08T00:30:00Z"
+updated_at: "2026-09-13T00:00:00Z"
 
 current_focus: |
-  Template v0.2.0 — four siblings. Instantiate with
-  apply_to_repo.py --layout siblings --parent <dir> --name <slug>
-  Default agent entry = *_pipeline.
+  Template v0.7.0 — ledger + comprehension + autoresearch host.
+  Instantiate with apply_to_repo.py --layout siblings --parent <dir> --name <slug>.
+  Default agent entry = *_pipeline. Fill TASK_LEDGER from the instance plan
+  before any campaign; run a comprehension pass before execution.
 
 next_actions:
   - id: NA_001
@@ -26,6 +30,10 @@ do_not:
   - Put raw datasets in pipeline or source
   - Copy src/objects into a paper sibling
   - Recreate a root smoke/ folder (use tests/smoke/)
+  - Mark ledger tasks done from toy/smoke/prototype runs (use validation_of)
+  - Require a particular autoresearch IDE extension for the instance to work
+  - Treat .auto/ or tools/experiment.py as mandatory for a capable agent
+  - Freeze an old agent UX into OS skills so newer autoresearch agents are blocked
 
 operating_principle: []
 canon_sources: []

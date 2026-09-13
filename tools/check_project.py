@@ -39,6 +39,9 @@ CORE_FILES = [
     ROOT / "os.yaml",
     ROOT / "AGENTS.md",
     ROOT / "skills" / "consult-plan.md",
+    ROOT / "skills" / "task-ledger.md",
+    ROOT / "skills" / "project-comprehension.md",
+    ROOT / "skills" / "autoresearch.md",
     ROOT / "skills" / "retrieval.md",
     ROOT / "skills" / "adding-knowledge.md",
     ROOT / "skills" / "change-report.md",
@@ -48,6 +51,8 @@ CORE_FILES = [
     ROOT / "skills" / "notation.md",
     ROOT / "tools" / "nav.py",
     ROOT / "tools" / "project_api.py",
+    ROOT / "tools" / "plan_pointer.py",
+    ROOT / "tools" / "check_project.py",
     ROOT / "workspace" / "current" / "NEXT_ACTION.yaml",
 ]
 
@@ -266,6 +271,68 @@ def _check_project_english() -> list[str]:
     return warnings
 
 
+def _check_task_ledger() -> tuple[list[str], list[str]]:
+    """Machine gate for skills/task-ledger.md: done requires evidence."""
+    try:
+        import yaml  # type: ignore
+    except ImportError:  # pragma: no cover
+        return [], ["PyYAML missing — skip TASK_LEDGER checks"]
+    ledger = ROOT / "workspace" / "current" / "TASK_LEDGER.yaml"
+    errors: list[str] = []
+    warnings: list[str] = []
+    if not ledger.is_file():
+        warnings.append(
+            "no workspace/current/TASK_LEDGER.yaml — create one before running "
+            "a campaign (skills/task-ledger.md)"
+        )
+        return errors, warnings
+    try:
+        docs = list(yaml.safe_load_all(ledger.read_text(encoding="utf-8")))
+        data = docs[0] if docs else {}
+    except Exception as exc:  # noqa: BLE001
+        errors.append(f"TASK_LEDGER.yaml unparseable: {exc}")
+        return errors, warnings
+    tasks = data.get("tasks") or []
+    if not tasks and os_pack(ROOT) == "pipeline":
+        try:
+            import yaml as _yaml  # type: ignore
+
+            os_doc = _yaml.safe_load((ROOT / "os.yaml").read_text(encoding="utf-8")) or {}
+            kind = ((os_doc.get("project") or {}).get("kind") or "").strip()
+        except Exception:  # noqa: BLE001
+            kind = ""
+        if kind != "template":
+            warnings.append(
+                "TASK_LEDGER.yaml has no tasks yet (fill before a campaign)"
+            )
+    known = {"not_started", "in_progress", "interrupted", "done"}
+    for t in tasks:
+        tid = str(t.get("id") or "?")
+        state = str(t.get("state") or "")
+        if state == "done":
+            if not (t.get("evidence") or []):
+                errors.append(
+                    f"TASK_LEDGER {tid}: state=done but no evidence "
+                    "(skills/task-ledger.md)"
+                )
+            if t.get("validation_of"):
+                errors.append(f"TASK_LEDGER {tid}: done + validation_of contradiction")
+        elif state and state not in known:
+            warnings.append(f"TASK_LEDGER {tid}: unknown state {state!r}")
+    return errors, warnings
+
+
+def _check_comprehension() -> list[str]:
+    """Warn if comprehension record is missing (skills/project-comprehension.md)."""
+    path = ROOT / "workspace" / "current" / "COMPREHENSION.md"
+    if path.is_file():
+        return []
+    return [
+        "no workspace/current/COMPREHENSION.md — run a comprehension pass before "
+        "execution (skills/project-comprehension.md)"
+    ]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument(
@@ -337,6 +404,10 @@ def main() -> int:
     warnings.extend(_change_report_density())
     warnings.extend(_check_project_english())
     warnings.extend(_check_notation_registry())
+    ledger_err, ledger_warn = _check_task_ledger()
+    errors.extend(ledger_err)
+    warnings.extend(ledger_warn)
+    warnings.extend(_check_comprehension())
 
     if indexed_paths:
         missing = _unindexed_files(indexed_paths)

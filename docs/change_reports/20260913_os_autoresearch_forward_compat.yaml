@@ -1,0 +1,39 @@
+# Change Report — Autoresearch forward-compat (host floor, not ceiling)
+
+task_id: "os-autoresearch-forward-compat"
+timestamp: "2026-09-13T17:45:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os-evolution"
+why: >
+  User clarified: autoresearch structure must help agents, but must not limit
+  present or future stronger autoresearch agents; stale template harnesses must
+  never become a capability ceiling.
+artifacts:
+  - path: skills/autoresearch.md
+    note: ordered principles; optional≠mandatory; evolution rule; anti-block
+  - path: docs/design/AUTORESEARCH.md
+    note: plug-in model; forward-compat maintainer checklist
+  - path: skills/experiment-loop.md
+    note: convenience not gate; agents may skip .auto/
+  - path: SKILL.md
+    note: H24 host floor / not ceiling
+  - path: skills/evolution.md
+    note: forward-compat checklist on OS changes
+  - path: workspace/current/NEXT_ACTION.yaml
+    note: do_not freeze old agent UX
+plan_ref: docs/design/AUTORESEARCH.md
+skills_followed:
+  - skills/evolution.md
+  - skills/autoresearch.md
+  - skills/change-report.md
+summary: >
+  Strengthened autoresearch docs so the OS is a truth/re-entry floor and
+  explicitly forbids blocking newer agents that outgrow .auto/ or experiment.py.
+new_knowledge: >
+  Template autoresearch policy: help with structure; never cap agent capability;
+  deprecate obsolete harnesses rather than forcing emulation.
+risks:
+  - "Teams may under-use .auto/ convenience; that is acceptable if ledger re-entry holds."
+  - "Maintainers must remember the forward-compat checklist when tempted to encode one agent's UX."
+integrity: "VALID_WITH_WARN"

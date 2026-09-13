@@ -1,0 +1,21 @@
+# TASK_LEDGER — authoritative campaign task state (single source of truth).
+# Rules: skills/task-ledger.md.
+# Replace plan_ref and fill tasks from the instance experiment/operating plan
+# before running a campaign. Empty tasks[] is OK on a fresh template.
+# state=done requires acceptance met + evidence. Toy/prototype runs use
+# validation_of and NEVER flip a task to done.
+
+plan_ref: docs/MASTER_PLAN.md
+updated: "1970-01-01T00:00:00Z"
+state_legend:
+  not_started: "no work begun"
+  in_progress: "started, not finished"
+  interrupted: "started, stopped mid-way (resume_notes)"
+  done: "acceptance met + evidence present"
+
+tasks: []
+
+notes: >
+  Instance: create tasks from your experiment plan (acceptance criteria) before
+  executing. NEXT_ACTION.yaml is only a focus pointer — this ledger wins on
+  conflict. See skills/task-ledger.md and skills/autoresearch.md.

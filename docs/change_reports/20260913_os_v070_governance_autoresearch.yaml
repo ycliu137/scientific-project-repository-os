@@ -1,0 +1,54 @@
+# Change Report — OS v0.7.0: ledger, comprehension, autoresearch host
+
+task_id: "os-v070-governance-autoresearch"
+timestamp: "2026-09-13T17:30:00Z"
+repos_touched:
+  - scientific-project-repository-os
+theme: "os-evolution"
+why: >
+  Absorb general campaign-governance and autoresearch host patterns proven in an
+  instance (task ledger, pre-execution comprehension, toy≠done, micro-loop
+  accounting) into the template without any domain science. Autoresearch must be
+  first-class but agent-agnostic: host contract without handcuffs.
+artifacts:
+  - path: skills/task-ledger.md
+    note: generic campaign state machine; validation_of ≠ done
+  - path: skills/project-comprehension.md
+    note: four-part audit; automatic audit→execution switch
+  - path: skills/autoresearch.md
+    note: host contract; layers; OS vs agent ownership
+  - path: skills/experiment-loop.md
+    note: generic .auto/ micro-loop; no vendor requirement
+  - path: docs/design/AUTORESEARCH.md
+    note: architecture overview for instances
+  - path: tools/experiment.py
+    note: optional METRIC CLI (init/run/log/status)
+  - path: tests/test_experiment_tool.py
+    note: micro-loop tests
+  - path: workspace/current/TASK_LEDGER.yaml
+    note: empty stub; KEEP_ON_UPGRADE
+  - path: workspace/current/COMPREHENSION.md
+    note: stub sections; KEEP_ON_UPGRADE
+  - path: tools/apply_to_repo.py
+    note: KERNEL + KEEP_ON_UPGRADE + OS_VERSION 0.7.0
+  - path: tools/check_project.py
+    note: ledger done/evidence gate; comprehension warn
+  - path: SKILL.md
+    note: invariants 22–24; always-on ledger+comprehension
+  - path: COLD_START.md
+    note: bootstrap/mental model include ledger+comprehension+autoresearch
+plan_ref: docs/MASTER_PLAN.md
+skills_followed:
+  - skills/evolution.md
+  - skills/change-report.md
+  - skills/consult-plan.md
+summary: >
+  Template v0.7.0 ships task ledger, comprehension pass, and an agent-agnostic
+  autoresearch host (skills + optional experiment.py). No project-specific science.
+new_knowledge: >
+  Separate campaign truth (ledger) from micro-loop logs (.auto/) and from optional
+  external agents; never require a particular autoresearch product.
+risks:
+  - "Empty tasks[] WARN on every fresh pipeline check until the instance fills the ledger."
+  - "Existing instances need apply_to_repo --upgrade to receive skills/tools (ledger/comprehension kept if already present)."
+integrity: "VALID_WITH_WARN"

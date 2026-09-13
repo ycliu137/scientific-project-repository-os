@@ -18,8 +18,11 @@ python3 tools/project_api.py reindex
 python3 tools/project_api.py inventory
 python3 tools/nav.py rebuild
 
-# 3) Compact state + task subgraph (do not pre-read all skills)
-python3 tools/plan_pointer.py
+# 3) Compact state: TASK_LEDGER + COMPREHENSION + NEXT_ACTION + task subgraph
+python3 tools/plan_pointer.py          # prints ledger + comprehension first
+#    read workspace/current/TASK_LEDGER.yaml BEFORE NEXT_ACTION.yaml
+#    then workspace/current/COMPREHENSION.md (authority / inventory /
+#    plan-vs-code / scope). skills/task-ledger.md + skills/project-comprehension.md
 python3 tools/project_api.py context --task learning
 # read only skills listed in context.read_skills_now
 
@@ -43,6 +46,10 @@ python3 tools/bridge.py status
 | Run in source cwd | `python3 tools/bridge.py run source -- pytest -q` |
 | Run in data cwd | `python3 tools/bridge.py run data -- python preprocess/...` |
 | Live next actions | `python3 tools/nav.py resolve next_action` |
+| Authoritative task state | `python3 tools/plan_pointer.py` → `workspace/current/TASK_LEDGER.yaml` |
+| Comprehension record | `workspace/current/COMPREHENSION.md` |
+| Autoresearch host | `python3 tools/nav.py resolve autoresearch` |
+| Micro-loop CLI | `python3 tools/experiment.py status` |
 | Task subgraph | `python3 tools/project_api.py context --task experiment` |
 | Literature catalog | `python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py list` |
 | Backend lab | `python3 tools/lab.py list` / `init` / `promote` |
@@ -59,8 +66,11 @@ python3 tools/bridge.py status
 python3 tools/nav.py resolve skill
 python3 tools/nav.py resolve project_api
 python3 tools/nav.py resolve consult_plan
+python3 tools/nav.py resolve task_ledger
+python3 tools/nav.py resolve project_comprehension
+python3 tools/nav.py resolve autoresearch
 python3 tools/nav.py resolve next_action
-python3 tools/plan_pointer.py
+python3 tools/plan_pointer.py           # TASK_LEDGER + COMPREHENSION then NEXT_ACTION
 python3 tools/project_api.py context --task bootstrap
 python3 tools/project_api.py inventory
 python3 tools/check_project.py
@@ -93,7 +103,11 @@ pipeline (entry) ──┼── data       (raw / processed / preprocess)
 
 ```
 SKILL.md ──► MAP.md ──► index
-                ├─► consult-plan → NEXT_ACTION.yaml + docs/MASTER_PLAN.md
+                ├─► plan_pointer → TASK_LEDGER.yaml (AUTHORITATIVE task state)
+                │        ├─► COMPREHENSION.md (mandatory pre-execution audit)
+                │        └─► NEXT_ACTION.yaml (current-focus pointer only)
+                ├─► consult-plan → instance plan + MASTER_PLAN (background)
+                ├─► autoresearch → .auto/ + experiment.py (optional agent)
                 ├─► tools/nav.py / project_api.py / plan_pointer.py
                 └─► tools/bridge.py ──► sibling SKILL.md + cwd run
 ```

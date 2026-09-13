@@ -29,7 +29,10 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are 
 | Integrity | `tools/check_project.py` | Done-gate |
 | Index (committed) | `index/tree.yaml` | Logical tree seed |
 | Index (generated) | `index/nav_*.json`, `objects.db`, … | Regenerable |
-| Next action | `workspace/current/NEXT_ACTION.yaml` | Live pointer |
+| Next action | `workspace/current/NEXT_ACTION.yaml` | Current-focus **pointer** only |
+| Task ledger | `workspace/current/TASK_LEDGER.yaml` | **Authoritative** campaign task state (`skills/task-ledger.md`) |
+| Comprehension | `workspace/current/COMPREHENSION.md` | Pre-execution audit record (`skills/project-comprehension.md`) |
+| Autoresearch | `skills/autoresearch.md`, `skills/experiment-loop.md`, `tools/experiment.py`, `docs/design/AUTORESEARCH.md` | Host contract + optional `.auto/` micro-loop (agent-agnostic) |
 | AI design docs | `docs/` | Agents; Change Reports under `docs/change_reports/`; notation map `docs/NOTATION.md` |
 | TeX notes | `tex_docs/` | Dual-use; Chinese meeting notes OK (`skills/language.md`); symbols via `skills/notation.md` |
 | Meetings | `meeting_record/` | Private; gitignored |

@@ -21,4 +21,7 @@ _One paragraph._
 
 ## 3. Next actions
 
-Keep in sync with `workspace/current/NEXT_ACTION.yaml`.
+Keep the focus pointer in sync with `workspace/current/NEXT_ACTION.yaml`.
+**Campaign truth** lives in `workspace/current/TASK_LEDGER.yaml` (ledger wins on
+conflict). Before executing, refresh `workspace/current/COMPREHENSION.md`.
+Autoresearch: see `skills/autoresearch.md` / `docs/design/AUTORESEARCH.md`.

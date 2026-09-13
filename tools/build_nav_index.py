@@ -75,6 +75,10 @@ SEED_ALIASES: dict[str, list[str]] = {
     "apply_to_repo": ["tools/apply_to_repo.py"],
     "bootstrap": ["skills/bootstrap.md"],
     "consult_plan": ["skills/consult-plan.md"],
+    "task_ledger": ["skills/task-ledger.md", "workspace/current/TASK_LEDGER.yaml"],
+    "project_comprehension": ["skills/project-comprehension.md", "workspace/current/COMPREHENSION.md"],
+    "autoresearch": ["skills/autoresearch.md", "docs/design/AUTORESEARCH.md"],
+    "experiment_loop": ["skills/experiment-loop.md", "tools/experiment.py"],
     "retrieval": ["skills/retrieval.md"],
     "adding_knowledge": ["skills/adding-knowledge.md"],
     "change_report": ["skills/change-report.md"],
@@ -85,6 +89,7 @@ SEED_ALIASES: dict[str, list[str]] = {
     "master_plan": ["docs/MASTER_PLAN.md"],
     "next_action": ["workspace/current/NEXT_ACTION.yaml"],
     "plan_pointer": ["tools/plan_pointer.py"],
+    "experiment_tool": ["tools/experiment.py"],
     "object_schema": ["protocol/OBJECT_SCHEMA.md"],
 }
 

@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.6.2"
+OS_VERSION = "0.7.0"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -33,6 +33,10 @@ KERNEL_FILES = [
     "skills/change-report.md",
     "skills/reindex.md",
     "skills/consult-plan.md",
+    "skills/task-ledger.md",
+    "skills/project-comprehension.md",
+    "skills/autoresearch.md",
+    "skills/experiment-loop.md",
     "skills/maintenance.md",
     "skills/evolution.md",
     "skills/paper-entry.md",
@@ -60,6 +64,7 @@ KERNEL_FILES = [
     "tools/apply_to_repo.py",
     "tools/compile_tex_docs.py",
     "tools/check_project.py",
+    "tools/experiment.py",
     "tools/ref_catalog.py",
     "tools/lab.py",
     "tools/slides.py",
@@ -67,6 +72,8 @@ KERNEL_FILES = [
     "docs/OBJECT_SCHEMA.md",
     "docs/change_reports/_TEMPLATE.yaml",
     "workspace/current/NEXT_ACTION.yaml",
+    "workspace/current/TASK_LEDGER.yaml",
+    "workspace/current/COMPREHENSION.md",
     "index/tree.yaml",
 ]
 
@@ -116,6 +123,8 @@ PIPELINE_EXTRA = [
     "backend_lab/_TEMPLATE/notes.md",
     "docs/design/BACKEND_LAB.md",
     "docs/design/SLIDES.md",
+    "docs/design/AUTORESEARCH.md",
+    "tests/test_experiment_tool.py",
 ]
 
 # Directory trees copied wholesale for pipeline packs (not listed file-by-file).
@@ -128,6 +137,8 @@ KEEP_ON_UPGRADE = {
     "docs/MASTER_PLAN.md",
     "docs/NOTATION.md",
     "workspace/current/NEXT_ACTION.yaml",
+    "workspace/current/TASK_LEDGER.yaml",
+    "workspace/current/COMPREHENSION.md",
 }
 
 PACK_OVERLAY = {
