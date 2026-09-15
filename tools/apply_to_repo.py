@@ -727,6 +727,11 @@ def apply(
     if pack == "source":
         files.extend(SOURCE_EXTRA)
 
+    # Pack overlays own these dest paths (e.g. source SKILL.md). Do not also
+    # ship the pipeline kernel constitution into that path on upgrade.
+    pack_overlay_dests = {dest for _src, dest in PACK_OVERLAY.get(pack, [])}
+    files = [rel for rel in files if rel not in pack_overlay_dests]
+
     for rel in files:
         src = SOURCE / rel
         if not src.is_file():
