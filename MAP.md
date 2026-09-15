@@ -39,6 +39,7 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are 
 | Tests | `tests/` | pytest |
 | Smoke scripts | `tests/smoke/` | Fast checks (`skills/code-change.md`) |
 | Runtimes | `env/` | One `create_*.sh` per env |
+| Compute hosts | `skills/compute-hosts.md` | Workstation vs HPC placement policy |
 
 ## Grown by the instance (create when needed)
 

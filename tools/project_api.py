@@ -61,8 +61,19 @@ EMPTY_LINKS = {
 }
 
 TASK_SKILLS: dict[str, list[str]] = {
-    "bootstrap": ["skills/bootstrap.md", "skills/runtime-env.md", "skills/language.md", "skills/notation.md"],
-    "env": ["skills/runtime-env.md", "skills/code-change.md", "skills/bootstrap.md"],
+    "bootstrap": [
+        "skills/bootstrap.md",
+        "skills/runtime-env.md",
+        "skills/compute-hosts.md",
+        "skills/language.md",
+        "skills/notation.md",
+    ],
+    "env": [
+        "skills/runtime-env.md",
+        "skills/compute-hosts.md",
+        "skills/code-change.md",
+        "skills/bootstrap.md",
+    ],
     "learning": [
         "skills/consult-plan.md",
         "skills/task-ledger.md",
@@ -82,6 +93,7 @@ TASK_SKILLS: dict[str, list[str]] = {
         "skills/pipeline-entry.md",
         "skills/pipeline-modules.md",
         "skills/code-change.md",
+        "skills/compute-hosts.md",
         "skills/notation.md",
     ],
     "pipeline": [
@@ -90,6 +102,7 @@ TASK_SKILLS: dict[str, list[str]] = {
         "skills/task-ledger.md",
         "skills/project-comprehension.md",
         "skills/code-change.md",
+        "skills/compute-hosts.md",
         "skills/change-report.md",
         "skills/notation.md",
     ],

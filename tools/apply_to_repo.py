@@ -58,6 +58,7 @@ KERNEL_FILES = [
     "skills/tex-docs.md",
     "skills/code-change.md",
     "skills/runtime-env.md",
+    "skills/compute-hosts.md",
     "skills/language.md",
     "skills/notation.md",
     "skills/reference-papers.md",

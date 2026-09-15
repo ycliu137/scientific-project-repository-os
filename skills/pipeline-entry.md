@@ -12,6 +12,7 @@ Use when `os.pack` is `pipeline`, which is the **default agent entry**.
 - **Beamer talks** into an external `--out` directory (`skills/slides.md`; journal club → `skills/journal-club-slides.md`) — no permanent `slides/` tree here.
 - Smoke tests in this repo’s `tests/` plus source tests in the source cwd.
 - **Pipeline modules:** one directory per task under `pipelines/<module>/` with a README (`skills/pipeline-modules.md`).
+- **Heavy compute:** follow `skills/compute-hosts.md` (prefer HPC cluster; respect workstation soft caps; never compute on login nodes).
 
 ## Do not
 
@@ -25,6 +26,7 @@ Use when `os.pack` is `pipeline`, which is the **default agent entry**.
 - Create a permanent tracked `slides/` package for cosmetics (use external `--out`).
 - Promote throwaway lab scripts into `pipelines/` without a rewrite.
 - Import pipeline from the source package.
+- Run unconstrained heavy jobs on the edit workstation, or compute on HPC login nodes.
 
 ## Source test loop
 
