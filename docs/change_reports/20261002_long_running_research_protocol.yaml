@@ -1,0 +1,33 @@
+# Change Report — long-running research protocol
+
+task_id: "os-long-running-research-protocol"
+timestamp: "2026-10-02T21:50:00Z"
+repos_touched: ["scientific-project-repository-os"]
+theme: "os"
+why: >
+  Multi-session campaigns were still one conversation away from losing their
+  place. Opening a fresh session does not help unless the plan, the compact
+  state, and the per-task evidence already live on disk. This adds a generic
+  long_running_research_protocol: persist everything important, and keep only
+  the open task in the working context. BSP, omega, covprior, and later
+  feature search reuse the same layers. The task ledger remains the done-gate.
+artifacts:
+  - path: skills/long_running_research_protocol.md
+    note: "Agent procedure: three layers, context lifecycle, checkpoint/compact/handoff, experiment registry"
+  - path: docs/design/LONG_RUNNING_RESEARCH.md
+    note: "Host architecture and how it sits beside the ledger and autoresearch"
+  - path: docs/templates/execution_plan.yaml
+    note: "DAG skeleton; copy on first campaign write"
+  - path: docs/templates/execution_record.yaml
+    note: "Per-task evidence skeleton"
+  - path: docs/templates/experiment_registry.csv
+    note: "Portable registry header"
+risks:
+  - "Existing campaigns do not yet have an execution plan; the protocol requires one before the next long task, and does not auto-migrate BSP_A0_STATE or the ledger."
+  - "Plan status and ledger state can drift if an agent updates only one of them."
+skills_followed: ["skills/change-report.md", "skills/evolution.md", "skills/language.md"]
+plan_ref: null
+summary: "OS 0.7.3 adds the long-running research protocol as a reusable disk-memory contract."
+new_knowledge: "Conversation context is working memory. Contract, execution plan, campaign state, history records, and the experiment registry are the durable store. Compact after every task; hand off from disk."
+supersedes: []
+integrity: "VALID_WITH_WARN"

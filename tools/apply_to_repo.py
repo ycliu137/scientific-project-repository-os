@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.7.2"
+OS_VERSION = "0.7.3"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -47,6 +47,7 @@ KERNEL_FILES = [
     "skills/project-comprehension.md",
     "skills/autoresearch.md",
     "skills/experiment-loop.md",
+    "skills/long_running_research_protocol.md",
     "skills/maintenance.md",
     "skills/evolution.md",
     "skills/paper-entry.md",
@@ -135,7 +136,11 @@ PIPELINE_EXTRA = [
     "docs/design/BACKEND_LAB.md",
     "docs/design/SLIDES.md",
     "docs/design/AUTORESEARCH.md",
+    "docs/design/LONG_RUNNING_RESEARCH.md",
     "docs/design/APPLY_AND_UPGRADE.md",
+    "docs/templates/execution_plan.yaml",
+    "docs/templates/execution_record.yaml",
+    "docs/templates/experiment_registry.csv",
     "tests/test_experiment_tool.py",
 ]
 

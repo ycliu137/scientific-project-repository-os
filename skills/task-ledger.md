@@ -83,6 +83,8 @@ can be summarized from the ledger alone.
 
 Read `SKILL.md` → `MAP.md` → `plan_pointer.py` → **`TASK_LEDGER.yaml`** →
 `COMPREHENSION.md` → listed skills. Resume `interrupted` from `resume_notes`.
+If the campaign is long-running, also load its execution plan and state, not
+the previous conversation (`skills/long_running_research_protocol.md`).
 
 ## Anti-patterns
 

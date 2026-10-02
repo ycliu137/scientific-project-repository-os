@@ -1,0 +1,37 @@
+# Skeleton for workspace/history/<campaign>/<task_id>_<slug>.yaml
+# Procedure: skills/long_running_research_protocol.md
+
+task_id: T-001
+campaign: <campaign>
+status: completed   # in_progress | interrupted | completed
+started_at: null
+completed_at: null
+hypothesis_or_goal: >
+  <what this task was trying to establish>
+
+actions:
+  - <step taken>
+
+findings:
+  - <what was learned>
+
+files_changed:
+  - <path>
+
+tests:
+  - command: <pytest or smoke command>
+    result: <pass/fail counts>
+
+artifacts:
+  - path: <path>
+    sha256: null
+
+decision:
+  outcome: pass   # pass | fail | blocked | validation_only
+  reason: >
+    <why this outcome>
+
+issues_found: []
+commit: null
+validation_of: null   # set when this run is smoke/toy/prototype; does not complete the ledger task
+resume_notes: null    # required when status is in_progress or interrupted

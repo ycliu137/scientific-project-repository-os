@@ -8,6 +8,7 @@ future autoresearch agent can do.
 
 Related: `skills/experiment-loop.md` (optional `.auto/` mechanics),
 `skills/task-ledger.md`, `skills/project-comprehension.md`,
+`skills/long_running_research_protocol.md` (disk plan / evidence / short context),
 `docs/design/AUTORESEARCH.md`.
 
 ## Design principles (ordered)
@@ -67,7 +68,10 @@ Whatever agent ran — including future ones with unknown features — close the
 loop into the OS:
 
 1. Update `TASK_LEDGER.yaml` (state, evidence, settings) — never leave winners
-   only inside an agent transcript or a private session dir.
+   only inside an agent transcript or a private session dir. Append a row to
+   the campaign experiment registry when the loop is a real search
+   (`skills/long_running_research_protocol.md`). The session keeps the frontier
+   and the next hypothesis, not the full history.
 2. Write a Change Report with `plan_ref`.
 3. Promote durable hypotheses / results / failures to objects when real.
 4. Refresh `COMPREHENSION.md` if plan-vs-code or inventory changed.

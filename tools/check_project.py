@@ -42,6 +42,7 @@ CORE_FILES = [
     ROOT / "skills" / "task-ledger.md",
     ROOT / "skills" / "project-comprehension.md",
     ROOT / "skills" / "autoresearch.md",
+    ROOT / "skills" / "long_running_research_protocol.md",
     ROOT / "skills" / "retrieval.md",
     ROOT / "skills" / "adding-knowledge.md",
     ROOT / "skills" / "change-report.md",

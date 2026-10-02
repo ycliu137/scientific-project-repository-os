@@ -49,6 +49,7 @@ python3 tools/bridge.py status
 | Authoritative task state | `python3 tools/plan_pointer.py` → `workspace/current/TASK_LEDGER.yaml` |
 | Comprehension record | `workspace/current/COMPREHENSION.md` |
 | Autoresearch host | `python3 tools/nav.py resolve autoresearch` |
+| Long-running campaign | `skills/long_running_research_protocol.md` — plan, state, history; not the conversation |
 | Micro-loop CLI | `python3 tools/experiment.py status` |
 | Task subgraph | `python3 tools/project_api.py context --task experiment` |
 | Literature catalog | `python3 tools/bridge.py run ref -- python3 tools/ref_catalog.py list` |

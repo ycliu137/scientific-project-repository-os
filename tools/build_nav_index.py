@@ -79,6 +79,10 @@ SEED_ALIASES: dict[str, list[str]] = {
     "project_comprehension": ["skills/project-comprehension.md", "workspace/current/COMPREHENSION.md"],
     "autoresearch": ["skills/autoresearch.md", "docs/design/AUTORESEARCH.md"],
     "experiment_loop": ["skills/experiment-loop.md", "tools/experiment.py"],
+    "long_running_research_protocol": [
+        "skills/long_running_research_protocol.md",
+        "docs/design/LONG_RUNNING_RESEARCH.md",
+    ],
     "retrieval": ["skills/retrieval.md"],
     "adding_knowledge": ["skills/adding-knowledge.md"],
     "change_report": ["skills/change-report.md"],

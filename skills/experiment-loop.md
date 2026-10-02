@@ -106,4 +106,8 @@ Document mem/disk/CPU caps in `.auto/prompt.md`. Cap long runs in `measure.sh`.
 Update `.auto/prompt.md` "What's Been Tried", write a Change Report, land the
 winner in the normal code/pipeline path, create objects only for real
 hypotheses/results/failures. Update `workspace/current/TASK_LEDGER.yaml` if the
-loop moved a task. Do not leave the winner only inside `.auto/`.
+loop moved a task. Do not leave the winner only inside `.auto/`. If the loop
+is one experiment among many, also append
+`workspace/experiments/<campaign>_registry.csv` and compact the session to the
+frontier plus the next hypothesis
+(`skills/long_running_research_protocol.md`).

@@ -33,6 +33,7 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are 
 | Task ledger | `workspace/current/TASK_LEDGER.yaml` | **Authoritative** campaign task state (`skills/task-ledger.md`) |
 | Comprehension | `workspace/current/COMPREHENSION.md` | Pre-execution audit record (`skills/project-comprehension.md`) |
 | Autoresearch | `skills/autoresearch.md`, `skills/experiment-loop.md`, `tools/experiment.py`, `docs/design/AUTORESEARCH.md` | Host contract + optional `.auto/` micro-loop (agent-agnostic) |
+| Long-running research | `skills/long_running_research_protocol.md`, `docs/design/LONG_RUNNING_RESEARCH.md`, `docs/templates/` | Disk plan + state + evidence; short working context |
 | AI design docs | `docs/` | Agents; Change Reports under `docs/change_reports/`; notation map `docs/NOTATION.md` |
 | TeX notes | `tex_docs/` | Dual-use; Chinese meeting notes OK (`skills/language.md`); symbols via `skills/notation.md` |
 | Meetings | `meeting_record/` | Private; gitignored |
@@ -54,6 +55,9 @@ Do **not** pre-create these in the template. First write creates the path.
 | Backend labs | `backend_lab/<lab_id>/` | Disposable sandbox; code in git, `outputs/` ignored; **no external imports**; promote to `tex_docs/` |
 | Beamer slides | external `--out` dir | Templates + CLI in pipeline; **no** permanent `slides/` tree (`skills/slides.md`) |
 | Scratch drafts | `workspace/scratch/` | `mkdir` when needed; not indexed; gitignored |
+| Long-running campaign | `workspace/current/<campaign>_EXECUTION_PLAN.yaml`, `<campaign>_STATE.yaml` | DAG + compact facts (`skills/long_running_research_protocol.md`). Keep existing contract/state paths; point the plan at them |
+| Task evidence | `workspace/history/<campaign>/` | One execution record per task. Archive, do not delete |
+| Experiment search | `workspace/experiments/<campaign>_registry.csv` | Append-only. Working set is frontier + next hypothesis, not the full table |
 
 Object census (counts / which domains exist): **inventory only** — never hand-maintain status rows in this file.
 
@@ -71,6 +75,7 @@ Parent grouping folder is **not** a git repo. Ref is a literature corpus (ingest
 
 ## Authoritative vs temporary
 
+- **Authoritative campaign memory:** contract, `TASK_LEDGER.yaml`, execution plan, campaign state, `workspace/history/`, experiment registry. A conversation is not this layer
 - **Authoritative objects:** pipeline `objects/` with integrity VALID
 - **Authoritative package:** source repo (installable, tested)
 - **Authoritative data:** data repo layout (adapt per project)

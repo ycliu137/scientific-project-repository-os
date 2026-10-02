@@ -47,6 +47,7 @@ a **ceiling**.
 | `TASK_LEDGER.yaml` | Campaign truth (toy ≠ done) | **yes** for campaigns |
 | `COMPREHENSION.md` | Pre-execution audit | **yes** before execute |
 | `NEXT_ACTION.yaml` | Focus pointer only | pointer only |
+| `skills/long_running_research_protocol.md` | Disk plan + evidence + short working context for multi-session campaigns | **yes** when the campaign can outlive one session |
 
 ## What instances add
 

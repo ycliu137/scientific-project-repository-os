@@ -12,6 +12,9 @@ When changing Protocol / root SKILL / invariants / `os.yaml` pack semantics:
    for **host contract** or optional convenience — never encode a vendor agent's
    prompts or APIs as the sole legal path. Run the forward-compat checklist in
    `docs/design/AUTORESEARCH.md` before merging. Newer agents must stay first-class.
+   Long-running session policy lives in `skills/long_running_research_protocol.md`
+   (disk plan, evidence, short working context). Do not replace that with a
+   vendor transcript format.
 6. If the change is a **scientific method** (not the OS): record it as hypothesis/experiment/result, not only as a code comment.
 
 Upgrade an instance from a clean template checkout (see

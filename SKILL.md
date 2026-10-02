@@ -53,7 +53,7 @@ Before any meaningful read/write:
 5. Task subgraph: `python3 tools/project_api.py context --task <intent>`
 6. Task ledger + comprehension: read `workspace/current/TASK_LEDGER.yaml` then `workspace/current/COMPREHENSION.md`; run a fresh pass if starting work (`skills/project-comprehension.md`)
 7. Read **only** listed L2/L3 skills (plus `skills/objects/<type>.md` if writing that type)
-8. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; ephemeral probes → `skills/backend-lab.md`; Beamer talks → `skills/slides.md` (journal club → `skills/journal-club-slides.md`); new host / missing env → `skills/runtime-env.md`; **where to run compute** → `skills/compute-hosts.md`; autoresearch → `skills/autoresearch.md` when looping
+8. Pack extras: `pipeline` → `skills/pipeline-entry.md` when listed; `paper` → `skills/paper-entry.md`; new meeting file → `skills/meeting-record.md`; data layout → `skills/data-management.md`; literature / PDFs → `skills/reference-papers.md`; ephemeral probes → `skills/backend-lab.md`; Beamer talks → `skills/slides.md` (journal club → `skills/journal-club-slides.md`); new host / missing env → `skills/runtime-env.md`; **where to run compute** → `skills/compute-hosts.md`; autoresearch → `skills/autoresearch.md` when looping; long-running campaigns → `skills/long_running_research_protocol.md`
 9. Act → index → dense Change Report → `tools/check_project.py` → **VALID** (or WARN-only if `os.strictness: warn`)
 
 Pipeline: `SKILL → MAP → INDEX → compact state (ledger+comprehension) → context → listed skills → REASON → UPDATE`
@@ -99,6 +99,7 @@ Full drill: `COLD_START.md`.
 23. **Task ledger is authoritative** (`skills/task-ledger.md`): campaigns keep `workspace/current/TASK_LEDGER.yaml` as the single source of task truth (with the instance plan). A task is `done` only with acceptance + evidence; toy/smoke/prototype runs are `validation_of`, never `done`. `NEXT_ACTION.yaml` is a focus pointer — ledger wins on conflict.
 24. **Comprehension before execution** (`skills/project-comprehension.md`): before experiment/pipeline/evolution/data campaign work, run the four-part pass (authority / inventory / plan-vs-code / scope) into `workspace/current/COMPREHENSION.md`. Audit is read-only; audit→execution switch is **automatic** — continue into the next unfinished ledger task without pausing when unblocked.
 25. **Autoresearch host, not a capability ceiling** (`skills/autoresearch.md`): the OS standardizes truth layers and re-entry so agents stay aligned; it does **not** require a particular autoresearch agent, nor freeze today's harness (`.auto/`, `tools/experiment.py`) as the only legal path. Future, stronger agents must remain first-class — optional convenience tools must never block them. Agents must not mark campaign tasks `done` from toy micro-runs.
+26. **Long-running research is disk state plus a short working set** (`skills/long_running_research_protocol.md`): persist the contract, execution plan, campaign state, per-task evidence, and (for search) the experiment registry. Contextualize only the open task. Checkpoint and compact after every task; hand off to a fresh session from disk. A conversation is not campaign memory. Do not delete history to save context.
 
 ---
 
@@ -113,7 +114,8 @@ Always-on L2: `consult-plan`, `task-ledger`, `project-comprehension`, `retrieval
 | Heavy compute / cluster vs workstation | `env` (also read `compute-hosts`) |
 | What next / learning | `learning` |
 | New hypothesis / experiment | `experiment` |
-| Autoresearch micro-loop | `experiment` (also read `autoresearch`, `experiment-loop`) |
+| Autoresearch micro-loop | `experiment` (also read `autoresearch`, `experiment-loop`, `long_running_research_protocol`) |
+| Multi-session campaign | `experiment` (also read `long_running_research_protocol`) |
 | New / change pipeline module | `pipeline` |
 | Literature / sources | `literature` |
 | Ephemeral backend lab | `lab` |

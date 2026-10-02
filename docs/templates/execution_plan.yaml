@@ -1,0 +1,54 @@
+# Skeleton for workspace/current/<campaign>_EXECUTION_PLAN.yaml
+# Copy on first use. Do not commit this skeleton as a live plan.
+# Procedure: skills/long_running_research_protocol.md
+
+campaign: <campaign>
+contract: <path-to-contract-or-plan>
+state: workspace/current/<campaign>_STATE.yaml
+ledger: workspace/current/TASK_LEDGER.yaml
+
+context_policy:
+  on_start:
+    load:
+      - contract
+      - current_state
+      - task_spec
+      - dependencies_summary
+  during:
+    retain:
+      - current findings
+      - current logs
+      - relevant code
+  on_complete:
+    persist:
+      - detailed execution record
+      - artifacts
+      - decisions
+      - tests
+      - issues
+      - commit
+    active_context_keep:
+      - task_id
+      - final outcome
+      - important decision
+      - unresolved dependencies
+      - evidence path
+    active_context_evict:
+      - exploratory logs
+      - failed intermediate attempts
+      - verbose command output
+      - resolved debugging details
+
+resume:
+  current_task: null
+  next_unblocked: null
+  open_issues: []
+  completed: []
+
+tasks:
+  - id: T-001
+    task: <imperative phrase>
+    depends_on: []
+    status: pending   # pending | in_progress | blocked | interrupted | completed
+    ledger_id: T-001  # matching id in TASK_LEDGER.yaml; omit if identical
+    evidence: null    # workspace/history/<campaign>/<id>_<slug>.yaml when completed

@@ -138,9 +138,13 @@ Humans: source README + `tex_docs/*.pdf`. Pipeline `docs/` is for agents.
 
 **Campaign / autoresearch governance** (generic): `skills/task-ledger.md`,
 `skills/project-comprehension.md`, `skills/autoresearch.md`,
-`skills/experiment-loop.md`, `docs/design/AUTORESEARCH.md`. Host **floor**
+`skills/experiment-loop.md`, `docs/design/AUTORESEARCH.md`,
+`skills/long_running_research_protocol.md`,
+`docs/design/LONG_RUNNING_RESEARCH.md`. Host **floor**
 (truth + re-entry) only — no vendor agent required; `.auto/` / `experiment.py`
 are optional; future stronger agents must not be blocked by stale harness rules.
+Long campaigns persist plan, state, and per-task evidence on disk and keep only
+the open task in the session.
 **Beamer slides** are an **external product** (no permanent `slides/` tree in the pipeline). Templates live under `tools/slides_templates/`; generate into a user `--out` directory:
 
 ```bash
