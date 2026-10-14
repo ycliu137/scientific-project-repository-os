@@ -21,7 +21,7 @@ includes them by path, and quote the path in the brief).
 
 | Always insert | Why |
 |---------------|-----|
-| `always-requirements.md` | The short list agents skip: where files go, no self-approval, disk is memory, do not invent results, keep the session alive until every assigned task is finished |
+| `always-requirements.md` | The short list agents skip: where files go, no self-approval, disk is memory, do not invent results, keep the session alive until every assigned task is finished, and compact finished detail inside that session when the context gets long |
 
 Also insert every file the task can violate:
 

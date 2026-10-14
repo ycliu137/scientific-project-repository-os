@@ -49,6 +49,26 @@ looks like, so a crash can be resumed. Then keep doing every next step that
 does not need that result, and continue the moment the job returns. The
 record is crash insurance. It is not a reason to stop.
 
+## When the context gets long
+
+The session has a context limit. That limit is not a reason to end the
+session or to open a new one. Remove finished detail from the session, then
+continue in this same session.
+
+After a stage is on disk:
+
+- Keep in the session: the open stage, the frozen constraints, and one line
+  per completed stage with its evidence path.
+- Drop from the session: exploratory logs, failed intermediate attempts,
+  verbose command output, and debugging that is already resolved.
+- Those details stay in `auto_docs/` and the evidence record. Removing them
+  from the session does not delete them from disk. Do not delete history to
+  free context.
+
+Do this as the context grows, then continue the next assigned task. A new
+session is only the recovery path after this one has died
+(`skills/long_running_research_protocol.md`).
+
 ## While you run
 
 - Write the acceptance rule before you see the result.
