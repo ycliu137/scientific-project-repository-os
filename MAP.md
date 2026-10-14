@@ -32,10 +32,10 @@ This clone’s pack is `os.yaml` → `os.pack`. Source / data / ref / paper are 
 | Next action | `workspace/current/NEXT_ACTION.yaml` | Current-focus **pointer** only |
 | Task ledger | `workspace/current/TASK_LEDGER.yaml` | **Authoritative** campaign task state (`skills/task-ledger.md`) |
 | Comprehension | `workspace/current/COMPREHENSION.md` | Pre-execution audit record (`skills/project-comprehension.md`) |
-| Autoresearch | `skills/autoresearch.md`, `skills/experiment-loop.md`, `tools/experiment.py`, `docs/design/AUTORESEARCH.md` | Host contract + optional `.auto/` micro-loop (agent-agnostic) |
+| Autoresearch | `skills/autoresearch.md`, `skills/auto-tasks.md`, `skills/multi-agent-research.md`, `skills/experiment-loop.md`, `tools/experiment.py`, `docs/design/AUTORESEARCH.md` | Host contract, assignment layout, independent review; optional `.auto/` micro-loop (agent-agnostic) |
 | Long-running research | `skills/long_running_research_protocol.md`, `docs/design/LONG_RUNNING_RESEARCH.md`, `docs/templates/` | Disk plan + state + evidence; short working context |
 | AI design docs | `docs/` | Agents; Change Reports under `docs/change_reports/`; notation map `docs/NOTATION.md` |
-| TeX notes | `tex_docs/` | Dual-use; Chinese meeting notes OK (`skills/language.md`); symbols via `skills/notation.md` |
+| TeX notes | `tex_docs/` | Dual-use method notes and **auto-research task reports**; Chinese meeting notes OK (`skills/language.md`); symbols via `skills/notation.md` |
 | Meetings | `meeting_record/` | Private; gitignored |
 | Tests | `tests/` | pytest |
 | Smoke scripts | `tests/smoke/` | Fast checks (`skills/code-change.md`) |
@@ -58,6 +58,8 @@ Do **not** pre-create these in the template. First write creates the path.
 | Long-running campaign | `workspace/current/<campaign>_EXECUTION_PLAN.yaml`, `<campaign>_STATE.yaml` | DAG + compact facts (`skills/long_running_research_protocol.md`). Keep existing contract/state paths; point the plan at them |
 | Task evidence | `workspace/history/<campaign>/` | One execution record per task. Archive, do not delete |
 | Experiment search | `workspace/experiments/<campaign>_registry.csv` | Append-only. Working set is frontier + next hypothesis, not the full table |
+| Auto-research task | `auto_tasks/<task_folder>/` | Task-statement markdown directly in the folder. Progress and handoffs in that folder's `auto_docs/`. Report in `tex_docs/` (`skills/auto-tasks.md`) |
+| Auto-research reminders | `auto_tasks/auto_research_skills_and_requirements/` | Paste into the task statement so the executing agent sees the rules. `skills/` remains the contract |
 
 Object census (counts / which domains exist): **inventory only** — never hand-maintain status rows in this file.
 

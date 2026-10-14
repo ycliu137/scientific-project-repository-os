@@ -16,24 +16,22 @@ Related: `skills/task-ledger.md` (done-gate), `skills/project-comprehension.md`,
 ## What this replaces
 
 A long session is short-term working memory. The repository is the durable
-store. Session continuity is not required. A conversation may die at any time;
-the campaign must still know where it is, why it is there, and what is next.
+store. **Keep this session alive until every assigned task is finished.**
+Do not end it, and do not hand the remaining work to another session, while
+any assigned task remains. Write state to disk from the start so that, if
+this session dies, the campaign still knows where it is, why it is there,
+and what is next. That record is crash insurance. It is not a reason to stop.
 
 Do this from the **start** of the campaign. Do not wait until the context is
-already huge.
+already huge. Compact finished detail inside this same session, then continue:
 
 ```
 Task → checkpoint → compact → next task
 ```
 
-After many compacted tasks, or when the working set no longer fits:
-
-```
-handoff → fresh session
-```
-
-A new session loads the disk layers below. It does not replay the old
-conversation.
+A fresh session is only the recovery path after this one has already died.
+It loads the disk layers below. It does not replay the old conversation, and
+it does not treat the death as the end of the task.
 
 ## Three layers
 
@@ -195,6 +193,24 @@ state and, if the session might die, write an interim history record with
 `status: in_progress` and `resume_notes`. Do not evict the open working set
 yet.
 
+**Keep this session alive until every assigned task is finished.** A pending
+or running job is unfinished work in this same session. Before or at
+submission, persist the job id, the command or job-body path and its hash,
+the code and input hashes, the output path, and what success will look like,
+so a crash can be resumed. Then keep working here: do the next piece that
+does not need this result, and continue as soon as the job returns. Do not
+end the session, and do not hand the campaign to another session, while any
+assigned task remains. A later session must still be able to inspect the job
+without the old transcript if this one dies. Scheduler "state unavailable" means
+reconcile against the artefacts, not "the job finished." A scheduler success
+code alone is not scientific success.
+
+A gate is a decision rule. If it passes and the plan already names the next
+step, continue. If it fails and the plan names the branch, follow that branch.
+Ask the owner only when the result creates a scientific choice the plan does
+not cover. Completing a task is not a reason to stop when the plan already
+says what comes next.
+
 On **task complete**, in the same change:
 
 1. Write the execution record.
@@ -204,9 +220,10 @@ On **task complete**, in the same change:
 5. Evict `active_context_evict` from the session and continue to the next
    unblocked task.
 
-**Handoff** (many tasks already compacted, or the working set does not fit):
-write `resume` on the execution plan (and a short mirror on the state file)
-before the session ends.
+**Resume record.** Write `resume` on the execution plan (and a short mirror
+on the state file) as you go, so a crash can be resumed. Do not end the
+session in order to write it. Keep this session alive until every assigned
+task is finished.
 
 ```yaml
 resume:
@@ -269,3 +286,5 @@ search, a registry row (`skills/autoresearch.md`).
 - Loading the whole registry, or every completed history file, "just in case".
 - Marking plan `completed` from a smoke run.
 - A second done-authority that disagrees with `TASK_LEDGER.yaml`.
+- Ending the session, or handing the campaign to another session, before every assigned task is finished. A pending or running job is unfinished work in this same session.
+- Treating a scheduler success code as the scientific result.

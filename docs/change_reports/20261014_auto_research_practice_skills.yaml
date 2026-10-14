@@ -1,0 +1,46 @@
+# Change Report — auto-research practice skills
+
+task_id: "os-auto-research-practice-skills"
+timestamp: "2026-10-14T20:20:00Z"
+repos_touched: ["scientific-project-repository-os"]
+theme: "os"
+why: >
+  Owner-assigned auto-research tasks had repeated the same operating
+  patterns: how to write a brief, what a handoff must open with, when to
+  audit before a grid, how to shape a roster, how a metric lies, how a
+  cluster campaign fails, how to check a report, and how two agents share
+  one clone. Those patterns were buried in task statements. This collects
+  the generic part as skills under auto_tasks/auto_research_skills/.
+  Domain conclusions stay in the instance.
+artifacts:
+  - path: auto_tasks/auto_research_skills/README.md
+    note: "Index. Points at the kernel contract in skills/"
+  - path: auto_tasks/auto_research_skills/writing-a-task-brief.md
+    note: "Questions, frozen choices, acceptance, stages, small tests"
+  - path: auto_tasks/auto_research_skills/execution-records.md
+    note: "STATE, HANDOFF, DESIGN_LOG, AUDIT, STATUS"
+  - path: auto_tasks/auto_research_skills/audit-before-scale.md
+    note: "Confirm the knob; reuse audit; equivalence before official numbers"
+  - path: auto_tasks/auto_research_skills/roster-and-splits.md
+    note: "No default Cartesian product; matched siblings; locked confirmation; separate OOD axes"
+  - path: auto_tasks/auto_research_skills/metrics-and-numerics.md
+    note: "Orientation, loss scale, smoke checks, covariance claims"
+  - path: auto_tasks/auto_research_skills/cluster-campaigns.md
+    note: "Pilot, device-env pairing, pending diagnosis, resume without the session"
+  - path: auto_tasks/auto_research_skills/report-verification.md
+    note: "Theory first; recompute; trace every literal; PDF checks"
+  - path: auto_tasks/auto_research_skills/concurrent-sessions.md
+    note: "Stay on the current branch; commit only this task's files; copy another lane's script"
+  - path: skills/auto-tasks.md
+    note: "Pointer at the practice folder"
+  - path: tools/apply_to_repo.py
+    note: "Ships the new files on instantiate and upgrade"
+risks:
+  - "Empty placeholder directories auto_tasks/T001... and auto_tasks/T002... were left untouched. They are not skills and are not shipped."
+  - "An instance upgrade copies these files because the paths are new. It still will not overwrite a modified SKILL.md or COLD_START.md."
+skills_followed: ["skills/change-report.md", "skills/language.md", "skills/evolution.md"]
+plan_ref: null
+summary: "Generic auto-research practice skills now live beside the task folders, separate from any one campaign's science."
+new_knowledge: "Read auto_tasks/auto_research_skills/README.md for how to write, run, record, and verify an assigned task. The kernel contract remains skills/auto-tasks.md and skills/multi-agent-research.md."
+supersedes: []
+integrity: "VALID_WITH_WARN"

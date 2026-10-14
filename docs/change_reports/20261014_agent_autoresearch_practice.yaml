@@ -1,0 +1,44 @@
+# Change Report — agent auto-research practice in the template
+
+task_id: "os-agent-autoresearch-practice"
+timestamp: "2026-10-14T20:10:00Z"
+repos_touched: ["scientific-project-repository-os"]
+theme: "os"
+why: >
+  Instance campaigns had accumulated a usable way to assign auto-research,
+  keep the design trace, review it independently, and avoid stalling on the
+  cluster. That practice lived in one project's task files and cold-start
+  notes. OS 0.7.4 lifts the generic part into the template. Domain science
+  stays in the instance. Review roles are duties; a runtime such as Pi is an
+  example binding, not a requirement.
+artifacts:
+  - path: skills/auto-tasks.md
+    note: "One folder per task; brief in the folder; progress in auto_docs/; report in tex_docs/"
+  - path: skills/multi-agent-research.md
+    note: "Plan, decision review, workers, three specialist reviewers, final PASS/FAIL/INCONCLUSIVE, process verifier"
+  - path: skills/autoresearch.md
+    note: "How to use an assignment, plus operating lessons that are not domain science"
+  - path: skills/compute-hosts.md
+    note: "Pilot-then-size, pending diagnosis, separate checkout, do not wait in-session"
+  - path: skills/long_running_research_protocol.md
+    note: "Batch jobs survive the session; a gate follows the plan"
+  - path: SKILL.md
+    note: "Invariant 27, bootstrap, write gate. OS version 0.7.4"
+  - path: COLD_START.md
+    note: "Cold-start section for the same layout"
+  - path: MAP.md
+    note: "Kernel and grown-path rows"
+  - path: AGENTS.md
+    note: "Rules 19 and 20"
+  - path: docs/design/AUTORESEARCH.md
+    note: "Component table and forward-compat note"
+risks:
+  - "Upgrading an instance will not overwrite its modified kernel files. SKILL.md, MAP.md, AGENTS.md, and COLD_START.md on a live instance need an absorb merge. New skills copy in because the paths are new."
+  - "include_roots gains auto_tasks for new instantiations. An existing instance keeps its own include_roots unless someone adds auto_tasks there."
+  - "Project-specific lessons (covariance versus a downstream estimator, PSD, feature leakage) were not copied. They stay in the instance."
+skills_followed: ["skills/change-report.md", "skills/evolution.md", "skills/language.md"]
+plan_ref: null
+summary: "OS 0.7.4 records how agents take an auto-research assignment, review it independently, and run it without stalling on the cluster."
+new_knowledge: "auto_tasks/<task>/*.md is the design record; auto_docs/ holds progress and handoffs; tex_docs/ holds the report. Substantial tasks need independent review and a PASS, FAIL, or INCONCLUSIVE. No agent approves its own work."
+supersedes: []
+integrity: "VALID_WITH_WARN"

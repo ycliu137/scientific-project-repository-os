@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.7.3"
+OS_VERSION = "0.7.4"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -46,6 +46,8 @@ KERNEL_FILES = [
     "skills/task-ledger.md",
     "skills/project-comprehension.md",
     "skills/autoresearch.md",
+    "skills/auto-tasks.md",
+    "skills/multi-agent-research.md",
     "skills/experiment-loop.md",
     "skills/long_running_research_protocol.md",
     "skills/maintenance.md",
@@ -136,6 +138,18 @@ PIPELINE_EXTRA = [
     "docs/design/BACKEND_LAB.md",
     "docs/design/SLIDES.md",
     "docs/design/AUTORESEARCH.md",
+    "auto_tasks/auto_research_skills_and_requirements/README.md",
+    "auto_tasks/auto_research_skills_and_requirements/always-requirements.md",
+    "auto_tasks/auto_research_skills_and_requirements/where-work-goes.md",
+    "auto_tasks/auto_research_skills_and_requirements/independent-review.md",
+    "auto_tasks/auto_research_skills_and_requirements/writing-a-task-brief.md",
+    "auto_tasks/auto_research_skills_and_requirements/execution-records.md",
+    "auto_tasks/auto_research_skills_and_requirements/audit-before-scale.md",
+    "auto_tasks/auto_research_skills_and_requirements/roster-and-splits.md",
+    "auto_tasks/auto_research_skills_and_requirements/metrics-and-numerics.md",
+    "auto_tasks/auto_research_skills_and_requirements/cluster-campaigns.md",
+    "auto_tasks/auto_research_skills_and_requirements/report-verification.md",
+    "auto_tasks/auto_research_skills_and_requirements/concurrent-sessions.md",
     "docs/design/LONG_RUNNING_RESEARCH.md",
     "docs/design/APPLY_AND_UPGRADE.md",
     "docs/templates/execution_plan.yaml",
@@ -197,7 +211,8 @@ INCLUDE = {
   - tests
   - env
   - objects
-  - pipelines""",
+  - pipelines
+  - auto_tasks""",
     "source": """  - skills
   - tools
   - src

@@ -78,6 +78,9 @@ SEED_ALIASES: dict[str, list[str]] = {
     "task_ledger": ["skills/task-ledger.md", "workspace/current/TASK_LEDGER.yaml"],
     "project_comprehension": ["skills/project-comprehension.md", "workspace/current/COMPREHENSION.md"],
     "autoresearch": ["skills/autoresearch.md", "docs/design/AUTORESEARCH.md"],
+    "auto_tasks": ["skills/auto-tasks.md"],
+    "auto_research_skills": ["auto_tasks/auto_research_skills_and_requirements/README.md"],
+    "multi_agent_research": ["skills/multi-agent-research.md"],
     "experiment_loop": ["skills/experiment-loop.md", "tools/experiment.py"],
     "long_running_research_protocol": [
         "skills/long_running_research_protocol.md",

@@ -6,10 +6,12 @@ The OS therefore ships a **host structure** that helps agents stay aligned with
 project truth. That structure must **never** become a ceiling on what a stronger
 future autoresearch agent can do.
 
-Related: `skills/experiment-loop.md` (optional `.auto/` mechanics),
-`skills/task-ledger.md`, `skills/project-comprehension.md`,
+Related: `skills/auto-tasks.md` (where the owner assignment, the execution
+trace, and the report live), `skills/multi-agent-research.md` (independent
+review for a substantial task), `skills/experiment-loop.md` (optional `.auto/`
+mechanics), `skills/task-ledger.md`, `skills/project-comprehension.md`,
 `skills/long_running_research_protocol.md` (disk plan / evidence / short context),
-`docs/design/AUTORESEARCH.md`.
+`skills/compute-hosts.md`, `docs/design/AUTORESEARCH.md`.
 
 ## Design principles (ordered)
 
@@ -54,6 +56,48 @@ agents use whatever runner they prefer and still update the ledger.
 - Layer 3 **must not** claim a Layer 2 campaign is complete.
 - Layer 3/4 formats are **not** sacred — only Layers 1–2 truth and re-entry are.
 - Durable science still lands in `objects/`, `tex_docs/`, and Change Reports.
+
+## How to use an assigned task
+
+1. Read the task-statement markdown in `auto_tasks/<task_folder>/` before
+   changing code or submitting jobs (`skills/auto-tasks.md`).
+2. Write progress and handoffs in that folder's `auto_docs/`. Write the report
+   in `tex_docs/`.
+3. For a substantial task, follow `skills/multi-agent-research.md`. A trivial
+   change does not need the full role set.
+4. Re-enter campaign truth through the ledger, evidence, and a Change Report
+   even when a subagent or an external runner did the work.
+
+## Practice learned from instances
+
+These are operating rules, not a search policy and not a required harness.
+Domain science stays in the instance plan and in `tex_docs/`.
+
+- State which decision the run will change (continue, replace, or stop) before
+  spending a large grid. If no outcome would change the next step, do not run it.
+- Order the work: small diagnostic, then mechanism, then a small screen, then
+  a large confirmation. A larger grid is not stronger evidence.
+- Persist the scientific object the next stage needs, not only a summary
+  metric. On a smoke subset, check that diagnostic columns are non-degenerate
+  before accepting a grid.
+- A failed arm is a result. Record what the evidence supports, and stop. Do
+  not replace it with a successful-looking output.
+- Keep answered questions marked answered, so a later session does not
+  re-investigate them as if they were open.
+- Two rounds with no new valid result are a signal to diagnose, not to add
+  tooling. Resolve routine implementation failures autonomously. Escalate an
+  ambiguous scientific choice, an irreversible action, or an unresolved
+  high-impact conflict.
+- Do not edit another concurrent lane's files. Copy a script you need to change.
+- Update on-disk state when the stage changes. A stale in-session checklist
+  misleads the next session.
+- **Keep this session alive until every assigned task is finished.** Do not
+  end it, and do not hand the remaining work to another session, while any
+  assigned task remains. A pending or running job is unfinished work in this
+  same session: persist the job id, the command, provenance, the output path,
+  and the success criterion, keep doing the next piece that does not need
+  that result, and continue when the job returns
+  (`skills/compute-hosts.md`, `skills/long_running_research_protocol.md`).
 
 ## Before any loop
 

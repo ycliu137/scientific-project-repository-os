@@ -7,6 +7,7 @@ Chinese is allowed **here** for meeting notes (`skills/language.md`). The rest o
 ## Write
 
 - One topic per folder or file: `tex_docs/<topic>/<topic>.tex`
+- Auto-research task reports belong here. The assignment stays in `auto_tasks/<task_folder>/*.md`; execution progress and handoffs stay in `auto_tasks/<task_folder>/auto_docs/` (`skills/auto-tasks.md`)
 - State the `H_*` / `EXP_*` you are explaining when they exist
 - Prefer compileable standalone articles (article class is enough)
 - Use symbols from pipeline `docs/NOTATION.md` (`skills/notation.md`); register new quantities there before inventing TeX macros

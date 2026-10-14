@@ -1,5 +1,7 @@
 # TeX method notes (dual-use). See skills/tex-docs.md.
 
+Auto-research **task reports** belong here. The task statement stays in `auto_tasks/<task_folder>/*.md`; progress and handoffs stay in `auto_tasks/<task_folder>/auto_docs/` (`skills/auto-tasks.md`).
+
 Write `tex_docs/<topic>/<topic>.tex`, then:
 
 ```bash

@@ -90,6 +90,8 @@ TASK_SKILLS: dict[str, list[str]] = {
         "skills/project-comprehension.md",
         "skills/long_running_research_protocol.md",
         "skills/autoresearch.md",
+        "skills/auto-tasks.md",
+        "skills/multi-agent-research.md",
         "skills/experiment-loop.md",
         "skills/adding-knowledge.md",
         "skills/pipeline-entry.md",

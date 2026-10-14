@@ -9,8 +9,11 @@ Companions: `skills/task-ledger.md`, `skills/autoresearch.md`,
 **Persist everything important; contextualize only what is currently necessary.**
 
 Agent conversation context is working memory. Repository files are the durable
-store. A campaign that can run for days or weeks must not depend on one
-session staying alive.
+store. **Keep the executing session alive until every assigned task is
+finished.** Do not end it, and do not hand the remaining work to another
+session, while any assigned task remains. Write the campaign to disk from
+the start so a crash can be resumed. That record is crash insurance. It is
+not a reason to stop.
 
 ```
 Plan on disk + State on disk + Evidence on disk + Short working context
@@ -20,10 +23,12 @@ Not: the whole project history lives in the current conversation.
 
 ## Why a protocol, not "just open a new session"
 
-Compaction plus a fresh session is useful. It is not sufficient if the new
-session has nothing authoritative to load. The protocol makes the handoff a
-disk write: execution plan, campaign state, one-line outcomes, evidence paths.
-Session continuity itself stops mattering.
+The executing session stays alive until every assigned task is finished.
+Compaction happens inside that session. A fresh session is only the recovery
+path after this one has already died, and it is useless if it has nothing
+authoritative to load. The protocol makes that recovery a disk write:
+execution plan, campaign state, one-line outcomes, evidence paths. The write
+does not end the live session.
 
 Every long-running campaign in this OS (BSP, omega, covprior, later feature
 search, and campaigns that do not exist yet) uses the same layers. Domain

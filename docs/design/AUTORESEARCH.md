@@ -1,6 +1,7 @@
 # AUTORESEARCH — OS host architecture (generic)
 
 Status: template design. Companion skills: `skills/autoresearch.md`,
+`skills/auto-tasks.md`, `skills/multi-agent-research.md`,
 `skills/experiment-loop.md`, `skills/task-ledger.md`,
 `skills/project-comprehension.md`.
 
@@ -42,6 +43,8 @@ a **ceiling**.
 | Piece | Role | Mandatory? |
 |-------|------|------------|
 | `skills/autoresearch.md` | Host contract; forward-compat rules | read when looping |
+| `skills/auto-tasks.md` | Assignment folder, `auto_docs/`, report in `tex_docs/` | **yes** when an owner task is assigned this way |
+| `skills/multi-agent-research.md` | Independent review roles for a substantial task | **yes** for substantial research; lightweight path for a trivial change |
 | `skills/experiment-loop.md` | Suggested `.auto/` micro-loop | **no** |
 | `tools/experiment.py` | Optional METRIC CLI | **no** |
 | `TASK_LEDGER.yaml` | Campaign truth (toy ≠ done) | **yes** for campaigns |
@@ -63,7 +66,8 @@ Before merging an OS change that touches autoresearch:
 
 - [ ] Does it still allow an agent that **ignores** `.auto/` / `experiment.py`?
 - [ ] Does it avoid naming one vendor as required?
-- [ ] Does it add obligations only on **truth/re-entry**, not on agent UX?
+- [ ] Does it add obligations only on **truth/re-entry**, or on the review
+      duties in `skills/multi-agent-research.md`, and not on one product's UX?
 - [ ] If deprecating a harness, is the old path still optional rather than
       deleted under agents' feet without a migration note?
 
@@ -71,5 +75,7 @@ Before merging an OS change that touches autoresearch:
 
 Not a prompt library. Not a fixed hyperparameter schedule. Not a capability
 cap on agents. Not a requirement to install any particular IDE extension.
+`skills/multi-agent-research.md` names roles and duties; an instance binds
+them to its runtime. That binding is an example, not a dependency of this OS.
 Agents plug in; the OS stays runnable without them; **newer agents must remain
 first-class citizens** even when they outgrow shipped convenience tools.

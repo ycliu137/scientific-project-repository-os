@@ -1,0 +1,31 @@
+# Change Report — paste-in task requirements
+
+task_id: "os-paste-in-task-requirements"
+timestamp: "2026-10-14T20:20:00Z"
+repos_touched: ["scientific-project-repository-os"]
+theme: "os"
+why: >
+  The practice notes were easy for an executing agent to miss, because they
+  lived only as skills to look up. The owner wants that folder to be text
+  that is inserted into the task statement, so the agent sees the rules
+  inside the assignment. The skills/ copies stay. The important rules are
+  written again in the reminder folder.
+artifacts:
+  - path: auto_tasks/auto_research_skills_and_requirements/README.md
+    note: "Which file to paste into which kind of task. skills/ is not removed"
+  - path: auto_tasks/auto_research_skills_and_requirements/always-requirements.md
+    note: "Short list inserted into every assignment"
+  - path: auto_tasks/auto_research_skills_and_requirements/where-work-goes.md
+    note: "Brief, auto_docs, tex_docs, ledger, restated for the executing agent"
+  - path: auto_tasks/auto_research_skills_and_requirements/independent-review.md
+    note: "Review duties restated from skills/multi-agent-research.md"
+  - path: skills/auto-tasks.md
+    note: "Points at the reminder folder and says skills/ stays"
+risks:
+  - "A task that only links the folder, without pasting or naming the files, still depends on the agent opening them. The README says to insert the text or quote the path in the brief."
+skills_followed: ["skills/change-report.md", "skills/language.md"]
+plan_ref: null
+summary: "Task-assignment reminders now restate the rules an executing agent must not skip. Repository skills stay in skills/."
+new_knowledge: "Paste auto_tasks/auto_research_skills_and_requirements/always-requirements.md into every auto-research brief, and the other files in that folder when the task can violate them."
+supersedes: []
+integrity: "VALID_WITH_WARN"

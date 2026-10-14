@@ -10,8 +10,11 @@ When changing Protocol / root SKILL / invariants / `os.yaml` pack semantics:
    refresh `COMPREHENSION.md` when plan-vs-code changes.
 6. Autoresearch changes: update `skills/autoresearch.md` / `experiment-loop.md` only
    for **host contract** or optional convenience — never encode a vendor agent's
-   prompts or APIs as the sole legal path. Run the forward-compat checklist in
-   `docs/design/AUTORESEARCH.md` before merging. Newer agents must stay first-class.
+   prompts or APIs as the sole legal path. Assignment layout is
+   `skills/auto-tasks.md`. Substantial-task review roles are
+   `skills/multi-agent-research.md`; name a runtime only as an example binding.
+   Run the forward-compat checklist in `docs/design/AUTORESEARCH.md` before merging.
+   Newer agents must stay first-class.
    Long-running session policy lives in `skills/long_running_research_protocol.md`
    (disk plan, evidence, short working context). Do not replace that with a
    vendor transcript format.

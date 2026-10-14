@@ -138,7 +138,10 @@ Humans: source README + `tex_docs/*.pdf`. Pipeline `docs/` is for agents.
 
 **Campaign / autoresearch governance** (generic): `skills/task-ledger.md`,
 `skills/project-comprehension.md`, `skills/autoresearch.md`,
-`skills/experiment-loop.md`, `docs/design/AUTORESEARCH.md`,
+`skills/auto-tasks.md` (one folder per task; brief in the folder, progress in
+`auto_docs/`, report in `tex_docs/`), `skills/multi-agent-research.md`
+(independent review for a substantial task; roles are duties, not a required
+product), `skills/experiment-loop.md`, `docs/design/AUTORESEARCH.md`,
 `skills/long_running_research_protocol.md`,
 `docs/design/LONG_RUNNING_RESEARCH.md`. Host **floor**
 (truth + re-entry) only — no vendor agent required; `.auto/` / `experiment.py`

@@ -7,6 +7,22 @@
 
 ---
 
+## Auto-research — assignment, review, report
+
+Owner assignments live in `auto_tasks/<task_folder>/` as markdown **directly in that folder** (`skills/auto-tasks.md`). Revise that markdown when the design changes or the task is redone.
+
+| What | Where |
+|------|--------|
+| Task statement | `auto_tasks/<task_folder>/*.md` |
+| Progress and handoff | `auto_tasks/<task_folder>/auto_docs/` |
+| Report | `tex_docs/<topic>/` (`skills/tex-docs.md`) |
+
+A substantial task follows `skills/multi-agent-research.md`: independent plan review, specialist review of mathematics, code, and results, then a final **PASS / FAIL / INCONCLUSIVE**. No agent approves its own work. The roles bind to the instance's runtime; they do not require one vendor product. Trivial edits stay on the lightweight path.
+
+Campaign truth still re-enters `TASK_LEDGER.yaml`, evidence, and a Change Report (`skills/autoresearch.md`). When assigning a task, paste the matching files from `auto_tasks/auto_research_skills_and_requirements/` into the task statement. `skills/` stays the contract. Those files are the reminder copy.
+
+---
+
 ## 60-second bootstrap
 
 ```bash
@@ -49,6 +65,8 @@ python3 tools/bridge.py status
 | Authoritative task state | `python3 tools/plan_pointer.py` → `workspace/current/TASK_LEDGER.yaml` |
 | Comprehension record | `workspace/current/COMPREHENSION.md` |
 | Autoresearch host | `python3 tools/nav.py resolve autoresearch` |
+| Auto-research assignment | `auto_tasks/<task_folder>/*.md` · `auto_docs/` · `tex_docs/` (`skills/auto-tasks.md`) |
+| Substantial multi-agent review | `skills/multi-agent-research.md` |
 | Long-running campaign | `skills/long_running_research_protocol.md` — plan, state, history; not the conversation |
 | Micro-loop CLI | `python3 tools/experiment.py status` |
 | Task subgraph | `python3 tools/project_api.py context --task experiment` |
@@ -88,7 +106,8 @@ Expected: resolve prints paths; `tools/check_project.py` prints `VALID` or `VALI
 2. **Source package:** edit in the source sibling; keep `pytest` green **in source cwd**.
 3. **Data:** register in `catalog.yaml` + `datasets/<id>/meta.yaml`.
 4. **Meeting:** `skills/meeting-record.md`.
-5. **TeX note:** `skills/tex-docs.md` then compile PDF.
+5. **TeX note / task report:** `skills/tex-docs.md` then compile PDF. Auto-research reports go in `tex_docs/`.
+5b. **Auto-research task:** brief markdown in `auto_tasks/<task_folder>/`; progress and handoffs in that folder's `auto_docs/`. Substantial work also follows `skills/multi-agent-research.md`.
 6. **Runtime on a new host:** `skills/runtime-env.md` then the matching `env/create_*.sh`.
 7. Finish writes with Change Report + integrity.
 
@@ -108,7 +127,7 @@ SKILL.md ──► MAP.md ──► index
                 │        ├─► COMPREHENSION.md (mandatory pre-execution audit)
                 │        └─► NEXT_ACTION.yaml (current-focus pointer only)
                 ├─► consult-plan → instance plan + MASTER_PLAN (background)
-                ├─► autoresearch → .auto/ + experiment.py (optional agent)
+                ├─► autoresearch → auto_tasks/ + multi-agent review; .auto/ optional
                 ├─► tools/nav.py / project_api.py / plan_pointer.py
                 └─► tools/bridge.py ──► sibling SKILL.md + cwd run
 ```
