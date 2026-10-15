@@ -17,7 +17,7 @@ Owner assignments live in `auto_tasks/<task_folder>/` as markdown **directly in 
 | Progress and handoff | `auto_tasks/<task_folder>/auto_docs/` |
 | Report | `tex_docs/<topic>/` (`skills/tex-docs.md`) |
 
-A substantial task follows `skills/multi-agent-research.md`: independent plan review, specialist review of mathematics, code, and results, then a final **PASS / FAIL / INCONCLUSIVE**. No agent approves its own work. The roles bind to the instance's runtime; they do not require one vendor product. Trivial edits stay on the lightweight path.
+A substantial stage follows `skills/multi-agent-research.md` and is COMPLETE only when `python3 tools/check_stage_gate.py` exits 0 on `auto_tasks/<task_folder>/auto_docs/reviews/<stage_id>/`. That requires four PASS reviews and a PASS verifier from agents who did not implement the stage. The roles bind to the instance's runtime; they do not require one vendor product. A trivial edit uses `scope.json` and lists no work artifacts.
 
 Campaign truth still re-enters `TASK_LEDGER.yaml`, evidence, and a Change Report (`skills/autoresearch.md`). When assigning a task, paste the matching files from `auto_tasks/auto_research_skills_and_requirements/` into the task statement. `skills/` stays the contract. Those files are the reminder copy.
 

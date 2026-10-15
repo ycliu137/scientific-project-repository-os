@@ -6,6 +6,7 @@ You are executing this task. This section is part of the assignment.
 |------|--------|
 | Task statement, including design changes and a redo | Markdown **directly in** `auto_tasks/<this-task>/`. Git history keeps the earlier wording |
 | Progress, state, handoff, design log, audit | `auto_tasks/<this-task>/auto_docs/`. Create the folder on the first such write |
+| Stage gate | `auto_tasks/<this-task>/auto_docs/reviews/<stage_id>/`. COMPLETE only after `tools/check_stage_gate.py` exits 0 |
 | Report | `tex_docs/<topic>/<topic>.tex` and the compiled PDF |
 | Done / not-done for the campaign | The task ledger, with evidence. This folder does not replace the ledger |
 | Bulk outputs | The instance's run tree, cited by path from `auto_docs/` and the report |

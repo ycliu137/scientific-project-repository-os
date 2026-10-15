@@ -27,7 +27,7 @@ Also insert every file the task can violate:
 
 | Insert when the task… | File |
 |------------------------|------|
-| is substantial (new science, a grid, a redo) | `independent-review.md` |
+| is substantial (new science, a grid, a redo) | `independent-review.md` (the stage gate; COMPLETE requires `tools/check_stage_gate.py` exit 0) |
 | creates or revises the brief | `writing-a-task-brief.md`, `where-work-goes.md` |
 | runs long enough that a crash must be resumable | `execution-records.md` |
 | reuses code or scales a roster | `audit-before-scale.md` |

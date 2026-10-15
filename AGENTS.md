@@ -21,7 +21,7 @@
 17. Write **English** everywhere except Chinese meeting records in `tex_docs/` and private `meeting_record/` (`skills/language.md`).
 18. Keep **one math symbol per quantity** in docs and **one code name per quantity** in code; record docs↔code mapping in `docs/NOTATION.md` (`skills/notation.md`).
 19. **Auto-research tasks** (`skills/auto-tasks.md`): one folder per task, `auto_tasks/<task_folder>/`. The task-statement markdown sits directly in that folder and is the design record (revision and redo stay there). Progress and handoffs go in `auto_tasks/<task_folder>/auto_docs/`. The report goes in `tex_docs/`.
-20. **Substantial research uses independent review** (`skills/multi-agent-research.md`): plan, decision review, execution, specialist review (mathematics, code, results), correction, and a final PASS / FAIL / INCONCLUSIVE. No agent approves its own work. Roles are duties; bind them to the instance's runtime. A trivial change stays on the lightweight path. A green test suite alone is not scientific correctness.
+20. **Substantial research is a stage gate** (`skills/multi-agent-research.md`, `tools/check_stage_gate.py`): workers, then decision, math, code, and results reviews, then a verifier. A stage is COMPLETE only when the checker exits 0. No agent approves its own work. Roles are duties; bind them to the instance's runtime. A trivial change uses `scope.json` and no work artifacts. A green test suite alone is not scientific correctness.
 
 ## Violations
 
@@ -42,4 +42,4 @@
 - **Any compute on HPC login nodes**, including quick python or a scheduler parent left on login
 - Packing multiple jobs onto one GPU, or spilling backlog onto the workstation instead of queuing on the cluster
 - Putting auto-research progress or handoff files beside the task statement (they belong in `auto_tasks/<task_folder>/auto_docs/`), or writing the task report under `auto_tasks/` (it belongs in `tex_docs/`)
-- Declaring a substantial research task complete from the implementing agent's own summary, or from a green test suite alone (`skills/multi-agent-research.md`)
+- Declaring a substantial stage complete without `tools/check_stage_gate.py` exiting 0, or from the implementing agent's own review, or from a green test suite alone (`skills/multi-agent-research.md`)

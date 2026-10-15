@@ -17,6 +17,7 @@ One task, one folder: `auto_tasks/<task_folder>/`.
 |------|--------|
 | Task statement | Markdown files **directly in** `auto_tasks/<task_folder>/`. This is the design record. Revise these files in the same folder when the design changes, the task is updated, or the task is redone. Git history keeps the earlier wording. |
 | Progress and handoff during execution | `auto_tasks/<task_folder>/auto_docs/`. State, plans, audits, and handoffs written while the task runs go here. Create the folder on the first such write. |
+| Stage gate for a substantial stage | `auto_tasks/<task_folder>/auto_docs/reviews/<stage_id>/`. Four reviews, the verifier, parallelism evidence, and `gate_result.txt` from `tools/check_stage_gate.py` (`skills/multi-agent-research.md`). |
 | Task report | `tex_docs/<topic>/<topic>.tex` plus the compiled PDF (`skills/tex-docs.md`). A redo adds a new report topic and leaves earlier reports in `tex_docs/` as history. |
 
 Read the task-statement markdown before executing. Resume from `auto_docs/`

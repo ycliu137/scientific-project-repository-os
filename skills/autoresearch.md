@@ -63,8 +63,9 @@ agents use whatever runner they prefer and still update the ledger.
    changing code or submitting jobs (`skills/auto-tasks.md`).
 2. Write progress and handoffs in that folder's `auto_docs/`. Write the report
    in `tex_docs/`.
-3. For a substantial task, follow `skills/multi-agent-research.md`. A trivial
-   change does not need the full role set.
+3. For a substantial stage, run `tools/check_stage_gate.py` and do not mark
+   the stage complete unless it exits 0 (`skills/multi-agent-research.md`).
+   A trivial edit uses `scope.json` and lists no work artifacts.
 4. Re-enter campaign truth through the ledger, evidence, and a Change Report
    even when a subagent or an external runner did the work.
 

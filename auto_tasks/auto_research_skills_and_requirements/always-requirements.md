@@ -27,7 +27,10 @@ You do not accept work you implemented. Final acceptance is exactly one of
 **PASS**, **FAIL**, or **INCONCLUSIVE**. FAIL or INCONCLUSIVE means the task
 is not done. A green test suite is not scientific correctness.
 Details: `independent-review.md` in this folder. Insert it for any
-substantial task.
+substantial task. A substantial stage is not COMPLETE until
+`python3 tools/check_stage_gate.py --stage-dir auto_tasks/<task_folder>/auto_docs/reviews/<stage_id>`
+exits 0. Your own review, a green test suite, and a long context do not
+replace that exit.
 
 ## Before you scale
 

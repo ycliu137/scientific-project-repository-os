@@ -44,7 +44,7 @@ a **ceiling**.
 |-------|------|------------|
 | `skills/autoresearch.md` | Host contract; forward-compat rules | read when looping |
 | `skills/auto-tasks.md` | Assignment folder, `auto_docs/`, report in `tex_docs/` | **yes** when an owner task is assigned this way |
-| `skills/multi-agent-research.md` | Independent review roles for a substantial task | **yes** for substantial research; lightweight path for a trivial change |
+| `skills/multi-agent-research.md`, `tools/check_stage_gate.py` | Stage gate: four reviews, verifier, parallelism evidence | **yes** for a substantial stage; `scope.json` only for a trivial edit with no work artifacts |
 | `skills/experiment-loop.md` | Suggested `.auto/` micro-loop | **no** |
 | `tools/experiment.py` | Optional METRIC CLI | **no** |
 | `TASK_LEDGER.yaml` | Campaign truth (toy ≠ done) | **yes** for campaigns |

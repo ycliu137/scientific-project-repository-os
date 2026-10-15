@@ -1,20 +1,92 @@
-# multi-agent-research.md — independent review for substantial research
+# multi-agent-research.md — stage gate for substantial research
 
-Use this for a substantial research task: new science, a large experiment, a
-redo, or any change whose correctness is not obvious from a small diff.
-Trivial edits stay on the lightweight path (one implementer, the normal
-done-gate). The goals are scientific correctness, implementation reliability,
-independent verification, and efficient autonomous execution.
+This is a gate. It is not advice the main agent may simplify.
 
-This skill states **roles and duties**. It does not require a particular
-agent product, extension, or model vendor. An instance binds the roles to
-whatever runtime it has. One working binding is Pi with a subagent extension
-for delegation and a diagnostics extension for code review, using a stronger
-reasoning configuration for decisions, reviews, and final verification, and a
-faster configuration for routine implementation. Inspect what is actually
-installed. Where a role has no native support, use a maintainable substitute
-or document the limitation. Validate delegation, review, correction, and final
-verification on a small example before a large research task.
+Use it for a substantial stage: new science, a large experiment, a redo, a
+fit, a result table, a scientific report, or any change whose correctness is
+not obvious from a small diff. A comment, a typo, or a formatting edit with
+no scientific output is the only lightweight path, and only through
+`scope.json` as `tools/check_stage_gate.py` defines it.
+
+A substantial stage is **COMPLETE** only when this command exits 0:
+
+```bash
+python3 tools/check_stage_gate.py \
+  --stage-dir auto_tasks/<task_folder>/auto_docs/reviews/<stage_id>
+```
+
+```text
+COMPLETE
+  iff work artifacts exist
+  and decision_review.md, math_review.md, code_review.md, results_review.md exist
+  and verifier.md accepts
+  and, if workers were declared independent, their execution intervals overlap
+```
+
+The checker writes `gate_result.txt` with `GATE_OK` only on that success. A
+ledger row or a sentence that says complete without that file is a protocol
+failure. The stage is not complete.
+
+The main agent must not waive, merge, or replace a required role. Self-review
+is not a review. A green test suite is not a review. Context pressure is not
+a review. `protocol_deviations.md` does not fill a missing review file. An
+unresolved deviation fails the checker.
+
+Artifacts, one directory per stage, under `auto_docs/reviews/<stage_id>/`:
+
+```text
+work_manifest.txt
+decision_review.md
+math_review.md
+code_review.md
+results_review.md
+verifier.md
+parallelism.json
+gate_result.txt
+protocol_deviations.md
+```
+
+`protocol_deviations.md` is written only when a deviation happened. It never
+replaces the missing role.
+
+Each review and the verifier start with this header, a blank line, then the
+findings:
+
+```text
+reviewer_role: decision
+reviewer_id: <agent who wrote this file>
+main_agent_id: <main agent>
+implementer_ids: <comma-separated writers of the stage>
+model: <model id>
+review_round: 1
+verdict: PASS
+inspected: <semicolon-separated paths actually opened>
+```
+
+`verifier.md` uses `reviewer_role: verifier` and also lists `reviewer_ids:`.
+COMPLETE requires `verdict: PASS` on all five files. `reviewer_id` must not
+be the main agent or an implementer. The verifier must not be the main agent,
+an implementer, or one of the four reviewers. `inspected` must name files
+that were opened, not the main agent's summary alone.
+
+`parallelism.json` records ISO-8601 start and end for each worker and for
+the math, code, and results reviews. Independent workers, and those three
+reviews, are started in one concurrent call. On Pi that call is `runs.all`.
+Another runtime writes the name of its own concurrent primitive. The checker
+rejects `sequential`, `await`, `await-each`, `serial`, and `one-by-one`.
+Endpoint contact is not overlap. The three review intervals must all overlap.
+Two or more independent workers need at least one overlapping pair. Serialized
+workers need a non-empty `serialization_reason`.
+
+Context length is handled by writing these files and reading the verdict plus
+the blocking findings. Cancelling a reviewer to save context is a protocol
+deviation and blocks COMPLETE.
+
+Roles below are duties. Bind them to the instance runtime. A missing product
+feature is filled by a separate session that did not do the work and still
+writes the same file. It is not filled by the main agent reviewing itself.
+Prefer a stronger reasoning configuration for the four reviews and the
+verifier, and a faster configuration for workers.
 
 Related: `skills/auto-tasks.md`, `skills/autoresearch.md`,
 `skills/task-ledger.md`, `skills/compute-hosts.md`.
@@ -29,7 +101,7 @@ Related: `skills/auto-tasks.md`, `skills/autoresearch.md`,
 - Delegate implementation to working agents.
 - Resolve conflicts from evidence, not from majority agreement.
 - Revisit a decision when new evidence contradicts it.
-- Do not declare the task complete without independent verification.
+- Do not mark a stage COMPLETE. Only `tools/check_stage_gate.py` exiting 0 does that.
 
 ### Decision reviewer — reviews the plan
 
@@ -48,8 +120,10 @@ Related: `skills/auto-tasks.md`, `skills/autoresearch.md`,
 - Assign as many as the task's independent pieces justify.
 - Coding, mathematical implementation, simulation, cluster experiments,
   testing, analysis, and report drafting are all in scope.
-- Run independent pieces in parallel when that is safe. Use isolated
-  worktrees when concurrent edits would collide.
+- When the pieces are independent, start them in one concurrent call and
+  record the intervals in `parallelism.json`. Use isolated worktrees when
+  concurrent edits would collide. Sequential await of independent pieces
+  is not parallel execution.
 - Follow the approved specification. Do not change a major mathematical
   assumption or the experimental objective on their own.
 - Produce reproducible outputs, logs, tests, and a clear record of what
@@ -111,21 +185,37 @@ is not correct because it has been reread many times.
 - Do not change scientific code, experimental design, or acceptance criteria
   while diagnosing a runtime problem.
 
-## Sequence for a substantial task
+## Sequence for a substantial stage
 
-1. **Plan.** Main agent states acceptance criteria and decomposes the work.
-2. **Decision review.** Resolve blocking concerns before implementation.
-3. **Execute.** Working agents implement, run, and leave reproducible artefacts.
-4. **Independent review.** The three reviewers run in parallel.
-5. **Correct.** Main agent consolidates findings and delegates fixes.
-6. **Re-review.** Repeat the reviews that the fix touches. Reopen decision
-   review if an assumption or the objective changed.
-7. **Final verification.** PASS, FAIL, or INCONCLUSIVE against the original
-   criteria.
-8. **Close.** The main agent declares completion only after PASS.
+This order is mandatory:
 
-Repeat correction and review as needed. A fixed number of review passes is
-not proof of correctness.
+```text
+Workers
+  → decision review, math review, code review, results review
+  → verifier
+  → checker exits 0
+  → stage COMPLETE
+```
+
+1. **Plan.** State acceptance criteria and which workers are independent.
+2. **Decision review, before workers.** Another agent reads the original task
+   statement. Blocking findings are fixed before implementation. Update the
+   same `decision_review.md` if the plan changes.
+3. **Workers.** Leave the files named in `work_manifest.txt`.
+4. **Math, code, and results reviews, in one concurrent launch.**
+5. **Correct.** Send blocking findings back to workers. Workers do not review
+   their own fix.
+6. **Re-review.** Update the files and increment `review_round`. Reopen
+   decision review if an assumption or the objective changed.
+7. **Verifier.** Against the original acceptance criteria. Does not edit code.
+   Returns exactly `PASS`, `FAIL`, or `INCONCLUSIVE`.
+8. **Checker.** Exit 0 writes `gate_result.txt`. Only then is the stage
+   COMPLETE.
+
+The process verifier watches jobs during the stage. Its notes are not one of
+the four reviews and are not the verifier. A fixed number of review passes
+is not proof of correctness. `FAIL` or `INCONCLUSIVE` means the stage is not
+complete.
 
 ## Independence
 
@@ -146,10 +236,11 @@ not proof of correctness.
 ## Efficiency
 
 - Match the number of working agents to how independent the pieces are.
-- Use the lightweight path for a trivial change and this architecture for
-  substantial research.
-- Parallelize independent reviews and experiments. Do not create conflicting
-  writes or resource fights.
+- A trivial edit uses `scope.json` with `{"trivial": true, "reason": "..."}`
+  and no work artifacts. Any listed artifact forces the full gate. Uncertainty
+  means the full gate.
+- Start independent workers together, and start the three reviews together.
+  Record the intervals. Do not create conflicting writes.
 - Do not repeat an analysis whose evidence is already sufficient.
 - Keep a persistent ledger: requirements, decisions, assignments, progress,
   findings, unresolved issues, verification status
@@ -163,13 +254,15 @@ not proof of correctness.
 
 ## Done
 
-A substantial task is complete only when:
+A substantial stage is complete only when `tools/check_stage_gate.py` exits 0
+for that stage directory. That exit requires the work artifacts, four PASS
+reviews by other agents, a PASS verifier who is none of those agents, and
+the parallelism evidence above. Remaining limitations are written in the
+verifier body. They do not replace a PASS.
 
-- the mandatory requirements are met
-- the deliverables exist and can be reproduced
-- the mathematical, code, and experimental reviews that apply have passed
-- blocking findings are resolved
-- final verification returned PASS
-- remaining limitations and non-blocking issues are written down
+If a required role is skipped, write `protocol_deviations.md` with
+`unresolved: true` in the same turn. Set `unresolved: false` only after the
+role has been run and its file is present. The checker fails while the
+deviation is unresolved.
 
 A green test suite is not, by itself, evidence of scientific correctness.

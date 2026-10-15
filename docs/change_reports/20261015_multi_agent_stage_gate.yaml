@@ -1,0 +1,30 @@
+# Change Report — template multi-agent stage gate
+
+task_id: "os-multi-agent-stage-gate"
+timestamp: "2026-10-15T15:30:00Z"
+repos_touched: ["scientific-project-repository-os"]
+theme: "os"
+why: >
+  The template stated multi-agent review as duties the main agent could
+  skip and replace with its own reading. A substantial stage is now complete
+  only when tools/check_stage_gate.py exits 0 on the stage's review
+  directory. OS version 0.7.5.
+artifacts:
+  - path: tools/check_stage_gate.py
+    note: "Exit 0 iff work artifacts, four PASS reviews, verifier PASS, and parallelism evidence hold"
+  - path: skills/multi-agent-research.md
+    note: "Stage gate contract; Pi runs.all is an example concurrent launch, not the only runtime"
+  - path: auto_tasks/auto_research_skills_and_requirements/independent-review.md
+    note: "Paste-in copy of the same gate"
+  - path: tests/test_stage_gate.py
+    note: "Self-review, endpoint-only intervals, sequential launch, and a trivial waiver over real work all fail"
+  - path: os.yaml
+    note: "0.7.5"
+risks:
+  - "Instances that already copied the 0.7.4 skill do not get this gate until they absorb or upgrade. --upgrade does not clobber a modified skill."
+skills_followed: ["skills/change-report.md", "skills/language.md", "skills/evolution.md"]
+plan_ref: null
+summary: "A substantial stage is COMPLETE only when the stage-gate checker exits 0."
+new_knowledge: "Review files live in auto_tasks/<task>/auto_docs/reviews/<stage_id>/. Self-review and a green test suite do not write GATE_OK."
+supersedes: []
+integrity: "VALID_WITH_WARN"

@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
-OS_VERSION = "0.7.4"
+OS_VERSION = "0.7.5"
 
 KERNEL_FILES = [
     "SKILL.md",
@@ -72,6 +72,7 @@ KERNEL_FILES = [
     "tools/nav.py",
     "tools/build_nav_index.py",
     "tools/project_api.py",
+    "tools/check_stage_gate.py",
     "tools/plan_pointer.py",
     "tools/bridge.py",
     "tools/code_bridge.py",
