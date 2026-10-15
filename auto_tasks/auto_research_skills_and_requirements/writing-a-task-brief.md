@@ -26,7 +26,11 @@ rationalisation.
 5. **Roster shape.** Which factors vary, which stay matched, and why a full
    Cartesian product is or is not required (`roster-and-splits.md`).
 6. **Stages.** Each stage has an input, an artefact, and a pass rule. The
-   next stage does not start on a failed pass rule.
+   next stage does not start on a failed pass rule. When the artefact is a
+   fitted model, the pass rule is the reload test in `always-requirements.md`:
+   the checkpoint contains the runnable object, the training-split transforms,
+   the decode constants, and the fit identity, and a fresh process reproduces
+   the fit-time predictions from that directory alone.
 7. **Where files go.** Task statement in this folder. Progress and handoffs
    in `auto_docs/`. Report in `tex_docs/<topic>/` as `.tex` and `.pdf`.
 8. **Stop rules.** Which negative outcomes are results and must be recorded,

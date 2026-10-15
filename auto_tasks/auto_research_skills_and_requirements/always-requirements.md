@@ -72,11 +72,43 @@ Do this as the context grows, then continue the next assigned task. A new
 session is only the recovery path after this one has died
 (`skills/long_running_research_protocol.md`).
 
+## A fitted model is usable before it is saved
+
+A fitted model is complete only when a later process can apply it to new
+inputs. Training that cannot be reloaded is not finished. Do not mark that
+directory saved.
+
+Before the directory counts as a checkpoint, it contains everything that
+process needs. The later process does not recover missing pieces from the
+training table, the trainer source, or a retrain:
+
+- The fitted object in a form a loader can run. A weight file without the
+  architecture required to rebuild the network is not that object. A fitted
+  estimator counts only when the loader can call it.
+- Every transform fit on the training split, including location, scale, and
+  the exact column order after unusable columns were dropped. A head fit on
+  its own rows carries its own transform.
+- Every constant that turns the raw output back into the quantity the next
+  stage consumes, and a statement of whether the objective applied a
+  transform inside the model or on the target.
+- The identity of the fit: family, objective, seed, split, and the other
+  knobs that change the function.
+
+After writing the directory, a fresh process reads only those files,
+predicts on training rows and on held-out rows, and matches the predictions
+produced in memory at fit time. If the reload fails or the numbers disagree,
+the fit is not complete.
+
+A file of predictions on the training table is a cache of that table. It is
+not the model. A loader that implements only some families is not a reason
+to leave the other families unusable. Every family and every objective the
+task trained meets the same bar.
+
 ## While you run
 
 - Write the acceptance rule before you see the result.
 - Persist the scientific object the next stage needs, not only a summary
-  metric.
+  metric. A fitted model meets the reload rule above before it is saved.
 - A failed arm is a result. Record what the evidence supports and stop.
   Do not replace it with a successful-looking output. Do not fabricate a
   number. If an artefact is missing, say so.

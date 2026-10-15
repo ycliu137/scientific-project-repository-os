@@ -35,6 +35,7 @@
 - Committing `backend_lab/**/outputs/`; importing `backend_lab` from pipelines/source/tests; or leaving important lab results only inside the lab (use `tex_docs/` promotion)
 - Adding a pipeline module directory without a structured README
 - Declaring a code/pipeline task done with failing tests or artefact paths that omit run parameters
+- Declaring a fitted model saved when a fresh process cannot reload that directory alone and apply it to new inputs (`skills/autoresearch.md`)
 - Creating runtimes only from chat-log pip lines instead of `env/create_*.sh`
 - Writing Chinese in skills, objects, code, or `docs/` (Chinese meeting notes belong in `tex_docs/` / `meeting_record/`)
 - Using two doc symbols or two code names for the same scientific quantity, or skipping `docs/NOTATION.md` when introducing/renaming one

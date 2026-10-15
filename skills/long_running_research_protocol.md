@@ -203,7 +203,9 @@ end the session, and do not hand the campaign to another session, while any
 assigned task remains. A later session must still be able to inspect the job
 without the old transcript if this one dies. Scheduler "state unavailable" means
 reconcile against the artefacts, not "the job finished." A scheduler success
-code alone is not scientific success.
+code alone is not scientific success. A directory that holds a fitted model
+is a checkpoint only after a fresh process reloads that directory alone and
+reproduces the fit-time predictions (`skills/autoresearch.md`).
 
 A gate is a decision rule. If it passes and the plan already names the next
 step, continue. If it fails and the plan names the branch, follow that branch.

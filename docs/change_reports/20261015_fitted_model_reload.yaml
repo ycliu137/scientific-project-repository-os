@@ -1,0 +1,36 @@
+# Change Report — fitted models must reload before they count as saved
+
+task_id: "os-fitted-model-reload"
+timestamp: "2026-10-15T15:50:00Z"
+repos_touched: ["scientific-project-repository-os"]
+theme: "os"
+why: >
+  An instance trained many model families and then handed downstream a
+  directory that a later process could not apply to new inputs. The template
+  now requires a fitted model to carry the runnable object, the
+  training-split transforms, the decode constants, and the fit identity, and
+  to pass a fresh-process reload against the fit-time predictions, before
+  that directory is marked saved. Domain names stay in the instance brief.
+artifacts:
+  - path: auto_tasks/auto_research_skills_and_requirements/always-requirements.md
+    note: "Paste-in rule every assignment sees"
+  - path: skills/autoresearch.md
+    note: "Same rule in the host practice list"
+  - path: auto_tasks/auto_research_skills_and_requirements/writing-a-task-brief.md
+    note: "A stage whose artefact is a fitted model uses this pass rule"
+  - path: auto_tasks/auto_research_skills_and_requirements/execution-records.md
+    note: "Citing a training-table prediction cache is not done"
+  - path: skills/long_running_research_protocol.md
+    note: "A model directory is a checkpoint only after the reload"
+  - path: SKILL.md
+    note: "Forbidden as done"
+  - path: AGENTS.md
+    note: "Matching anti-pattern"
+risks:
+  - "Instances that already pasted an older always-requirements.md do not see this sentence until the brief is updated. --upgrade does not clobber a modified skill."
+skills_followed: ["skills/change-report.md", "skills/language.md"]
+plan_ref: null
+summary: "A fitted model is saved only when a fresh process can reload that directory and apply it to new inputs."
+new_knowledge: "A prediction file for the training table is a cache. Every trained family and objective meets the same reload bar."
+supersedes: []
+integrity: "VALID_WITH_WARN"

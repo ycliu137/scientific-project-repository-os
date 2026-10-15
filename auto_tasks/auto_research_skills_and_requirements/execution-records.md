@@ -52,6 +52,11 @@ A stage is done only when its pass rule in the brief holds and the artefact
 is cited. "The job finished" is not done. A scheduler success code is not
 done. Point at the file that was checked.
 
+A fitted model is cited only after a fresh process reloads the saved
+directory and matches the in-memory predictions on training rows and
+held-out rows. A prediction cache for the training table does not satisfy
+that check (`always-requirements.md`).
+
 When a historical conclusion is invalidated, write what it is now evidence
 of, and what must be redone. Do not delete the old record.
 

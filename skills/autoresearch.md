@@ -81,6 +81,16 @@ Domain science stays in the instance plan and in `tex_docs/`.
 - Persist the scientific object the next stage needs, not only a summary
   metric. On a smoke subset, check that diagnostic columns are non-degenerate
   before accepting a grid.
+- A fitted model is saved only when a fresh process can reload that directory
+  alone and apply it to new inputs. The directory holds the runnable object
+  (weights plus the architecture needed to rebuild a network), every
+  training-split transform (location, scale, column order; each head keeps
+  its own), the constants that decode the raw output, and the fit identity.
+  After the write, that process predicts on training rows and held-out rows
+  and matches the in-memory predictions. A prediction cache for the training
+  table is not the model. A loader that implements only some families does
+  not excuse the others. Recomputing a training-split transform from the
+  original table, or retraining, does not replace persisting it.
 - A failed arm is a result. Record what the evidence supports, and stop. Do
   not replace it with a successful-looking output.
 - Keep answered questions marked answered, so a later session does not
